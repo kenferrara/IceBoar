@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ *****************************************************************************
+  ~ * Copyright © 2015 Hoffmann-La Roche
+  ~ *
+  ~ * Licensed under the Apache License, Version 2.0 (the "License");
+  ~ * you may not use this file except in compliance with the License.
+  ~ * You may obtain a copy of the License at
+  ~ *
+  ~ *     http://www.apache.org/licenses/LICENSE-2.0
+  ~ *
+  ~ * Unless required by applicable law or agreed to in writing, software
+  ~ * distributed under the License is distributed on an "AS IS" BASIS,
+  ~ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ * See the License for the specific language governing permissions and
+  ~ * limitations under the License.
+  ~ *****************************************************************************
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- This artifact does not inherit from the parent pom and it is the only one deployed to the maven repository. -->
+    <!-- For usages of Ice Boar see ice-boar-samples project. -->
+    <groupId>com.roche</groupId>
+    <artifactId>ice-boar</artifactId>
+    <name>Ice Boar Core</name>
+    <version>0.5</version>
+
+    <description>
+        Helper for running a Java standalone application using Java Web Start (JNLP) with a custom version of JRE.
+    </description>
+
+    <properties>
+        <entry.class>com.roche.iceboar.IceBoar</entry.class>
+        <!-- Exclude glue code, file access, swing etc. from Sonar. -->
+        <sonar.exclusions>
+            **/*_.java,**/com/roche/iceboar/IceBoar.java,**/com/roche/iceboar/debugview/*.java,**/com/roche/iceboar/debugview/logging/*.java,**/com/roche/iceboar/downloader/FileUtilsFacade.java,**/com/roche/iceboar/progressview/*.java
+        </sonar.exclusions>
+        <sonar.sources>src/main</sonar.sources>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.2</version>  <!--This version is compatible with java 1.5-->
+        </dependency>
+
+        <dependency>
+            <groupId>net.lingala.zip4j</groupId>
+            <artifactId>zip4j</artifactId>
+            <version>1.3.2</version>
+        </dependency>
+
+        <!-- For BasicService -->
+        <dependency>
+            <groupId>javax.jnlp</groupId>
+            <artifactId>jnlp-api</artifactId>
+            <version>7.0</version>
+            <scope>system</scope>
+            <systemPath>${java.home}/lib/javaws.jar</systemPath>
+        </dependency>
+
+        <!-- test dependencies -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>1.9.5</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.8.8</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>1.7.0</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.5</source>
+                    <target>1.5</target>
+                </configuration>
+            </plugin>
+
+            <!--Add custom Manifest to Jar-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <!-- Settings only for Jar without dependencies -->
+                    <archive>
+                        <addMavenDescriptor>true</addMavenDescriptor>
+                        <manifestEntries>
+                            <Permissions>all-permissions</Permissions>
+                            <Built-By></Built-By>
+                            <Build-Jdk></Build-Jdk>
+                            <Created-By></Created-By>
+                            <Archiver-Version></Archiver-Version>
+                            <Application-Name>Ice Boar</Application-Name>
+                        </manifestEntries>
+                        <manifest>
+                            <mainClass>${entry.class}</mainClass>
+                        </manifest>
+                    </archive>
+                    <finalName>${project.artifactId}</finalName>
+                </configuration>
+            </plugin>
+
+            <!-- Build Jar with all dependencies-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <!-- This is copy paste from maven-jar-plugin, but this settings go only to jar with dependencies -->
+                    <archive>
+                        <addMavenDescriptor>true</addMavenDescriptor>
+                        <manifestEntries>
+                            <Permissions>all-permissions</Permissions>
+                            <Built-By></Built-By>
+                            <Build-Jdk></Build-Jdk>
+                            <Created-By></Created-By>
+                            <Archiver-Version></Archiver-Version>
+                            <Application-Name>Ice Boar</Application-Name>
+                        </manifestEntries>
+                        <manifest>
+                            <mainClass>${entry.class}</mainClass>
+                        </manifest>
+                    </archive>
+
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <appendAssemblyId>true</appendAssemblyId>
+
+                </configuration>
+                <!-- Execute build Jar with dependencies by package phase to build it automatic -->
+                <executions>
+                    <execution>
+                        <id>make-assembly</id> <!-- this is used for inheritance merges -->
+                        <phase>package</phase> <!-- bind to the packaging phase -->
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Generate a javadoc -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.3</version>
+                <configuration>
+                    <show>public</show>
+                    <doctitle>&lt;h1&gt;Welcome to Ice Boar&lt;/h1&gt;
+                        &lt;p&gt;&lt;img src=&quot;resources/ice-boar-logo.png&quot;/&gt;
+                        &lt;p&gt;How it works?
+                        &lt;p&gt;&lt;img src=&quot;resources/ice-boar-sequence-diagram.png&quot;/&gt;
+                        &lt;br&gt; &lt;br&gt; &lt;h2&gt;
+                        &lt;p&gt;If you need more technical details please read Readme.md&lt;/a&gt;.
+                        &lt;p&gt;Main entry point is &lt;a href=&quot;com/roche/iceboar/IceBoar.html&quot;&gt;IceBoar&lt;/a&gt;
+                        class.
+                        &lt;/h2&gt;
+                    </doctitle>
+                    <docfilessubdirs>true</docfilessubdirs>
+                    <additionalparam>-Xdoclint:none</additionalparam>
+                </configuration>
+            </plugin>
+
+            <!-- Sonar -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>2.5</version>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.7.4.201502262128</version>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

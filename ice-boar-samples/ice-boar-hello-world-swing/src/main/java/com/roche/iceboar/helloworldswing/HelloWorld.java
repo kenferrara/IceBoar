@@ -1,0 +1,94 @@
+/*
+ * ****************************************************************************
+ *  Copyright © 2015 Hoffmann-La Roche
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ * ****************************************************************************
+ */
+
+package com.roche.iceboar.helloworldswing;
+
+import com.google.common.base.Preconditions;
+
+import javax.swing.*;
+import java.net.URISyntaxException;
+import java.util.Map;
+import java.util.Properties;
+
+/**
+ * This is a standalone application used for showing an effects on using IceBoar and Java Web Start. It show JFrame
+ * with JTextArea and print there some information's (Java version, command lines arguments, JNLP properties).
+ */
+public class HelloWorld {
+
+    public static final int WIDTH = 500;
+    public static final int HEIGHT = 400;
+
+    public static void main(String[] args) {
+        JFrame jFrame = new JFrame("Hello World Swing");
+        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JTextArea area = new JTextArea(createText(args));
+        JScrollPane pane = new JScrollPane(area);
+        jFrame.getContentPane().add(pane);
+        jFrame.setSize(WIDTH, HEIGHT);
+        jFrame.setVisible(true);
+    }
+
+    private static String createText(String[] args) {
+        String text = getJavaVersion();
+        text = appendCommandLineArguments(args, text);
+        text = appendJarPath(text);
+        text = appendJnlpProperties(text);
+        text = appendGuavaPreconditions(text);
+        return text;
+    }
+
+    private static String getJavaVersion() {
+        final String javaVersion = System.getProperty("java.version");
+        return "Java Version: " + javaVersion + "\nargs: ";
+    }
+
+    private static String appendCommandLineArguments(String[] args, String text) {
+        for (String arg : args) {
+            text = text + arg + "\n";
+        }
+        return text;
+    }
+
+    private static String appendJarPath(String text) {
+        try {
+            String path = HelloWorld.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
+            text = text + "\nJar path: " + path + "\n";
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+        return text;
+    }
+
+    private static String appendJnlpProperties(String text) {
+        Properties allProperties = System.getProperties();
+        text = text + "\nOnly jnlp.* properties:\n";
+        for (Map.Entry<Object, Object> entry : allProperties.entrySet()) {
+            if (entry.getKey().toString().startsWith("jnlp.")) {
+                text = text + entry.getKey() + "=" + entry.getValue() + "\n";
+            }
+        }
+        return text;
+    }
+
+    private static String appendGuavaPreconditions(String text) {
+        Preconditions.checkNotNull(text);       // call some method to verify that guava.jar is visible on classpath
+        text = text + "\n\nPreconditions guava works";
+        return text;
+    }
+}

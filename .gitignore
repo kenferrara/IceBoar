@@ -1,0 +1,12 @@
+target
+.idea
+*.iml
+*.DS_Store
+.classpath
+.project
+.settings
+nb-configuration.xml
+nbactions.xml
+spy.log
+*.jks
+libs
