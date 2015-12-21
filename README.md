@@ -40,7 +40,7 @@ Web Start technology is used.
 # How to use Ice Boar?
 * You need to add ice-boar library to your project and make it downloadable. 
 * You need to create a JNLP file and make it also downloadable. 
-You can use maven-webstart-plugin for both or make it manually. 
+You can use [webstart-maven-plugin](http://www.mojohaus.org/webstart/webstart-maven-plugin/) for both or make it manually. 
 To learn how it can be done please check [ice-boar-samples/ice-boar-demo](ice-boar-samples/ice-boar-demo) module.   
 
 ## A minimum example of JNLP file
@@ -157,10 +157,10 @@ To avoid any vagueness there is screenshot of this site (access: 02.12.2015)
 
 ## Q: Why IceBoar use System.out and System.err instead of SLF4J or others logging frameworks? 
 
-The main goal of IceBoar Core module was a small size of final JAR file. This library contains only necessary 
-dependencies (I can probably avoid commons-lang3). The second reason to avoid logging frameworks is a sort life cycle 
-of IceBoar Core. For big projects it works maximum 10 Minutes and I don't need log rotation, patterns, and all this 
-stuff from logging frameworks.
+The main goal of IceBoar was a small size of final JAR file. This library contains only necessary dependencies (I 
+can probably avoid commons-lang3). The second reason to avoid logging frameworks is a short life cycle of IceBoar. 
+For big projects it works maximum 10 Minutes and I don't need log rotation, patterns, and all this stuff from logging 
+frameworks.
      
 # Acknowledgments
 Thanks Rafał Udziela for coax me into writing this project.
