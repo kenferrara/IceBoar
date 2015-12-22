@@ -161,12 +161,17 @@ The main goal of IceBoar was a small size of final JAR file. This library contai
 can probably avoid commons-lang3). The second reason to avoid logging frameworks is a short life cycle of IceBoar. 
 For big projects it works maximum 10 Minutes and I don't need log rotation, patterns, and all this stuff from logging 
 frameworks.
-     
+
+# Authors
+This project was initially developed by Marcin Stachniuk (Roche ADMD) to address the issues with WebStart reported by 
+Michael Vogel from Genentech Bioinformatics & Computational Biology Department.
+
 # Acknowledgments
-Thanks Rafał Udziela for coax me into writing this project.
 
-Thanks code reviewers: Rafał Udziela and Damian Mierzwiński.
+Thanks Rafał Udziela (Roche ADMD) for coax me into writing this project.
 
-Thanks for good usage feedback and first tests: Łukasz Migdałek.
+Thanks code reviewers: Rafał Udziela (Roche ADMD) and Damian Mierzwiński (Roche ADMD).
 
-Thanks for preparing logo: Paweł Opozda.
+Thanks for good usage feedback and first tests: Łukasz Migdałek (Roche ADMD).
+
+Thanks for preparing logo: Paweł Opozda (Roche ADMD).
