@@ -26,12 +26,20 @@
     <!-- For usages of Ice Boar see ice-boar-samples project. -->
     <groupId>com.roche</groupId>
     <artifactId>ice-boar</artifactId>
-    <name>Ice Boar Core</name>
     <version>0.5</version>
 
+    <name>Ice Boar</name>
     <description>
         Helper for running a Java standalone application using Java Web Start (JNLP) with a custom version of JRE.
     </description>
+    <url>https://github.com/Roche/IceBoar</url>
+
+    <licenses>
+        <license>
+            <name>The Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
 
     <properties>
         <entry.class>com.roche.iceboar.IceBoar</entry.class>
@@ -207,4 +215,18 @@
         </plugins>
     </build>
 
+    <developers>
+        <developer>
+            <name>Marcin Stachniuk</name>
+            <email>marcin.stachniuk@contractors.roche.com</email>
+            <organization>F. Hoffmann-La Roche</organization>
+            <organizationUrl>http://www.roche.com/</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git@github.com:Roche/IceBoar</connection>
+        <developerConnection>scm:git:git@github.com:Roche/IceBoar</developerConnection>
+        <url>git@github.com:Roche/IceBoar</url>
+    </scm>
 </project>
