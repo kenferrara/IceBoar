@@ -33,7 +33,6 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.apache.commons.lang3.StringUtils.join;
 
 /**
- * <link rel="stylesheet" type="text/css" href="../../../resources/my-css.css"/>
  * This class defines properties that can be set in JNLP file to configure behaviour of Ice Boar application,
  * ex. <br>
  * <pre class="code"><code class="xml">{@code <resources os="Windows" arch="x86">

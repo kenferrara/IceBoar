@@ -30,7 +30,7 @@ import java.util.Properties;
 /**
  * Show JFrame with debug information's (redirecting from System.out and System.err). It's deactivated by default. To
  * see it please set {@value GlobalSettings#JNLP_SHOW_DEBUG} to <tt>true</tt> in your JNLP file.
- * <p/>
+ * <p>
  * For explanation why I use System.out and System.err see FAQ in Readme.md.
  */
 public class DebugJFrame extends JFrame {

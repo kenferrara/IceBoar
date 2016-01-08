@@ -34,14 +34,13 @@ import com.roche.iceboar.settings.GlobalSettingsFactory;
 import javax.swing.*;
 
 /**
- * <link rel="stylesheet" type="text/css" href="../../../resources/my-css.css"/>
  * This is the main class/entry point of the project. It is executed by Java Webstart.
- * <p/>
+ * <p>
  * This class is an entry point for ice-boar library. It reads a configuration from JNLP file, downloads a custom
  * JRE (from a given location), downloads the target Java application with all dependencies and runs it.
- * <p/>
+ * <p>
  * <h3>How to debug this class / application?</h3>
- * <p/>
+ * <p>
  * It is hard to debug Ice Boar. In real environment it is started by javaws. To see whats happen by the
  * running this class please set <tt>jnlp.IceBoar.showDebug</tt> to <tt>true</tt> into your JNLP file.
  * This setting shows {@link com.roche.iceboar.debugview.DebugJFrame} with some debug information's.
