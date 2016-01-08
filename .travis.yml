@@ -1,0 +1,2 @@
+language: java
+script: cd ice-boar && mvn clean install javadoc:jar source:jar && cd .. && mvn clean install
