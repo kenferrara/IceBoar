@@ -1,5 +1,7 @@
 # Ice Boar
 
+[![Build Status](https://travis-ci.org/Roche/IceBoar.svg?branch=master)](https://travis-ci.org/Roche/IceBoar)
+
 ![Ice Boar](ice-boar/src/main/javadoc/resources/ice-boar-logo.png)
 
 Helper for running a Java standalone application using Java Web Start (JNLP) with a custom version of JRE.
