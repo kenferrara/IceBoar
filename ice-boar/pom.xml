@@ -229,4 +229,12 @@
         <developerConnection>scm:git:git@github.com:Roche/IceBoar</developerConnection>
         <url>git@github.com:Roche/IceBoar</url>
     </scm>
+
+    <distributionManagement>
+        <repository>
+            <id>bintray-stachnim-IceBoar</id>
+            <name>stachnim-IceBoar</name>
+            <url>https://api.bintray.com/maven/stachnim/IceBoar/com.roche.iceboar/;publish=1</url>
+        </repository>
+    </distributionManagement>
 </project>
