@@ -6,7 +6,7 @@ KEY_STORE_PASSWORD=password
 KEY_STORE_ALIAS=myalias
 TOMCAT_WEBAPPS_DIR=/usr/local/Cellar/tomcat/8.0.27/libexec/webapps
 MAVEN_REPO=~/.m2/repository
-ICE_BOAR_VERSION = 0.5
+ICE_BOAR_VERSION = 0.6-SNAPSHOT
 
 # Copy Ice Boar JARs to libs
 mkdir libs

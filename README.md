@@ -40,7 +40,21 @@ Runtime Environment (JRE), installs it, downloads this ice-boar library and runs
 Web Start technology is used.
 
 # How to use Ice Boar?
-* You need to add ice-boar library to your project and make it downloadable. 
+* You need to add ice-boar library to your project and make it downloadable. It is available via [Maven Central]
+(http://search.maven.org/#search%7Cga%7C1%7Cice-boar):
+
+```xml
+<dependency>
+    <groupId>com.roche</groupId>
+    <artifactId>ice-boar</artifactId>
+    <version>0.5</version>
+    <classifier>jar-with-dependencies</classifier>
+</dependency>
+```
+
+I suggest to use jar-with-dependencies. In other case you need to define additional Ice Boar dependencies in your 
+JNLP file, using `jar` tag.
+
 * You need to create a JNLP file and make it also downloadable. 
 You can use [webstart-maven-plugin](http://www.mojohaus.org/webstart/webstart-maven-plugin/) for both or make it manually. 
 To learn how it can be done please check [ice-boar-samples/ice-boar-demo](ice-boar-samples/ice-boar-demo) module.   
@@ -77,7 +91,7 @@ To learn how it can be done please check [ice-boar-samples/ice-boar-demo](ice-bo
 
    <!-- Defines where JAR file with IceBoar class is located. In a corporate environment usually this JAR needs to --> 
    <!-- be signed to be executed with all permissions. -->
-   <jar href="http://SERVER:PORT/PATH/ice-boar-jar-with-dependencies.jar"/>
+   <jar href="http://SERVER:PORT/PATH/ice-boar-VERSION-jar-with-dependencies.jar"/>
 
    <!-- Settings section. By using properties with "jnlp." prefix you can pass properties to your target --> 
    <!-- application. Alternatively you can use properties predefined in Java (e.g. path.separator, 
