@@ -1,6 +1,6 @@
 # Ice Boar
 
-[![Build Status](https://travis-ci.org/Roche/IceBoar.svg?branch=master)](https://travis-ci.org/Roche/IceBoar)
+[![Build Status](https://travis-ci.org/Roche/IceBoar.svg?branch=master)](https://travis-ci.org/Roche/IceBoar) [![codecov.io](https://codecov.io/github/Roche/IceBoar/coverage.svg?branch=master)](https://codecov.io/github/Roche/IceBoar?branch=master) [![Apache License Version 2.0](https://img.shields.io/badge/license-Apache%202.0-green.svg) ](https://github.com/Roche/IceBoar/blob/master/LICENSE.txt)
 
 ![Ice Boar](ice-boar/src/main/javadoc/resources/ice-boar-logo.png)
 
