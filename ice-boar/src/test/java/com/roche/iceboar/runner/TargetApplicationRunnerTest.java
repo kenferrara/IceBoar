@@ -68,4 +68,77 @@ public class TargetApplicationRunnerTest {
         }
         return allClass;
     }
+
+    @Test
+    public void shouldReplayNextEventWhenJREDownloadedEvent() {
+        // given
+        List<String> jarURLs = new ArrayList<String>();
+        jarURLs.add("jar1");
+        jarURLs.add("jar2");
+        GlobalSettings settings = GlobalSettings.builder()
+                                                .jarURLs(jarURLs)
+                                                .build();
+        ProgressEventFactory progressEventFactory = new ProgressEventFactory();
+        progressEventFactory.init(settings);
+        ProgressEventQueue progressEventQueue = mock(ProgressEventQueue.class);
+        TargetApplicationRunner runner = new TargetApplicationRunner();
+
+        runner.run(settings, null, progressEventFactory, progressEventQueue);
+
+        // when
+        runner.update(progressEventFactory.getJREDownloadedEvent());
+
+        // then
+        verify(progressEventQueue).update(progressEventFactory.getJREUnzipEvent());
+    }
+
+    @Test
+    public void shouldReplayNextEventWhenJREUnzippedEvent() {
+        // given
+        List<String> jarURLs = new ArrayList<String>();
+        jarURLs.add("jar1");
+        jarURLs.add("jar2");
+        GlobalSettings settings = GlobalSettings.builder()
+                                                .jarURLs(jarURLs)
+                                                .build();
+        ProgressEventFactory progressEventFactory = new ProgressEventFactory();
+        progressEventFactory.init(settings);
+        ProgressEventQueue progressEventQueue = mock(ProgressEventQueue.class);
+        TargetApplicationRunner runner = new TargetApplicationRunner();
+
+        ProgressEvent expectedNextEvent = progressEventFactory.getEventsToReply().get(0);
+
+        runner.run(settings, null, progressEventFactory, progressEventQueue);
+
+        // when
+        runner.update(progressEventFactory.getJREUnzippedEvent());
+
+        // then
+        verify(progressEventQueue).update(expectedNextEvent);
+    }
+
+    @Test
+    public void shouldReplayNextEventWhenDownloadJarFinishEvent() {
+        // given
+        List<String> jarURLs = new ArrayList<String>();
+        jarURLs.add("jar1");
+        jarURLs.add("jar2");
+        GlobalSettings settings = GlobalSettings.builder()
+                                                .jarURLs(jarURLs)
+                                                .build();
+        ProgressEventFactory progressEventFactory = new ProgressEventFactory();
+        progressEventFactory.init(settings);
+        ProgressEventQueue progressEventQueue = mock(ProgressEventQueue.class);
+        TargetApplicationRunner runner = new TargetApplicationRunner();
+
+        ProgressEvent expectedNextEvent = progressEventFactory.getEventsToReply().get(0);
+
+        runner.run(settings, null, progressEventFactory, progressEventQueue);
+
+        // when
+        runner.update(progressEventFactory.getDownloadJarFinishEvent("jar1"));
+
+        // then
+        verify(progressEventQueue).update(expectedNextEvent);
+    }
 }

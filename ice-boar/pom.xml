@@ -43,11 +43,6 @@
 
     <properties>
         <entry.class>com.roche.iceboar.IceBoar</entry.class>
-        <!-- Exclude glue code, file access, swing etc. from Sonar. -->
-        <sonar.exclusions>
-            **/*_.java,**/com/roche/iceboar/IceBoar.java,**/com/roche/iceboar/debugview/*.java,**/com/roche/iceboar/debugview/logging/*.java,**/com/roche/iceboar/downloader/FileUtilsFacade.java,**/com/roche/iceboar/progressview/*.java
-        </sonar.exclusions>
-        <sonar.sources>src/main</sonar.sources>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
@@ -201,12 +196,6 @@
                 </configuration>
             </plugin>
 
-            <!-- Sonar -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>sonar-maven-plugin</artifactId>
-                <version>2.5</version>
-            </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
