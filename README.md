@@ -8,8 +8,8 @@ Helper for running a Java standalone application using Java Web Start (JNLP) wit
 [![Apache License Version 2.0](https://img.shields.io/badge/license-Apache%202.0-green.svg)](https://github.com/Roche/IceBoar/blob/master/LICENSE.txt)
 
 ![latest stable](https://img.shields.io/badge/latest-stable%20=%3E-yellow.svg) [ ![download bintray]
-(https://img.shields.io/badge/Download-Bintray-blue.svg)](https://bintray.com/stachnim/IceBoar/com.roche/view) [ 
-![download Maven Central](https://img.shields.io/badge/Download-Maven%20Central-blue.svg)](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.roche%22%20AND%20a%3A%22ice-boar%22)
+(https://img.shields.io/bintray/v/stachnim/IceBoar/com.roche.svg)](https://bintray.com/stachnim/IceBoar/com.roche/view) [ 
+![download Maven Central](https://img.shields.io/maven-central/v/com.roche/ice-boar.svg)](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.roche%22%20AND%20a%3A%22ice-boar%22)
 
 ![latest snapshots](https://img.shields.io/badge/latest-snapshot%20=%3E-yellow.svg) [ ![download bintray]
 (https://img.shields.io/badge/Download-Bintray-blue.svg)](https://oss.jfrog.org/artifactory/webapp/#/artifacts/browse/tree/General/oss-snapshot-local/com/roche/ice-boar)
