@@ -12,18 +12,20 @@ Helper for running a Java standalone application using Java Web Start (JNLP) wit
 ![download Maven Central](https://img.shields.io/maven-central/v/com.roche/ice-boar.svg)](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.roche%22%20AND%20a%3A%22ice-boar%22)
 
 ![latest snapshots](https://img.shields.io/badge/latest-snapshot%20=%3E-yellow.svg) [ ![download bintray]
-(https://img.shields.io/badge/Download-Bintray-blue.svg)](https://oss.jfrog.org/artifactory/webapp/#/artifacts/browse/tree/General/oss-snapshot-local/com/roche/ice-boar)
+(https://img.shields.io/badge/download-bintray-green.svg)](https://oss.jfrog.org/artifactory/webapp/#/artifacts/browse/tree/General/oss-snapshot-local/com/roche/ice-boar)
 
 Ice Boar is a small app started by Java Web Start (using JNLP file), with does the following:
 
 * checks installed Java Version,
 * downloads a JRE from the custom location (ZIP file) and unpacks it,
-* downloads target JAR files and executes it on dedicated JVM.
+* downloads target JAR files and executes it on dedicated JVM (using java command instead of javaws or jp2launcher).
 
 This helps to avoid typical problems with Java Web Start technology:
 
-* your app is running on dedicated VM prepared by you - no incompatibility issues anymore
+* your app is running on dedicated JVM prepared by you - no incompatibility issues anymore
 * no super user rights needed to install JVM
+* no more problems with web start sandbox (security, cache)
+* you need to sign only IceBoar JAR file
 * and others...       
 
 # Release Notes
