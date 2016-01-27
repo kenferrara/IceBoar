@@ -25,8 +25,6 @@ import com.roche.iceboar.progressevent.ProgressEventQueue;
 import com.roche.iceboar.progressview.ProgressJFrame;
 import com.roche.iceboar.progressview.ProgressUpdater;
 import com.roche.iceboar.runner.ExecutableCommandFactory;
-import com.roche.iceboar.runner.JVMRunner;
-import com.roche.iceboar.runner.JVMRunnerFactory;
 import com.roche.iceboar.runner.TargetApplicationRunner;
 import com.roche.iceboar.settings.GlobalSettings;
 import com.roche.iceboar.settings.GlobalSettingsFactory;
@@ -103,7 +101,8 @@ public final class IceBoar {
 
     private void printCacheInfo() {
         CacheStatus cacheStatus = settings.getCacheStatus();
-        System.out.println("Read from cache:\n" + cacheStatus);
+        System.out.println("Read from cache: " + settings.getCachePath());
+        System.out.println(cacheStatus);
     }
 
     private void initProgressEventFactory() {

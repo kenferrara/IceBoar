@@ -42,7 +42,6 @@ public class ExecutableCommand {
             return process;
         } catch (IOException e) {
             System.err.println("Failed to execute: " + getReadable());
-            e.printStackTrace();
             throw new IceBoarException("Failed to start a target application. Please try again. See debug view " +
                     "for more details.", e);
         }

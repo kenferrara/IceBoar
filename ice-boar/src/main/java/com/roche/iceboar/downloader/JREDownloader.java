@@ -131,6 +131,9 @@ public class JREDownloader implements ProgressEventObserver {
 
     private boolean canUseUnzippedJre() {
         String path = settings.getUnzippedJrePathFromCache();
+        if (StringUtils.isBlank(path)) {
+            return false;
+        }
         ExecutableCommand cmd = executableCommandFactory.createJavaGetVersionNumberCommand(path);
         int exitValue = -1;
         try {
@@ -138,8 +141,7 @@ public class JREDownloader implements ProgressEventObserver {
             exitValue = exec.waitFor();
             System.out.println("Check Java version from cache, exit Value: " + exitValue);
         } catch (Exception e) {
-            // exception means we cannot use unzipped JRE
-            e.printStackTrace();
+            System.out.println("Can't use unzipped JRE. Exception message: " + e.getMessage());
         }
         return exitValue == 0;
     }

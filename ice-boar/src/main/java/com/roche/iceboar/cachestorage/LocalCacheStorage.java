@@ -44,7 +44,7 @@ public class LocalCacheStorage {
             CacheStatus cacheStatus = (CacheStatus) input.readObject();
             return cacheStatus;
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Can't open file with cache settings. Expected file here: " + cachePath);
         } finally {
             if (input != null) {
                 try {
