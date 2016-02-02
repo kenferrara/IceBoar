@@ -21,9 +21,10 @@ package com.roche.iceboar.helloworldswing;
 import com.google.common.base.Preconditions;
 
 import javax.swing.*;
+import java.awt.*;
 import java.net.URISyntaxException;
-import java.util.Map;
-import java.util.Properties;
+import java.net.URL;
+import java.util.*;
 
 /**
  * This is a standalone application used for showing an effects on using IceBoar and Java Web Start. It show JFrame
@@ -33,15 +34,28 @@ public class HelloWorld {
 
     public static final int WIDTH = 500;
     public static final int HEIGHT = 400;
+    private static final String[] ICONS = new String[]{"/img/IceBoar-icon-grey-128x128.png",
+            "/img/IceBoar-icon-grey-64x64.png", "/img/IceBoar-icon-grey-32x32.png", "/img/IceBoar-icon-grey-16x16.png"};
 
     public static void main(String[] args) {
         JFrame jFrame = new JFrame("Hello World Swing");
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        loadIcons(jFrame);
         JTextArea area = new JTextArea(createText(args));
         JScrollPane pane = new JScrollPane(area);
         jFrame.getContentPane().add(pane);
         jFrame.setSize(WIDTH, HEIGHT);
         jFrame.setVisible(true);
+    }
+
+    private static void loadIcons(JFrame jFrame) {
+        java.util.List<Image> icons = new ArrayList<Image>();
+        for(String iconPath: ICONS) {
+            URL iconURL = HelloWorld.class.getResource(iconPath);
+            ImageIcon icon = new ImageIcon(iconURL);
+            icons.add(icon.getImage());
+        }
+        jFrame.setIconImages(icons);
     }
 
     private static String createText(String[] args) {

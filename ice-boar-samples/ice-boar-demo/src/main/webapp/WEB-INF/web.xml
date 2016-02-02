@@ -26,10 +26,26 @@
     <servlet>
         <servlet-name>jnlpServlet</servlet-name>
         <servlet-class>com.roche.iceboar.demo.JnlpServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
     </servlet>
+
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.png</url-pattern>
+    </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>jnlpServlet</servlet-name>
         <url-pattern>*.jnlp</url-pattern>
     </servlet-mapping>
+
+    <mime-mapping>
+        <extension>png</extension>
+        <mime-type>image/png</mime-type>
+    </mime-mapping>
 </web-app>

@@ -19,13 +19,13 @@
 package com.roche.iceboar.debugview;
 
 import com.roche.iceboar.debugview.logging.MessageConsole;
+import com.roche.iceboar.progressview.IconsLoader;
 import com.roche.iceboar.settings.GlobalSettings;
 
 import javax.swing.*;
 import java.awt.*;
 import java.net.URISyntaxException;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 /**
  * Show JFrame with debug information's (redirecting from System.out and System.err). It's deactivated by default. To
@@ -35,9 +35,10 @@ import java.util.Properties;
  */
 public class DebugJFrame extends JFrame {
 
-    public void init(GlobalSettings settings) {
+    public void init(GlobalSettings settings, IconsLoader iconsLoader) {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Java Web Start Bootstrap");
+        setTitle("IceBoar Debug");
+        loadIcons(iconsLoader);
         JTextArea jTextArea = new JTextArea(createText(settings));
         JScrollPane pane = new JScrollPane(jTextArea);
         getContentPane().add(pane);
@@ -46,6 +47,11 @@ public class DebugJFrame extends JFrame {
         MessageConsole console = new MessageConsole(jTextArea);
         console.redirectOut();
         console.redirectErr(Color.RED, null);
+    }
+
+    private void loadIcons(IconsLoader iconsLoader) {
+        java.util.List<Image> icons = iconsLoader.loadDefaultIcons();
+        setIconImages(icons);
     }
 
     private String createText(GlobalSettings settings) {

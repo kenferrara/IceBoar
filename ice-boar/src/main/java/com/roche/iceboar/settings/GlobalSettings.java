@@ -147,6 +147,23 @@ public class GlobalSettings {
      */
     public static final String JNLP_CLOSE_ON_END = "jnlp.IceBoar.close-on-end";
 
+    /**
+     * <tt>{@value #JNLP_ICONS_PREFIX}</tt><br>
+     * This prefix is used to define properties that specify icons for JFrame with progressbar. In clear JNLP this
+     * properties correspond to:<br>
+     * <pre class="code"><code class="xml">
+     * {@code
+     * <icon href="images/image.jpg"/>}
+     * </code></pre>
+     * You can't duplicate the property name. If you need to specify more than one entry (e.g. for different sizes
+     * like 16x16, 32x32, 64x64, 128x128), please create more properties that start from the same prefix e.g.
+     * <pre class="code"><code class="xml">
+     * {@code
+     * <property name="jnlp.IceBoar.icon.0" value="images/icon-128x128.png"/>
+     * <property name="jnlp.IceBoar.icon.1" value="images/icon-64x64.png"/>}
+     * </code></pre>
+     */
+    public static final String JNLP_ICONS_PREFIX = "jnlp.IceBoar.icon.";
 
     private List<String> applicationArguments;
     private long jvmStartTime;
@@ -167,6 +184,7 @@ public class GlobalSettings {
     private String cachePath;
     private CacheStatus cacheStatus;
     private boolean closeOnEnd;
+    private List<String> icons;
 
     public static Builder builder() {
         return new Builder();
@@ -338,6 +356,10 @@ public class GlobalSettings {
         return closeOnEnd;
     }
 
+    public List<String> getIcons() {
+        return icons;
+    }
+
     public static class Builder {
         private String[] applicationArguments = new String[]{};
         private long jvmStartTime;
@@ -358,6 +380,7 @@ public class GlobalSettings {
         private String cachePath;
         private CacheStatus cacheStatus;
         private boolean closeOnEnd;
+        private List<String> icons;
 
         public Builder applicationArguments(String[] applicationArguments) {
             if (applicationArguments != null) {
@@ -460,6 +483,11 @@ public class GlobalSettings {
             return this;
         }
 
+        public Builder icons(List<String> icons) {
+            this.icons = icons;
+            return this;
+        }
+
         public GlobalSettings build() {
             GlobalSettings settings = new GlobalSettings(applicationArguments);
             settings.jvmStartTime = jvmStartTime;
@@ -480,6 +508,7 @@ public class GlobalSettings {
             settings.closeOnEnd = closeOnEnd;
             settings.cachePath = cachePath;
             settings.cacheStatus = cacheStatus;
+            settings.icons = icons;
             return settings;
         }
     }

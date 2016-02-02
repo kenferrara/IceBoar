@@ -18,22 +18,25 @@
 
 package com.roche.iceboar.progressview;
 
-import com.roche.iceboar.progressevent.ProgressEvent;
 import com.roche.iceboar.progressevent.ProgressEventFactory;
-import com.roche.iceboar.progressevent.ProgressEventObserver;
 import com.roche.iceboar.settings.GlobalSettings;
 
 import javax.swing.*;
 import java.awt.*;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Show JFrame with progress of downloading / extracting and running a target application.
  */
 public class ProgressJFrame extends JFrame {
 
-    public ProgressUpdater init(GlobalSettings settings, ProgressEventFactory progressEventFactory) {
+    public ProgressUpdater init(GlobalSettings settings, ProgressEventFactory progressEventFactory, IconsLoader iconsLoader) {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle(settings.getFrameTitle());
+
+        loadIcons(iconsLoader, settings);
 
         setSize(300, 100);
         setLocationRelativeTo(null);
@@ -60,5 +63,10 @@ public class ProgressJFrame extends JFrame {
         setContentPane(mainPanel);
 
         return new ProgressUpdater(progressBar, informationLabel, progressEventFactory);
+    }
+
+    private void loadIcons(IconsLoader iconsLoader, GlobalSettings settings) {
+        List<Image> icons = iconsLoader.loadIcons(settings);
+        setIconImages(icons);
     }
 }

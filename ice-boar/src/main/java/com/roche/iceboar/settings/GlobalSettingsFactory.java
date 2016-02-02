@@ -81,7 +81,8 @@ public class GlobalSettingsFactory {
         String pathSeparator = properties.getProperty(PATH_SEPARATOR);
         boolean closeOnEnd = getCloseOnEnd(properties);
         String cachePath = tempDirectory + ".IceBoar.cache";
-        CacheStatus cacheStatus = readCacheStatus(cachePath);
+        CacheStatus cacheStatus = getCacheStatus(cachePath);
+        List<String> icons = getIcons(codeBase, properties);
 
         GlobalSettings settings = GlobalSettings.builder()
                                                 .applicationArguments(args)
@@ -103,6 +104,7 @@ public class GlobalSettingsFactory {
                                                 .closeOnEnd(closeOnEnd)
                                                 .cachePath(cachePath)
                                                 .cacheStatus(cacheStatus)
+                                                .icons(icons)
                                                 .build();
         return settings;
     }
@@ -153,23 +155,27 @@ public class GlobalSettingsFactory {
     }
 
     private static List<String> getDependenciesJars(String codeBase, Properties properties) {
-        List<String> jarURLs;
-        jarURLs = new ArrayList<String>();
-        for (Map.Entry<Object, Object> entry : properties.entrySet()) {
-            Object key = entry.getKey();
-            if (key instanceof String && ((String) key).startsWith(JNLP_JARS_PREFIX)) {
-                String urlText = (String) entry.getValue();
-                if (!isAbsolutePath(urlText) && StringUtils.isNotBlank(codeBase)) {
-                    urlText = codeBase + urlText;
-                }
-                jarURLs.add(urlText);
-            }
-        }
+        List<String> jarURLs = readRemoteResourcesByPrefix(codeBase, properties, JNLP_JARS_PREFIX);
         if (jarURLs.isEmpty()) {
             throw new IceBoarException("Please specify minimum a one JAR file in property: " + JNLP_JARS_PREFIX +
                     "0", null);
         }
         return jarURLs;
+    }
+
+    private static List<String> readRemoteResourcesByPrefix(String codeBase, Properties properties, String prefix) {
+        List<String> urls = new ArrayList<String>();
+        for (Map.Entry<Object, Object> entry : properties.entrySet()) {
+            Object key = entry.getKey();
+            if (key instanceof String && ((String) key).startsWith(prefix)) {
+                String urlText = (String) entry.getValue();
+                if (!isAbsolutePath(urlText) && StringUtils.isNotBlank(codeBase)) {
+                    urlText = codeBase + urlText;
+                }
+                urls.add(urlText);
+            }
+        }
+        return urls;
     }
 
     private static List<String> getAllPropertiesForTarget(Properties properties) {
@@ -190,9 +196,14 @@ public class GlobalSettingsFactory {
         return urlText.contains("://");
     }
 
-    private static CacheStatus readCacheStatus(String cachePath) {
+    private static CacheStatus getCacheStatus(String cachePath) {
         LocalCacheStorage localCacheStorage = new LocalCacheStorage();
         CacheStatus cacheStatus = localCacheStorage.loadCacheStatus(cachePath);
         return cacheStatus;
+    }
+
+    private static List<String> getIcons(String codeBase, Properties properties) {
+        List<String> icons = readRemoteResourcesByPrefix(codeBase, properties, JNLP_ICONS_PREFIX);
+        return icons;
     }
 }

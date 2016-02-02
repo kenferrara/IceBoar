@@ -27,6 +27,8 @@
         <vendor>Roche</vendor>
         <description>Hello World Description</description>
         <offline-allowed/>
+        <icon href="${jre.and.jars.host}/${artifactId}/img/IceBoar-icon-red-128x128.png"/>
+        <icon kind="splash" href="${jre.and.jars.host}/${artifactId}/img/ice-boar-logo.png"/>
     </information>
     <security>
         <all-permissions/>
@@ -40,11 +42,15 @@
         <property name="jnlp.IceBoar.targetJavaVersion" value="1.7.0_01"/>
         <property name="jnlp.IceBoar.main-class" value="com.roche.iceboar.helloworldswing.HelloWorld"/>
         <property name="jnlp.IceBoar.jar.0"
-                  value="${jre.and.jars.host}/${jars.path}/ice-boar-hello-world-swing.jar"/>
+                  value="${jre.and.jars.host}/${jars.path}/ice-boar-hello-world-swing-${version}.jar"/>
         <property name="jnlp.IceBoar.jar.1" value="${jre.and.jars.host}/${jars.path}/libs/guava-11.0.2.jar"/>
         <property name="jnlp.IceBoar.initial-heap-size" value="128m"/>
         <property name="jnlp.IceBoar.max-heap-size" value="256m"/>
         <property name="jnlp.IceBoar.close-on-end" value="false"/>
+        <property name="jnlp.IceBoar.icon.1" value="${jre.and.jars.host}/${artifactId}/img/IceBoar-icon-red-16x16.png"/>
+        <property name="jnlp.IceBoar.icon.2" value="${jre.and.jars.host}/${artifactId}/img/IceBoar-icon-red-32x32.png"/>
+        <property name="jnlp.IceBoar.icon.3" value="${jre.and.jars.host}/${artifactId}/img/IceBoar-icon-red-64x64.png"/>
+        <property name="jnlp.IceBoar.icon.4" value="${jre.and.jars.host}/${artifactId}/img/IceBoar-icon-red-128x128.png"/>
 
     </resources>
 

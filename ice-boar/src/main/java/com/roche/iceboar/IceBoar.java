@@ -22,6 +22,7 @@ import com.roche.iceboar.cachestorage.CacheStatus;
 import com.roche.iceboar.debugview.DebugJFrame;
 import com.roche.iceboar.progressevent.ProgressEventFactory;
 import com.roche.iceboar.progressevent.ProgressEventQueue;
+import com.roche.iceboar.progressview.IconsLoader;
 import com.roche.iceboar.progressview.ProgressJFrame;
 import com.roche.iceboar.progressview.ProgressUpdater;
 import com.roche.iceboar.runner.ExecutableCommandFactory;
@@ -49,6 +50,7 @@ public final class IceBoar {
 
     private GlobalSettings settings;
     private ProgressUpdater progress;
+    private IconsLoader iconsLoader;
     private ProgressEventFactory progressEventFactory;
     private ProgressEventQueue progressEventQueue;
 
@@ -63,6 +65,7 @@ public final class IceBoar {
     public void start(String[] args) {
         try {
             initGlobalSettings(args);
+            initIconsLoader();
             showDebugFrameIfItsNeeded();
             printCacheInfo();
             initProgressEventFactory();
@@ -78,6 +81,10 @@ public final class IceBoar {
         settings = GlobalSettingsFactory.getGlobalSettings(args);
     }
 
+    private void initIconsLoader() {
+        iconsLoader = new IconsLoader();
+    }
+
     private void showDebugFrameIfItsNeeded() {
         boolean showDebug = settings.isShowDebug();
 
@@ -86,7 +93,7 @@ public final class IceBoar {
 
                 public void run() {
                     DebugJFrame jFrame = new DebugJFrame();
-                    jFrame.init(settings);
+                    jFrame.init(settings, iconsLoader);
                     jFrame.setVisible(true);
                 }
             });
@@ -116,7 +123,7 @@ public final class IceBoar {
 
     private void showProgressFrame() {
         ProgressJFrame jFrame = new ProgressJFrame();
-        progress = jFrame.init(settings, progressEventFactory);
+        progress = jFrame.init(settings, progressEventFactory, iconsLoader);
         progressEventQueue.registerObserver(progress);
         jFrame.setVisible(true);
     }
