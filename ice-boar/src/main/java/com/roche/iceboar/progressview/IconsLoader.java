@@ -43,8 +43,7 @@ public class IconsLoader {
         for (String url : iconsURLs) {
             try {
                 BufferedImage image = ImageIO.read(new URL(url));
-                ImageIcon imageIcon = new ImageIcon(image);
-                icons.add(imageIcon.getImage());
+                icons.add(image);
                 System.out.println("Load icon successful: " + url);
             } catch (IOException e) {
                 System.out.println("Fail to load icon: " + url);

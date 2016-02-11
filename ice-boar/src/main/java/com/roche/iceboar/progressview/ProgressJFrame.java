@@ -23,9 +23,9 @@ import com.roche.iceboar.settings.GlobalSettings;
 
 import javax.swing.*;
 import java.awt.*;
-import java.net.URL;
-import java.util.ArrayList;
+import java.awt.image.BufferedImage;
 import java.util.List;
+import com.apple.eawt.Application;
 
 /**
  * Show JFrame with progress of downloading / extracting and running a target application.
@@ -68,5 +68,18 @@ public class ProgressJFrame extends JFrame {
     private void loadIcons(IconsLoader iconsLoader, GlobalSettings settings) {
         List<Image> icons = iconsLoader.loadIcons(settings);
         setIconImages(icons);
+
+        Application application = Application.getApplication();
+        application.setDockIconImage(findTheBiggest(icons));
+    }
+
+    private Image findTheBiggest(List<Image> icons) {
+        Image theBiggest = icons.get(0);
+        for (int i = 1; i < icons.size(); i++) {
+            if(icons.get(i).getWidth(null) > theBiggest.getWidth(null)) {
+                theBiggest = icons.get(i);
+            }
+        }
+        return theBiggest;
     }
 }

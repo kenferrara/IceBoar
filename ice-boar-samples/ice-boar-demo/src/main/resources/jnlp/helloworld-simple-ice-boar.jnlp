@@ -26,6 +26,8 @@
         <vendor>Roche</vendor>
         <description>Hello World Description</description>
         <offline-allowed/>
+        <icon href="${jre.and.jars.host}/${artifactId}/img/IceBoar-icon-128x128.png"/>
+        <icon kind="splash" href="${jre.and.jars.host}/${artifactId}/img/ice-boar-logo.png"/>
     </information>
     <security>
         <all-permissions/>

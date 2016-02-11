@@ -18,6 +18,7 @@
 
 package com.roche.iceboar.helloworldswing;
 
+import com.apple.eawt.Application;
 import com.google.common.base.Preconditions;
 
 import javax.swing.*;
@@ -56,6 +57,9 @@ public class HelloWorld {
             icons.add(icon.getImage());
         }
         jFrame.setIconImages(icons);
+
+        Application application = Application.getApplication();
+        application.setDockIconImage(icons.get(0));
     }
 
     private static String createText(String[] args) {
