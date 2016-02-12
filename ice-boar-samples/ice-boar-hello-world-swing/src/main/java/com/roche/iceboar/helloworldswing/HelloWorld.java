@@ -58,8 +58,15 @@ public class HelloWorld {
         }
         jFrame.setIconImages(icons);
 
-        Application application = Application.getApplication();
-        application.setDockIconImage(icons.get(0));
+        if(isOperationSystemMacOSX()) {
+            Application application = Application.getApplication();
+            application.setDockIconImage(icons.get(0));
+        }
+    }
+
+    private static boolean isOperationSystemMacOSX() {
+        String osName = System.getProperty("os.name");
+        return osName.equals("Mac OS X");
     }
 
     private static String createText(String[] args) {

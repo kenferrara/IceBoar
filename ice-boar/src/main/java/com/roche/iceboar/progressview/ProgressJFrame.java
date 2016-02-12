@@ -69,8 +69,10 @@ public class ProgressJFrame extends JFrame {
         List<Image> icons = iconsLoader.loadIcons(settings);
         setIconImages(icons);
 
-        Application application = Application.getApplication();
-        application.setDockIconImage(findTheBiggest(icons));
+        if(settings.isOperationSystemMacOSX()) {
+            Application application = Application.getApplication();
+            application.setDockIconImage(findTheBiggest(icons));
+        }
     }
 
     private Image findTheBiggest(List<Image> icons) {
