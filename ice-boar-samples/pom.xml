@@ -24,7 +24,7 @@
 
     <groupId>com.roche</groupId>
     <artifactId>ice-boar-samples</artifactId>
-    <version>0.6-SNAPSHOT</version>
+    <version>0.6</version>
     <modules>
         <module>ice-boar-demo</module>
         <module>ice-boar-hello-world-swing</module>
