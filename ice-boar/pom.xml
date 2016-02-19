@@ -243,7 +243,7 @@
         <repository>
             <id>bintray-stachnim-IceBoar</id>
             <name>stachnim-IceBoar</name>
-            <url>https://api.bintray.com/maven/stachnim/IceBoar/com.roche.iceboar/;publish=1</url>
+            <url>https://api.bintray.com/maven/stachnim/IceBoar/com.roche/;publish=1</url>
         </repository>
 		<snapshotRepository>
 			<id>oss-jfrog-artifactory</id>
