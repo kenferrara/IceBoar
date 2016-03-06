@@ -46,6 +46,7 @@
         <property name="jnlp.IceBoar.max-heap-size" value="256m"/>
         <property name="jnlp.IceBoar.java-vm-args" value="-Xdebug -XX:+UseParallelGC"/>
         <property name="jnlp.IceBoar.close-on-end" value="false"/>
+        <property name="jnlp.IceBoar.splash" value="${jre.and.jars.host}/${artifactId}/img/splash-screen-04.jpg"/>
 
     </resources>
 
@@ -76,4 +77,4 @@
 
     <application-desc main-class="com.roche.iceboar.IceBoar">
     </application-desc>
-</jnlp> 
+</jnlp>

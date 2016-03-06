@@ -18,38 +18,45 @@
 
 package com.roche.iceboar.progressview;
 
+import com.apple.eawt.Application;
 import com.roche.iceboar.progressevent.ProgressEventFactory;
 import com.roche.iceboar.settings.GlobalSettings;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.List;
-import com.apple.eawt.Application;
 
 /**
  * Show JFrame with progress of downloading / extracting and running a target application.
  */
 public class ProgressJFrame extends JFrame {
 
-    public ProgressUpdater init(GlobalSettings settings, ProgressEventFactory progressEventFactory, IconsLoader iconsLoader) {
+    public ProgressUpdater init(GlobalSettings settings, ProgressEventFactory progressEventFactory, ImageLoader imageLoader) {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle(settings.getFrameTitle());
 
-        loadIcons(iconsLoader, settings);
+        loadIcons(imageLoader, settings);
 
-        setSize(300, 100);
+        setSize(620, 450);
         setLocationRelativeTo(null);
 
         JPanel mainPanel = new JPanel();
         LayoutManager layoutManager = new BoxLayout(mainPanel, BoxLayout.Y_AXIS);
         mainPanel.setLayout(layoutManager);
 
+
+        Image splashScreenImage = imageLoader.loadSplashScreen(settings);
+        if(splashScreenImage != null){
+            JLabel splashScreen = new JLabel(new ImageIcon(splashScreenImage));
+            splashScreen.setAlignmentX(Component.CENTER_ALIGNMENT);
+            mainPanel.add(splashScreen);
+        }
+
         JProgressBar progressBar = new JProgressBar();
         progressBar.setAlignmentX(Component.CENTER_ALIGNMENT);
         progressBar.setMinimumSize(new Dimension(50, 30));
-        progressBar.setPreferredSize(new Dimension(50, 30));
-        progressBar.setMaximumSize(new Dimension(250, 30));
+        progressBar.setPreferredSize(new Dimension(620, 30));
+        progressBar.setMaximumSize(new Dimension(620, 30));
         progressBar.setStringPainted(true);
 
         JLabel informationLabel = new JLabel("In progress...");
@@ -61,15 +68,15 @@ public class ProgressJFrame extends JFrame {
         mainPanel.add(informationLabel);
         mainPanel.add(Box.createVerticalGlue());
         setContentPane(mainPanel);
-
+        setUndecorated(true);
         return new ProgressUpdater(progressBar, informationLabel, progressEventFactory);
     }
 
-    private void loadIcons(IconsLoader iconsLoader, GlobalSettings settings) {
-        List<Image> icons = iconsLoader.loadIcons(settings);
+    private void loadIcons(ImageLoader imageLoader, GlobalSettings settings) {
+        List<Image> icons = imageLoader.loadIcons(settings);
         setIconImages(icons);
 
-        if(settings.isOperationSystemMacOSX()) {
+        if (settings.isOperationSystemMacOSX()) {
             Application application = Application.getApplication();
             application.setDockIconImage(findTheBiggest(icons));
         }
@@ -78,7 +85,7 @@ public class ProgressJFrame extends JFrame {
     private Image findTheBiggest(List<Image> icons) {
         Image theBiggest = icons.get(0);
         for (int i = 1; i < icons.size(); i++) {
-            if(icons.get(i).getWidth(null) > theBiggest.getWidth(null)) {
+            if (icons.get(i).getWidth(null) > theBiggest.getWidth(null)) {
                 theBiggest = icons.get(i);
             }
         }
