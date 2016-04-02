@@ -162,15 +162,23 @@ public class GlobalSettings {
      * <property name="jnlp.IceBoar.icon.0" value="images/icon-128x128.png"/>
      * <property name="jnlp.IceBoar.icon.1" value="images/icon-64x64.png"/>}
      * </code></pre>
+     * @since 0.6
      */
     public static final String JNLP_ICONS_PREFIX = "jnlp.IceBoar.icon.";
 
     /**
      * <tt>{@value #JNLP_SPLASH_SCREEN}</tt><br>
-     * Custom splash screen
-     *
+     * Define your custom splash screen. If file will be not found a default frame will be showed.
+     * @since 0.7
      */
     public static final String JNLP_SPLASH_SCREEN = "jnlp.IceBoar.splash";
+
+    /**
+     * <tt>{@value #JNLP_SPLASH_HIDE_FRAME_BORDER}</tt><br>
+     * Hide a frame border. A JFrame will be undecorated. Default is set to false.
+     * @since 0.7
+     */
+    public static final String JNLP_SPLASH_HIDE_FRAME_BORDER = "jnlp.IceBoar.hide-frame-border";
 
     private List<String> applicationArguments;
     private long jvmStartTime;
@@ -193,6 +201,7 @@ public class GlobalSettings {
     private boolean closeOnEnd;
     private List<String> icons;
     private String customSplashImage;
+    private boolean hideFrameBorder;
 
     public static Builder builder() {
         return new Builder();
@@ -372,6 +381,10 @@ public class GlobalSettings {
         return customSplashImage;
     }
 
+    public boolean isHideFrameBorder() {
+        return hideFrameBorder;
+    }
+
     public static class Builder {
         private String[] applicationArguments = new String[]{};
         private long jvmStartTime;
@@ -394,6 +407,7 @@ public class GlobalSettings {
         private boolean closeOnEnd;
         private List<String> icons;
         private String splashScreen;
+        private boolean hideFrameBorder;
 
         public Builder applicationArguments(String[] applicationArguments) {
             if (applicationArguments != null) {
@@ -506,6 +520,11 @@ public class GlobalSettings {
             return this;
         }
 
+        public Builder hideFrameBorder(boolean hideFrameBorder) {
+            this.hideFrameBorder = hideFrameBorder;
+            return this;
+        }
+
         public GlobalSettings build() {
             GlobalSettings settings = new GlobalSettings(applicationArguments);
             settings.jvmStartTime = jvmStartTime;
@@ -528,6 +547,7 @@ public class GlobalSettings {
             settings.cacheStatus = cacheStatus;
             settings.icons = icons;
             settings.customSplashImage = splashScreen;
+            settings.hideFrameBorder = hideFrameBorder;
             return settings;
         }
     }

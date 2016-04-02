@@ -37,7 +37,7 @@ public class ProgressJFrame extends JFrame {
 
         loadIcons(imageLoader, settings);
 
-        setSize(620, 450);
+        setSize(300, 100);
         setLocationRelativeTo(null);
 
         JPanel mainPanel = new JPanel();
@@ -54,9 +54,6 @@ public class ProgressJFrame extends JFrame {
 
         JProgressBar progressBar = new JProgressBar();
         progressBar.setAlignmentX(Component.CENTER_ALIGNMENT);
-        progressBar.setMinimumSize(new Dimension(50, 30));
-        progressBar.setPreferredSize(new Dimension(620, 30));
-        progressBar.setMaximumSize(new Dimension(620, 30));
         progressBar.setStringPainted(true);
 
         JLabel informationLabel = new JLabel("In progress...");
@@ -68,7 +65,11 @@ public class ProgressJFrame extends JFrame {
         mainPanel.add(informationLabel);
         mainPanel.add(Box.createVerticalGlue());
         setContentPane(mainPanel);
-        setUndecorated(true);
+        if(settings.isHideFrameBorder()) {
+            setUndecorated(true);
+        }
+        pack();
+
         return new ProgressUpdater(progressBar, informationLabel, progressEventFactory);
     }
 

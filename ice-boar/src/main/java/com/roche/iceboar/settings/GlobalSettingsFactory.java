@@ -85,6 +85,7 @@ public class GlobalSettingsFactory {
         CacheStatus cacheStatus = getCacheStatus(cachePath);
         List<String> icons = getIcons(codeBase, properties);
         String splash = getSplashScreen(codeBase, properties);
+        boolean hideFrameBorder = getHideFrameBorder(properties);
 
         GlobalSettings settings = GlobalSettings.builder()
                                                 .applicationArguments(args)
@@ -108,6 +109,7 @@ public class GlobalSettingsFactory {
                                                 .cacheStatus(cacheStatus)
                                                 .icons(icons)
                                                 .customSplashImage(splash)
+                                                .hideFrameBorder(hideFrameBorder)
                                                 .build();
         return settings;
     }
@@ -217,4 +219,10 @@ public class GlobalSettingsFactory {
     private static String getSplashScreen(String codeBase, Properties properties) {
         return getAbsoluteUrl(codeBase, defaultIfNull((String) properties.get(JNLP_SPLASH_SCREEN), ""));
     }
+
+    private static boolean getHideFrameBorder(Properties properties) {
+        String hideFrameBorder = properties.getProperty(JNLP_SPLASH_HIDE_FRAME_BORDER);
+        return (isNotBlank(hideFrameBorder) && hideFrameBorder.equals("true"));
+    }
+
 }

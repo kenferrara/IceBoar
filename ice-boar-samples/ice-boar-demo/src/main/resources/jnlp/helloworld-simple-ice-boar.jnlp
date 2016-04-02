@@ -46,7 +46,7 @@
         <property name="jnlp.IceBoar.max-heap-size" value="256m"/>
         <property name="jnlp.IceBoar.java-vm-args" value="-Xdebug -XX:+UseParallelGC"/>
         <property name="jnlp.IceBoar.close-on-end" value="false"/>
-        <property name="jnlp.IceBoar.splash" value="${jre.and.jars.host}/${artifactId}/img/splash-screen-04.jpg"/>
+        <property name="jnlp.IceBoar.splash" value="${jre.and.jars.host}/${artifactId}/img/ice-boar-splash.png"/>
 
     </resources>
 
