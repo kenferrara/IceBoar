@@ -18,8 +18,7 @@
   ~ *****************************************************************************
   -->
 
-<!-- This example show how to run hello-world-swing application using IceBoar. In contrast to helloworld-simple-ice-boar.jnlp -->
-<!-- this file define also dependencies for target application (see jnlp.IceBoar.jar.1 property) -->
+<!-- This example show how to run hello-world-swing application using IceBoar. It define a most useful properties. -->
 
 <jnlp spec="1.0+" codebase="#{codebase}">
     <information>
@@ -27,6 +26,10 @@
         <vendor>Roche</vendor>
         <description>Hello World Description</description>
         <offline-allowed/>
+        <!-- Custom icon of Ice Boar but not always shown. -->
+        <icon href="${jre.and.jars.host}/${artifactId}/img/IceBoar-icon-128x128.png"/>
+        <!-- This probably doesn't work in newest JRE. -->
+        <icon kind="splash" href="${jre.and.jars.host}/${artifactId}/img/ice-boar-logo.png"/>
     </information>
     <security>
         <all-permissions/>
@@ -35,12 +38,18 @@
         <j2se version="1.5+" href="http://java.sun.com/products/autodl/j2se"/>
         <jar href="${jre.and.jars.host}/${jars.path}/ice-boar-${version}-jar-with-dependencies.jar"/>
 
+        <property name="jnlp.IceBoar.showDebug" value="true"/>
+        <property name="jnlp.IceBoar.close-on-end" value="false"/>
         <property name="jnlp.IceBoar.main-class" value="com.roche.iceboar.helloworldswing.HelloWorld"/>
         <property name="jnlp.IceBoar.jar.0"
-                  value="${jre.and.jars.host}/${jars.path}/ice-boar-hello-world-swing-${version}.jar"/>
+                  value="${jre.and.jars.host}/${jars.path}/ice-boar-hello-world-swing-${version}-jar-with-dependencies.jar"/>
 
-        <!-- Definition of depended Jar -->
-        <property name="jnlp.IceBoar.jar.1" value="${jre.and.jars.host}/${jars.path}/libs/guava-11.0.2.jar"/>
+        <!-- Icons used by IceBoar in taskbar, window and dock. You don't need to define all sizes of icons, one is
+        sufficient. It will be scaled when needed. -->
+        <property name="jnlp.IceBoar.icon.1" value="${jre.and.jars.host}/${artifactId}/img/IceBoar-icon-red-16x16.png"/>
+        <property name="jnlp.IceBoar.icon.2" value="${jre.and.jars.host}/${artifactId}/img/IceBoar-icon-red-32x32.png"/>
+        <property name="jnlp.IceBoar.icon.3" value="${jre.and.jars.host}/${artifactId}/img/IceBoar-icon-red-64x64.png"/>
+        <property name="jnlp.IceBoar.icon.4" value="${jre.and.jars.host}/${artifactId}/img/IceBoar-icon-red-128x128.png"/>
     </resources>
 
     <resources os="Windows" arch="amd64">
@@ -70,4 +79,4 @@
 
     <application-desc main-class="com.roche.iceboar.IceBoar">
     </application-desc>
-</jnlp> 
+</jnlp>

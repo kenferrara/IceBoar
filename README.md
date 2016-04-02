@@ -113,7 +113,7 @@ To learn how it can be done please check [ice-boar-samples/ice-boar-demo](ice-bo
    <property name="jnlp.IceBoar.showDebug" value="true"/>
 
    <!-- Defines a version of Java to execute the target application. -->
-   <property name="jnlp.IceBoar.targetJavaVersion" value="1.7.0_01"/>
+   <property name="jnlp.IceBoar.targetJavaVersion" value="1.7.0_04"/>
 
    <!-- Defines an entry point class to your / target application. -->
    <property name="jnlp.IceBoar.main-class" value="com.roche.iceboar.helloworldswing.HelloWorld"/>
@@ -130,11 +130,11 @@ To learn how it can be done please check [ice-boar-samples/ice-boar-demo](ice-bo
 
 <!-- Specifies properties specific to a given OS and architecture. -->
 <resources os="Windows" arch="amd64">
-   <property name="jnlp.IceBoar.targetJavaURL" value="http://SERVER:PORT/PATH/jre-1.7.0_01-win-x64.zip"/>
+   <property name="jnlp.IceBoar.targetJavaURL" value="http://SERVER:PORT/PATH/jre-1.7.0_04-win-x64.zip"/>
 </resources>
 
 <resources os="Mac OS X" arch="x86_64">
-   <property name="jnlp.IceBoar.targetJavaURL" value="http://SERVER:PORT/PATH/jre-1.7.0_01-macosx-x64.zip"/>
+   <property name="jnlp.IceBoar.targetJavaURL" value="http://SERVER:PORT/PATH/jre-1.7.0_04-macosx-x64.zip"/>
 </resources>
 
 <!-- Definition of Entry Point to Ice Boar, witch wills run class defined in jnlp.IceBoar.main-class. -->

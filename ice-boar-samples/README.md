@@ -23,9 +23,9 @@ More info: [Creating a KeyStore in JKS Format](https://docs.oracle.com/cd/E19509
 4) Prepare a ZIP file with JRE that will be used to execute the target application and place it under 
 TOMCAT_DIR/webapps/jre. ZIP archives to be prepared for the demo (they are specified in ice-boar-demo module):
 
-- jre-1.7.0_01-win-x64.zip
-- jre-1.7.0_01-win-x32.zip
-- jre-1.7.0_01-macosx-x64.zip
+- jre-1.7.0_04-win-x64.zip
+- jre-1.7.0_04-win-x32.zip
+- jre-1.7.0_04-macosx-x64.zip
 
 5) Open and adjust paths in [ice-boar-demo/signwin.bat](ice-boar-demo/signwin.bat) or 
 [ice-boar-demo/signmac.sh](ice-boar-demo/signmac.sh) depend on your OS and run it.

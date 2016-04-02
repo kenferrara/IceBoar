@@ -18,8 +18,7 @@
   ~ *****************************************************************************
   -->
 
-<!-- This example show how to run hello-world-swing application using IceBoar. In contrast to helloworld-simple-ice-boar.jnlp -->
-<!-- this file define also dependencies for target application (see jnlp.IceBoar.jar.1 property) -->
+<!-- This example show how to run hello-world-swing application using IceBoar. It define a most useful properties. -->
 
 <jnlp spec="1.0+" codebase="#{codebase}">
     <information>
@@ -35,12 +34,17 @@
         <j2se version="1.5+" href="http://java.sun.com/products/autodl/j2se"/>
         <jar href="${jre.and.jars.host}/${jars.path}/ice-boar-${version}-jar-with-dependencies.jar"/>
 
+        <property name="jnlp.IceBoar.showDebug" value="true"/>
+        <property name="jnlp.IceBoar.close-on-end" value="false"/>
         <property name="jnlp.IceBoar.main-class" value="com.roche.iceboar.helloworldswing.HelloWorld"/>
         <property name="jnlp.IceBoar.jar.0"
-                  value="${jre.and.jars.host}/${jars.path}/ice-boar-hello-world-swing-${version}.jar"/>
+                  value="${jre.and.jars.host}/${jars.path}/ice-boar-hello-world-swing-${version}-jar-with-dependencies.jar"/>
 
-        <!-- Definition of depended Jar -->
-        <property name="jnlp.IceBoar.jar.1" value="${jre.and.jars.host}/${jars.path}/libs/guava-11.0.2.jar"/>
+        <!-- Splash screen -->
+        <property name="jnlp.IceBoar.splash" value="${jre.and.jars.host}/${artifactId}/img/ice-boar-splash.png"/>
+
+        <!-- Hide a frame border / undecorate. -->
+        <property name="jnlp.IceBoar.hide-frame-border" value="true"/>
     </resources>
 
     <resources os="Windows" arch="amd64">
@@ -70,4 +74,4 @@
 
     <application-desc main-class="com.roche.iceboar.IceBoar">
     </application-desc>
-</jnlp> 
+</jnlp>

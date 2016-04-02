@@ -18,7 +18,7 @@
   ~ *****************************************************************************
   -->
 
-<!-- This example show how to run hello-world-swing application using IceBoar. It define a most useful properties. -->
+<!-- This example show how to run hello-world-swing application using IceBoar. It define a minimum properties -->
 
 <jnlp spec="1.0+" codebase="#{codebase}">
     <information>
@@ -26,55 +26,51 @@
         <vendor>Roche</vendor>
         <description>Hello World Description</description>
         <offline-allowed/>
-        <icon href="${jre.and.jars.host}/${artifactId}/img/IceBoar-icon-128x128.png"/>
-        <icon kind="splash" href="${jre.and.jars.host}/${artifactId}/img/ice-boar-logo.png"/>
     </information>
     <security>
         <all-permissions/>
     </security>
     <resources>
+        <!-- This JRE version is used for starting Ice Boar. It needs to be >= 1.5 -->
         <j2se version="1.5+" href="http://java.sun.com/products/autodl/j2se"/>
+        <!-- Here a path to Ice Boar Jar is necessary -->
         <jar href="${jre.and.jars.host}/${jars.path}/ice-boar-${version}-jar-with-dependencies.jar"/>
 
-        <property name="jnlp.IceBoar.showDebug" value="true"/>
-        <property name="jnlp.IceBoar.frameTitle" value="Roche..."/>
-        <property name="jnlp.IceBoar.targetJavaVersion" value="1.7.0_01"/>
+        <!-- A main target class. In pure Web Start here should be a class from application-desc main-class. -->
         <property name="jnlp.IceBoar.main-class" value="com.roche.iceboar.helloworldswing.HelloWorld"/>
+
+        <!-- A path to target jar. -->
         <property name="jnlp.IceBoar.jar.0"
                   value="${jre.and.jars.host}/${jars.path}/ice-boar-hello-world-swing-${version}-jar-with-dependencies.jar"/>
-        <property name="jnlp.IceBoar.initial-heap-size" value="128m"/>
-        <property name="jnlp.IceBoar.max-heap-size" value="256m"/>
-        <property name="jnlp.IceBoar.java-vm-args" value="-Xdebug -XX:+UseParallelGC"/>
-        <property name="jnlp.IceBoar.close-on-end" value="false"/>
-        <property name="jnlp.IceBoar.splash" value="${jre.and.jars.host}/${artifactId}/img/ice-boar-splash.png"/>
-
     </resources>
 
+    <!-- Path to zipped JRE depended on OS. A target app will be started ont his version of JRE. -->
     <resources os="Windows" arch="amd64">
         <property name="jnlp.IceBoar.targetJavaURL"
-                  value="${jre.and.jars.host}/${jre.path}/jre-1.7.0_01-win-x64.zip"/>
+                  value="${jre.and.jars.host}/${jre.path}/jre-1.7.0_04-win-x64.zip"/>
     </resources>
 
     <resources os="Windows" arch="x86">
         <property name="jnlp.IceBoar.targetJavaURL"
-                  value="${jre.and.jars.host}/${jre.path}/jre-1.7.0_01-win-x32.zip"/>
+                  value="${jre.and.jars.host}/${jre.path}/jre-1.7.0_04-win-x32.zip"/>
     </resources>
 
     <resources os="Windows" arch="x86_64">
         <property name="jnlp.IceBoar.targetJavaURL"
-                  value="${jre.and.jars.host}/${jre.path}/jre-1.7.0_01-win-x64.zip"/>
+                  value="${jre.and.jars.host}/${jre.path}/jre-1.7.0_04-win-x64.zip"/>
     </resources>
 
     <resources os="Mac OS X" arch="i386">
         <property name="jnlp.IceBoar.targetJavaURL"
-                  value="${jre.and.jars.host}/${jre.path}/jre-1.7.0_01-macosx-x64.zip"/>
+                  value="${jre.and.jars.host}/${jre.path}/jre-1.7.0_04-macosx-x64.zip"/>
     </resources>
 
     <resources os="Mac OS X" arch="x86_64">
         <property name="jnlp.IceBoar.targetJavaURL"
-                  value="${jre.and.jars.host}/${jre.path}/jre-1.7.0_01-macosx-x64.zip"/>
+                  value="${jre.and.jars.host}/${jre.path}/jre-1.7.0_04-macosx-x64.zip"/>
     </resources>
 
+    <!-- Main class of Ice Boar. It shouldn't be changed. -->
     <application-desc main-class="com.roche.iceboar.IceBoar">
     </application-desc>
 </jnlp>

@@ -20,24 +20,85 @@
 <title>Ice Boar Demo</title>
 
 <BODY>
-<h1>Welcome to Ice Boar Demo ${version}</h1>
+    <h1>Ice Boar Demo ${version}</h1>
 
-<h2>Simple Hello World Swing demo</h2>
+    <h2>Comparison between pure Java Web Start and Ice Boar</h2>
 
-<p>
-    Below links show how to works Ice Boar with a simple Hello World Swing Demo.
-    <br>
-    <a href="jnlp/helloworld-simple-jnlp.jnlp">Hello World Simple JNLP</a> use the JNLP file and start directly
-    destination Jar file.<br>
-    <a href="jnlp/helloworld-simple-ice-boar.jnlp">Hello World Simple Ice Boar</a> use the Ice Boar to download JRE,
-    unzip
-    it,
-    download and run destination Jar file.<br>
-    <a href="jnlp/helloworld-dependencies-ice-boar.jnlp">Hello World Dependencies Ice Boar</a> like above but download
-    also
-    necessary dependency file.<br>
+    <table>
+        <thead>
+            <tr>
+                <td>Web Start</td> <td>Ice Boar</td> <td>Description</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><a href="jnlp/helloworld-simple.jnlp">helloworld-simple.jnlp</a></td>
+                <td><a href="jnlp/helloworld-simple-ice-boar.jnlp">helloworld-simple-ice-boar.jnlp</a></td>
+                <td>This example show a minimum example of both runners. Starting one jar without dependencies</td>
+            </tr>
+            <tr>
+                <td><a href="jnlp/helloworld-dependencies.jnlp">helloworld-dependencies.jnlp</a></td>
+                <td><a href="jnlp/helloworld-dependencies-ice-boar.jnlp">helloworld-dependencies-ice-boar.jnlp</a></td>
+                <td>Starting one jar with dependencies</td>
+            </tr>
+            <tr>
+                <td><a href="jnlp/helloworld-1.7.0_04.jnlp">helloworld-1.7.0_04.jnlp</a></td>
+                <td><a href="jnlp/helloworld-1.7.0_04-ice-boar.jnlp">helloworld-1.7.0_04-ice-boar.jnlp</a></td>
+                <td>Run on exactly JRE 1.7.0_04 version. Pure Web Start will be probably started not on 1.7.0_04</td>
+            </tr>
+            <tr>
+                <td><a href="jnlp/helloworld-heap-size.jnlp">helloworld-heap-size.jnlp</a></td>
+                <td><a href="jnlp/helloworld-heap-size-ice-boar.jnlp">helloworld-heap-size-ice-boar.jnlp</a></td>
+                <td>Define heap size (initial and max)</td>
+            </tr>
+            <tr>
+                <td><a href="jnlp/helloworld-vm-args.jnlp">helloworld-vm-args.jnlp</a></td>
+                <td><a href="jnlp/helloworld-vm-args-ice-boar.jnlp">helloworld-vm-args-ice-boar.jnlp</a></td>
+                <td>Define VM arguments</td>
+            </tr>
+            <tr>
+                <td><a href="jnlp/helloworld-app-args.jnlp">helloworld-app-args.jnlp</a></td>
+                <td><a href="jnlp/helloworld-app-args-ice-boar.jnlp">helloworld-app-args-ice-boar.jnlp</a></td>
+                <td>Define application arguments</td>
+            </tr>
+        </tbody>
+    </table>
 
-<p>
+    <h2>Ice Boar specific features</h2>
+    <table>
+        <thead>
+            <tr>
+                <td>Ice Boar</td> <td>Description</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><a href="jnlp/helloworld-show-debug-console-ice-boar.jnlp">helloworld-show-debug-console-ice-boar.jnlp</a></td>
+                <td>Show debug console</td>
+            </tr>
+            <tr>
+                <td><a href="jnlp/helloworld-not-close-on-end-ice-boar.jnlp">helloworld-not-close-on-end-ice-boar.jnlp</a></td>
+                <td>Don't close Ice Boar on end - for debugging purposes</td>
+            </tr>
+            <tr>
+                <td><a href="jnlp/helloworld-frame-title-ice-boar.jnlp">helloworld-frame-title-ice-boar.jnlp</a></td>
+                <td>Change Ice Boar frame title to "Custom Frame Title"</td>
+            </tr>
+            <tr>
+                <td><a href="jnlp/helloworld-icon-ice-boar.jnlp">helloworld-icon-ice-boar.jnlp</a></td>
+                <td>Change Ice Boar Icon. Icon of progress frame will be red. Another icons without changes.
+                    (Since 0.6)</td>
+            </tr>
+            <tr>
+                <td><a href="jnlp/helloworld-splash-ice-boar.jnlp">helloworld-splash-ice-boar.jnlp</a></td>
+                <td>Using splash 1 (Since 0.7)</td>
+            </tr>
+            <tr>
+                <td><a href="jnlp/helloworld-undecorated-ice-boar.jnlp">helloworld-undecorated-ice-boar.jnlp</a></td>
+                <td>Using splash 2 and hide frame border (undecorated) (Since 0.7)</td>
+            </tr>
+        </tbody>
+    </table>
 
 </BODY>
 </HTML>

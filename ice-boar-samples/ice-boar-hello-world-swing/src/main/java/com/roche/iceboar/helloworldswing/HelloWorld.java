@@ -73,6 +73,7 @@ public class HelloWorld {
         String text = getJavaVersion();
         text = appendCommandLineArguments(args, text);
         text = appendJarPath(text);
+        text = appendHeapSize(text);
         text = appendJnlpProperties(text);
         text = appendGuavaPreconditions(text);
         return text;
@@ -98,6 +99,11 @@ public class HelloWorld {
             throw new RuntimeException(e);
         }
         return text;
+    }
+
+    private static String appendHeapSize(String text) {
+        long maxMemory = Runtime.getRuntime().maxMemory();
+        return text + "Max Heap Size: " + (maxMemory / 1024 / 1024) + " MB\n";
     }
 
     private static String appendJnlpProperties(String text) {

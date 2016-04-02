@@ -23,6 +23,8 @@ jarsigner -keystore $KEY_STORE_JKS -storepass $KEY_STORE_PASSWORD -tsa http://ti
 # You need to sign this when you would run demo witchout IceBoar
 jarsigner -keystore $KEY_STORE_JKS -storepass $KEY_STORE_PASSWORD -tsa http://timestamp.digicert.com libs/ice-boar-hello-world-swing-$ICE_BOAR_VERSION-jar-with-dependencies.jar $KEY_STORE_ALIAS
 
+jarsigner -keystore $KEY_STORE_JKS -storepass $KEY_STORE_PASSWORD -tsa http://timestamp.digicert.com libs/ice-boar-hello-world-swing-$ICE_BOAR_VERSION.jar $KEY_STORE_ALIAS
+
 mkdir $TOMCAT_WEBAPPS_DIR/apps
 cp libs/ice-boar-hello-world-swing-$ICE_BOAR_VERSION.jar $TOMCAT_WEBAPPS_DIR/apps/
 cp libs/ice-boar-hello-world-swing-$ICE_BOAR_VERSION-jar-with-dependencies.jar $TOMCAT_WEBAPPS_DIR/apps/

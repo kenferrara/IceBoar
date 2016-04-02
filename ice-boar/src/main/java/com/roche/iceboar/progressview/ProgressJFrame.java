@@ -68,7 +68,10 @@ public class ProgressJFrame extends JFrame {
         if(settings.isHideFrameBorder()) {
             setUndecorated(true);
         }
-        pack();
+        if(splashScreenImage != null) {
+            // A JFrame will be resized, only when splash is defined. If not a default size will be used.
+            pack();
+        }
 
         return new ProgressUpdater(progressBar, informationLabel, progressEventFactory);
     }

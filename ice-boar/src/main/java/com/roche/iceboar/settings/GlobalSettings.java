@@ -64,8 +64,8 @@ public class GlobalSettings {
      * <j2se version="1.6+" ...>}
      * </code></pre>
      * It is highly recommend to set this to version the same like in &lt;j2se&gt; tag - if user doesn't have
-     * Java installed in defined or newest version, then  plain Java Webstart will download and install JRE in a version
-     * as specified (or newest).
+     * Java installed in defined or newest version, then  plain Java Web Start will download and install JRE in a
+     * version as specified (or newest).
      */
     public static final String JNLP_TARGET_JAVA_VERSION = "jnlp.IceBoar.targetJavaVersion";
 
@@ -112,7 +112,7 @@ public class GlobalSettings {
      * It corresponds to initial-heap-size value in <tt>&lt;j2se&gt;</tt> tag, e.g.:<br>
      * <pre class="code"><code class="xml">
      * {@code
-     * <j2se href="..." initial-heap-size="128m/>"}
+     * <j2se href="..." initial-heap-size="128m"/>}
      * </code></pre>
      */
     public static final String JNLP_INITIAL_HEAP_SIZE = "jnlp.IceBoar.initial-heap-size";
@@ -123,7 +123,7 @@ public class GlobalSettings {
      * It correspond to max-heap-size value in <tt>&lt;j2se&gt;</tt> tag, e.g.:<br>
      * <pre class="code"><code class="xml">
      * {@code
-     * <j2se href="..." max-heap-size="1024m/>"}
+     * <j2se href="..." max-heap-size="1024m"/>}
      * </code></pre>
      */
     public static final String JNLP_MAX_HEAP_SIZE = "jnlp.IceBoar.max-heap-size";
@@ -134,7 +134,7 @@ public class GlobalSettings {
      * application. It corresponds to java-vm-args value in <tt>&lt;j2se&gt;</tt> tag, e.g.:<br>
      * <pre class="code"><code class="xml">
      * {@code
-     * <j2se href="..." java-vm-args="-XX:+UseParallelGC/>"}
+     * <j2se href="..." java-vm-args="-XX:+UseParallelGC"/>}
      * </code></pre>
      */
     public static final String JNLP_JAVA_VM_ARGS = "jnlp.IceBoar.java-vm-args";

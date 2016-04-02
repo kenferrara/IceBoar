@@ -18,8 +18,7 @@
   ~ *****************************************************************************
   -->
 
-<!-- This example show how to run hello-world-swing application using IceBoar. In contrast to helloworld-simple-ice-boar.jnlp -->
-<!-- this file define also dependencies for target application (see jnlp.IceBoar.jar.1 property) -->
+<!-- This example show how to run hello-world-swing application using IceBoar. It define a most useful properties. -->
 
 <jnlp spec="1.0+" codebase="#{codebase}">
     <information>
@@ -37,10 +36,13 @@
 
         <property name="jnlp.IceBoar.main-class" value="com.roche.iceboar.helloworldswing.HelloWorld"/>
         <property name="jnlp.IceBoar.jar.0"
-                  value="${jre.and.jars.host}/${jars.path}/ice-boar-hello-world-swing-${version}.jar"/>
+                  value="${jre.and.jars.host}/${jars.path}/ice-boar-hello-world-swing-${version}-jar-with-dependencies.jar"/>
 
-        <!-- Definition of depended Jar -->
-        <property name="jnlp.IceBoar.jar.1" value="${jre.and.jars.host}/${jars.path}/libs/guava-11.0.2.jar"/>
+        <!-- Initial heap size -->
+        <property name="jnlp.IceBoar.initial-heap-size" value="128m"/>
+
+        <!-- Max heap size -->
+        <property name="jnlp.IceBoar.max-heap-size" value="256m"/>
     </resources>
 
     <resources os="Windows" arch="amd64">
@@ -70,4 +72,4 @@
 
     <application-desc main-class="com.roche.iceboar.IceBoar">
     </application-desc>
-</jnlp> 
+</jnlp>
