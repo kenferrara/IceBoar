@@ -22,7 +22,7 @@ import com.roche.iceboar.cachestorage.CacheStatus;
 import com.roche.iceboar.debugview.DebugJFrame;
 import com.roche.iceboar.progressevent.ProgressEventFactory;
 import com.roche.iceboar.progressevent.ProgressEventQueue;
-import com.roche.iceboar.progressview.IconsLoader;
+import com.roche.iceboar.progressview.ImageLoader;
 import com.roche.iceboar.progressview.ProgressJFrame;
 import com.roche.iceboar.progressview.ProgressUpdater;
 import com.roche.iceboar.runner.ExecutableCommandFactory;
@@ -50,7 +50,7 @@ public final class IceBoar {
 
     private GlobalSettings settings;
     private ProgressUpdater progress;
-    private IconsLoader iconsLoader;
+    private ImageLoader imageLoader;
     private ProgressEventFactory progressEventFactory;
     private ProgressEventQueue progressEventQueue;
 
@@ -82,7 +82,7 @@ public final class IceBoar {
     }
 
     private void initIconsLoader() {
-        iconsLoader = new IconsLoader();
+        imageLoader = new ImageLoader();
     }
 
     private void showDebugFrameIfItsNeeded() {
@@ -93,7 +93,7 @@ public final class IceBoar {
 
                 public void run() {
                     DebugJFrame jFrame = new DebugJFrame();
-                    jFrame.init(settings, iconsLoader);
+                    jFrame.init(settings, imageLoader);
                     jFrame.setVisible(true);
                 }
             });
@@ -123,7 +123,7 @@ public final class IceBoar {
 
     private void showProgressFrame() {
         ProgressJFrame jFrame = new ProgressJFrame();
-        progress = jFrame.init(settings, progressEventFactory, iconsLoader);
+        progress = jFrame.init(settings, progressEventFactory, imageLoader);
         progressEventQueue.registerObserver(progress);
         jFrame.setVisible(true);
     }

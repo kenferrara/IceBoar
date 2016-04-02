@@ -165,6 +165,13 @@ public class GlobalSettings {
      */
     public static final String JNLP_ICONS_PREFIX = "jnlp.IceBoar.icon.";
 
+    /**
+     * <tt>{@value #JNLP_SPLASH_SCREEN}</tt><br>
+     * Custom splash screen
+     *
+     */
+    public static final String JNLP_SPLASH_SCREEN = "jnlp.IceBoar.splash";
+
     private List<String> applicationArguments;
     private long jvmStartTime;
     private boolean showDebug;
@@ -185,6 +192,7 @@ public class GlobalSettings {
     private CacheStatus cacheStatus;
     private boolean closeOnEnd;
     private List<String> icons;
+    private String customSplashImage;
 
     public static Builder builder() {
         return new Builder();
@@ -360,6 +368,10 @@ public class GlobalSettings {
         return icons;
     }
 
+    public String getCustomSplashImage() {
+        return customSplashImage;
+    }
+
     public static class Builder {
         private String[] applicationArguments = new String[]{};
         private long jvmStartTime;
@@ -381,6 +393,7 @@ public class GlobalSettings {
         private CacheStatus cacheStatus;
         private boolean closeOnEnd;
         private List<String> icons;
+        private String splashScreen;
 
         public Builder applicationArguments(String[] applicationArguments) {
             if (applicationArguments != null) {
@@ -488,6 +501,11 @@ public class GlobalSettings {
             return this;
         }
 
+        public Builder customSplashImage(String image) {
+            this.splashScreen = image;
+            return this;
+        }
+
         public GlobalSettings build() {
             GlobalSettings settings = new GlobalSettings(applicationArguments);
             settings.jvmStartTime = jvmStartTime;
@@ -509,6 +527,7 @@ public class GlobalSettings {
             settings.cachePath = cachePath;
             settings.cacheStatus = cacheStatus;
             settings.icons = icons;
+            settings.customSplashImage = splashScreen;
             return settings;
         }
     }

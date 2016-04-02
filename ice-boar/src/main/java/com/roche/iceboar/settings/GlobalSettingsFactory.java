@@ -33,6 +33,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import static com.roche.iceboar.settings.GlobalSettings.*;
+import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
@@ -83,6 +84,7 @@ public class GlobalSettingsFactory {
         String cachePath = tempDirectory + ".IceBoar.cache";
         CacheStatus cacheStatus = getCacheStatus(cachePath);
         List<String> icons = getIcons(codeBase, properties);
+        String splash = getSplashScreen(codeBase, properties);
 
         GlobalSettings settings = GlobalSettings.builder()
                                                 .applicationArguments(args)
@@ -105,6 +107,7 @@ public class GlobalSettingsFactory {
                                                 .cachePath(cachePath)
                                                 .cacheStatus(cacheStatus)
                                                 .icons(icons)
+                                                .customSplashImage(splash)
                                                 .build();
         return settings;
     }
@@ -168,14 +171,18 @@ public class GlobalSettingsFactory {
         for (Map.Entry<Object, Object> entry : properties.entrySet()) {
             Object key = entry.getKey();
             if (key instanceof String && ((String) key).startsWith(prefix)) {
-                String urlText = (String) entry.getValue();
-                if (!isAbsolutePath(urlText) && StringUtils.isNotBlank(codeBase)) {
-                    urlText = codeBase + urlText;
-                }
+                String urlText = getAbsoluteUrl(codeBase, entry.getValue().toString());
                 urls.add(urlText);
             }
         }
         return urls;
+    }
+
+    private static String getAbsoluteUrl(String codeBase, String urlText) {
+        if (!isAbsolutePath(urlText) && StringUtils.isNotBlank(codeBase)) {
+            urlText = codeBase + urlText;
+        }
+        return urlText;
     }
 
     private static List<String> getAllPropertiesForTarget(Properties properties) {
@@ -205,5 +212,9 @@ public class GlobalSettingsFactory {
     private static List<String> getIcons(String codeBase, Properties properties) {
         List<String> icons = readRemoteResourcesByPrefix(codeBase, properties, JNLP_ICONS_PREFIX);
         return icons;
+    }
+
+    private static String getSplashScreen(String codeBase, Properties properties) {
+        return getAbsoluteUrl(codeBase, defaultIfNull((String) properties.get(JNLP_SPLASH_SCREEN), ""));
     }
 }

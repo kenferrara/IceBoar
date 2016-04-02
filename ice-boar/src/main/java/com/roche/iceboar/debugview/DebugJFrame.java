@@ -19,13 +19,14 @@
 package com.roche.iceboar.debugview;
 
 import com.roche.iceboar.debugview.logging.MessageConsole;
-import com.roche.iceboar.progressview.IconsLoader;
+import com.roche.iceboar.progressview.ImageLoader;
 import com.roche.iceboar.settings.GlobalSettings;
 
 import javax.swing.*;
 import java.awt.*;
 import java.net.URISyntaxException;
-import java.util.*;
+import java.util.Map;
+import java.util.Properties;
 
 /**
  * Show JFrame with debug information's (redirecting from System.out and System.err). It's deactivated by default. To
@@ -35,10 +36,10 @@ import java.util.*;
  */
 public class DebugJFrame extends JFrame {
 
-    public void init(GlobalSettings settings, IconsLoader iconsLoader) {
+    public void init(GlobalSettings settings, ImageLoader imageLoader) {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("IceBoar Debug");
-        loadIcons(iconsLoader);
+        loadIcons(imageLoader);
         JTextArea jTextArea = new JTextArea(createText(settings));
         JScrollPane pane = new JScrollPane(jTextArea);
         getContentPane().add(pane);
@@ -49,8 +50,8 @@ public class DebugJFrame extends JFrame {
         console.redirectErr(Color.RED, null);
     }
 
-    private void loadIcons(IconsLoader iconsLoader) {
-        java.util.List<Image> icons = iconsLoader.loadDefaultIcons();
+    private void loadIcons(ImageLoader imageLoader) {
+        java.util.List<Image> icons = imageLoader.loadDefaultIcons();
         setIconImages(icons);
     }
 
