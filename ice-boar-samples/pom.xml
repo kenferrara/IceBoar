@@ -27,6 +27,7 @@
     <version>0.7-SNAPSHOT</version>
     <modules>
         <module>ice-boar-demo</module>
+        <module>ice-boar-demo-gh-pages</module>
         <module>ice-boar-hello-world-swing</module>
     </modules>
     <packaging>pom</packaging>

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ *****************************************************************************
+  ~ * Copyright © 2015 Hoffmann-La Roche
+  ~ *
+  ~ * Licensed under the Apache License, Version 2.0 (the "License");
+  ~ * you may not use this file except in compliance with the License.
+  ~ * You may obtain a copy of the License at
+  ~ *
+  ~ *     http://www.apache.org/licenses/LICENSE-2.0
+  ~ *
+  ~ * Unless required by applicable law or agreed to in writing, software
+  ~ * distributed under the License is distributed on an "AS IS" BASIS,
+  ~ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ * See the License for the specific language governing permissions and
+  ~ * limitations under the License.
+  ~ *****************************************************************************
+  -->
+
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>ice-boar-samples</artifactId>
+        <groupId>com.roche</groupId>
+        <version>0.7-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>ice-boar-demo-gh-pages</artifactId>
+    <packaging>war</packaging>
+    <name>Ice Boar Demo GitHub Pages</name>
+
+    <description>
+        An example hot to run ice-boar in your web application. This example is publish to GitHub Pages.
+    </description>
+
+    <properties>
+        <jre.path>jre</jre.path>
+        <jars.path>apps</jars.path>
+        <jre.and.jars.host>http://localhost:8080/${artifactId}</jre.and.jars.host>
+        <codebase>http://localhost:8080/${artifactId}/</codebase>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>ghpages</id>
+            <properties>
+                <jre.and.jars.host>http://roche.github.io/IceBoar</jre.and.jars.host>
+                <codebase>http://roche.github.io/IceBoar/</codebase>
+            </properties>
+        </profile>
+    </profiles>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.roche</groupId>
+            <artifactId>ice-boar-hello-world-swing</artifactId>
+            <version>0.7-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.roche</groupId>
+            <artifactId>ice-boar-hello-world-swing</artifactId>
+            <version>0.7-SNAPSHOT</version>
+            <classifier>jar-with-dependencies</classifier>
+        </dependency>
+        <dependency>
+            <groupId>com.roche</groupId>
+            <artifactId>ice-boar</artifactId>
+            <version>0.7-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.roche</groupId>
+            <artifactId>ice-boar</artifactId>
+            <version>0.7-SNAPSHOT</version>
+            <classifier>jar-with-dependencies</classifier>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>11.0.2</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <resources>
+            <!-- Filtering JNLP files -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <targetPath>${basedir}/target/ice-boar-demo-gh-pages</targetPath>
+            </resource>
+        </resources>
+        <plugins>
+            <!--  Runs embedded Tomcat (mvn tomcat7:run-war)  -->
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <port>8080</port>
+                    <path>/${artifactId}</path>
+                    <warDirectory>${project.build.directory}/${project.build.finalName}</warDirectory>
+                </configuration>
+            </plugin>
+
+            <!-- Generate keystore -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>keytool-maven-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generateKeyPair</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <skipIfExist>true</skipIfExist>
+                    <keystore>target/jks/generatedkeystore.jks</keystore>
+                    <storepass>storepass</storepass>
+                    <keypass>keypass</keypass>
+                    <alias>myalias</alias>
+                    <dname>cn=www.example.com, ou=None, L=Seattle, ST=Washington, o=ExampleOrg, c=US</dname>
+                    <sigalg>SHA1withDSA</sigalg>
+                    <ext></ext>
+                    <validity>100</validity>
+                    <keyalg>DSA</keyalg>
+                    <keysize>1024</keysize>
+                </configuration>
+            </plugin>
+
+            <!-- Copy dependencies -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.10</version>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/ice-boar-demo-gh-pages/apps</outputDirectory>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>false</overWriteSnapshots>
+                            <overWriteIfNewer>true</overWriteIfNewer>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Sign dependencies  -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jarsigner-plugin</artifactId>
+                <version>1.4</version>
+                <executions>
+                    <execution>
+                        <id>sign</id>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                        <phase>prepare-package</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <archiveDirectory>target/ice-boar-demo-gh-pages/apps</archiveDirectory>
+                    <includes>
+                        <include>**/*.jar</include>
+                    </includes>
+                    <keystore>target/jks/generatedkeystore.jks</keystore>
+                    <alias>myalias</alias>
+                    <storepass>storepass</storepass>
+                    <keypass>keypass</keypass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
