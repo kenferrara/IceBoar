@@ -48,6 +48,10 @@ public class ExecutableCommand {
     }
 
     public String getReadable() {
-        return StringUtils.join(cmd, " ");
+		String msg = "";
+		for (String st : cmd) {
+			msg = msg + "\"" + st + "\", ";
+		}
+		return msg;
     }
 }

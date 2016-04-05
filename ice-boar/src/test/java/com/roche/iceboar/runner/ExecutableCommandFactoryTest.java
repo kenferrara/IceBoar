@@ -51,10 +51,13 @@ public class ExecutableCommandFactoryTest {
 
         // then
         String cmdText = command.getReadable();
-        assertThat(cmdText).isEqualTo("xxx" + File.separator + "bin" + File.separator + "java prop1 prop2 " +
-                "-Xms128M -Xmx256M xxx " + "-cp |/temp/temp" + File.separator + "IceBoar_0" + File.separator +
+		assertThat(cmdText).isEqualTo(
+		        "\"xxx" + File.separator + "bin" + File.separator + "java\", \"prop1\", " + "\"prop2\", "
+		                + "\"-Xms128M\", \"-Xmx256M\", \"xxx\", " + "\"-cp\", \"|/temp/temp" + File.separator
+		                + "IceBoar_0" + File.separator +
                 "jar1|/temp/temp" + File.separator + "IceBoar_0" + File.separator + "jar2|/temp/temp" + File.separator
-                + "IceBoar_0" + File.separator + "jar3 " + "MainClass arg1 arg2");
+ + "IceBoar_0" + File.separator
+		                + "jar3\", " + "\"MainClass\", \"arg1\", \"arg2\", ");
     }
 
     @Test
@@ -68,7 +71,7 @@ public class ExecutableCommandFactoryTest {
 
         // then
         String cmdText = command.getReadable();
-        assertThat(cmdText).isEqualTo("chmod +x xxxyyy");
+		assertThat(cmdText).isEqualTo("\"chmod\", \"+x\", \"xxxyyy\", ");
     }
 
     @Test
@@ -82,6 +85,6 @@ public class ExecutableCommandFactoryTest {
 
         // then
         String cmdText = command.getReadable();
-        assertThat(cmdText).isEqualTo("aaa" + File.separator + "bin" + File.separator + "java -version");
+		assertThat(cmdText).isEqualTo("\"aaa" + File.separator + "bin" + File.separator + "java\", \"-version\", ");
     }
 }
