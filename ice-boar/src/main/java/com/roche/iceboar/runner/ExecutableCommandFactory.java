@@ -20,6 +20,7 @@ package com.roche.iceboar.runner;
 
 import com.roche.iceboar.downloader.FileUtilsFacade;
 import com.roche.iceboar.settings.GlobalSettings;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +44,19 @@ public class ExecutableCommandFactory {
         cmdList.add(settings.getMainClass());
         cmdList.addAll(settings.getApplicationArguments());
 
-        return new ExecutableCommand(cmdList.toArray(new String[cmdList.size()]));
+        List<String> strings = removeBlankString(cmdList);
+
+        return new ExecutableCommand(strings.toArray(new String[strings.size()]));
+    }
+
+    private List<String> removeBlankString(List<String> cmdList) {
+        List<String> result = new ArrayList<String>();
+        for (String s : cmdList) {
+            if (StringUtils.isNotBlank(s)) {
+                result.add(s);
+            }
+        }
+        return result;
     }
 
     public ExecutableCommand createJavaExecutableCommand(String javaCmdPath) {
