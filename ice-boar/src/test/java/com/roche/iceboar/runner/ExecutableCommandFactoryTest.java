@@ -54,10 +54,38 @@ public class ExecutableCommandFactoryTest {
 		assertThat(cmdText).isEqualTo(
 		        "\"xxx" + File.separator + "bin" + File.separator + "java\", \"prop1\", " + "\"prop2\", "
 		                + "\"-Xms128M\", \"-Xmx256M\", \"xxx\", " + "\"-cp\", \"|/temp/temp" + File.separator
-		                + "IceBoar_0" + File.separator +
-                "jar1|/temp/temp" + File.separator + "IceBoar_0" + File.separator + "jar2|/temp/temp" + File.separator
- + "IceBoar_0" + File.separator
-		                + "jar3\", " + "\"MainClass\", \"arg1\", \"arg2\", ");
+                        + "IceBoar_0" + File.separator + "jar1|/temp/temp" + File.separator + "IceBoar_0"
+                        + File.separator + "jar2|/temp/temp" + File.separator + "IceBoar_0" + File.separator
+                        + "jar3\", " + "\"MainClass\", \"arg1\", \"arg2\", ");
+    }
+
+    @Test
+    public void shouldRemoveBlankArguments() {
+        // given
+        GlobalSettings settings = GlobalSettings.builder()
+                                                .allPropertiesForTarget(asList("prop1", "prop2"))
+                                                .initialHeapSize(" ")
+                                                .maxHeapSize("")
+                                                .javaVmArgs(" ")
+                                                .pathSeparator("|")
+                                                .jarURLs(asList("jar1", "jar2", "jar3"))
+                                                .mainClass("MainClass")
+                                                .applicationArguments(new String[]{"arg1", ""})
+                                                .tempDirectory("/temp/temp")
+                                                .build();
+        ExecutableCommandFactory factory = new ExecutableCommandFactory();
+
+        // when
+        ExecutableCommand command = factory.createRunTargetApplicationCommand(settings, "xxx");
+
+        // then
+        String cmdText = command.getReadable();
+        assertThat(cmdText).isEqualTo(
+                "\"xxx" + File.separator + "bin" + File.separator + "java\", \"prop1\", " + "\"prop2\", "
+                        + "\"-cp\", \"|/temp/temp" + File.separator
+                        + "IceBoar_0" + File.separator + "jar1|/temp/temp" + File.separator + "IceBoar_0"
+                        + File.separator + "jar2|/temp/temp" + File.separator + "IceBoar_0" + File.separator
+                        + "jar3\", " + "\"MainClass\", \"arg1\", ");
     }
 
     @Test
