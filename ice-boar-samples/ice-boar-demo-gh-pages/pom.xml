@@ -56,6 +56,23 @@
         </profile>
     </profiles>
 
+    <repositories>
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>bintray-stachnim-IceBoar</id>
+            <name>bintray</name>
+            <url>http://dl.bintray.com/stachnim/IceBoar</url>
+        </repository>
+        <repository>
+            <snapshots/>
+            <id>snapshots</id>
+            <name>libs-snapshot</name>
+            <url>https://oss.jfrog.org/artifactory/libs-snapshot</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>com.roche</groupId>
