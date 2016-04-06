@@ -1,5 +1,5 @@
 language: java
-script: cd ice-boar && mvn javadoc:jar source:jar deploy --settings settings.xml && cd .. && mvn clean install --settings ice-boar/settings.xml
+script: cd ice-boar && mvn javadoc:jar source:jar deploy --settings settings.xml && cd .. && mvn clean install --settings settings.xml
 jdk:
   - oraclejdk8
 before_install:

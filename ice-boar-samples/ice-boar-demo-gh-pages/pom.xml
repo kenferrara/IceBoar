@@ -39,8 +39,8 @@
     <properties>
         <jre.path>jre</jre.path>
         <jars.path>apps</jars.path>
-        <jre.and.jars.host>http://localhost:8080/${artifactId}</jre.and.jars.host>
-        <codebase>http://localhost:8080/${artifactId}/</codebase>
+        <jre.and.jars.host>http://localhost:8080/${project.artifactId}</jre.and.jars.host>
+        <codebase>http://localhost:8080/${project.artifactId}/</codebase>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -105,7 +105,7 @@
                 <version>2.2</version>
                 <configuration>
                     <port>8080</port>
-                    <path>/${artifactId}</path>
+                    <path>/${project.artifactId}</path>
                     <warDirectory>${project.build.directory}/${project.build.finalName}</warDirectory>
                 </configuration>
             </plugin>
@@ -125,7 +125,7 @@
                 </executions>
                 <configuration>
                     <skipIfExist>true</skipIfExist>
-                    <keystore>target/jks/generatedkeystore.jks</keystore>
+                    <keystore>${project.build.directory}/jks/generatedkeystore.jks</keystore>
                     <storepass>storepass</storepass>
                     <keypass>keypass</keypass>
                     <alias>myalias</alias>
@@ -175,7 +175,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <archiveDirectory>target/ice-boar-demo-gh-pages/apps</archiveDirectory>
+                    <archiveDirectory>${project.build.directory}/ice-boar-demo-gh-pages/apps</archiveDirectory>
                     <includes>
                         <include>**/*.jar</include>
                     </includes>
