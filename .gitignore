@@ -10,3 +10,4 @@ nbactions.xml
 spy.log
 *.jks
 libs
+*.log
