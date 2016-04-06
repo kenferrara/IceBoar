@@ -14,7 +14,7 @@ source code repository.
 1) Build ice-boar and ice-boar-samples projects using maven: `mvn clean install`. 
 
 2) Generate (if you don't have) a certificate to sign your JAR files in next step. Easiest way:
-`keytool -keystore keyStore.jks -genkey -alias <alias>`
+`keytool -keystore keyStore.jks -genkey -alias myalias`
 
 More info: [Creating a KeyStore in JKS Format](https://docs.oracle.com/cd/E19509-01/820-3503/6nf1il6er/index.html).
 

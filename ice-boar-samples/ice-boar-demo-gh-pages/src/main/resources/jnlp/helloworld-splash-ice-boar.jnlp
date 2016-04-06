@@ -41,7 +41,7 @@
                   value="${jre.and.jars.host}/${jars.path}/ice-boar-hello-world-swing-${version}-jar-with-dependencies.jar"/>
 
         <!-- Splash screen -->
-        <property name="jnlp.IceBoar.splash" value="${jre.and.jars.host}/${artifactId}/img/ice-boar-splash.png"/>
+        <property name="jnlp.IceBoar.splash" value="${jre.and.jars.host}/img/ice-boar-splash.png"/>
     </resources>
 
     <resources os="Windows" arch="amd64">

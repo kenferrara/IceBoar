@@ -77,23 +77,23 @@
         <dependency>
             <groupId>com.roche</groupId>
             <artifactId>ice-boar-hello-world-swing</artifactId>
-            <version>0.7-SNAPSHOT</version>
+            <version>${version}</version>
         </dependency>
         <dependency>
             <groupId>com.roche</groupId>
             <artifactId>ice-boar-hello-world-swing</artifactId>
-            <version>0.7-SNAPSHOT</version>
+            <version>${version}</version>
             <classifier>jar-with-dependencies</classifier>
         </dependency>
         <dependency>
             <groupId>com.roche</groupId>
             <artifactId>ice-boar</artifactId>
-            <version>0.7-SNAPSHOT</version>
+            <version>${version}</version>
         </dependency>
         <dependency>
             <groupId>com.roche</groupId>
             <artifactId>ice-boar</artifactId>
-            <version>0.7-SNAPSHOT</version>
+            <version>${version}</version>
             <classifier>jar-with-dependencies</classifier>
         </dependency>
 
@@ -111,7 +111,7 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
-                <targetPath>${basedir}/target/ice-boar-demo-gh-pages</targetPath>
+                <targetPath>${project.build.directory}/ice-boar-demo-gh-pages</targetPath>
             </resource>
         </resources>
         <plugins>
@@ -196,7 +196,7 @@
                     <includes>
                         <include>**/*.jar</include>
                     </includes>
-                    <keystore>target/jks/generatedkeystore.jks</keystore>
+                    <keystore>${project.build.directory}/jks/generatedkeystore.jks</keystore>
                     <alias>myalias</alias>
                     <storepass>storepass</storepass>
                     <keypass>keypass</keypass>
