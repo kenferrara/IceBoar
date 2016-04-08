@@ -41,7 +41,7 @@
                   value="http://roche.github.io/IceBoar/apps/ice-boar-hello-world-swing-0.7-SNAPSHOT-jar-with-dependencies.jar"/>
 
         <!-- Splash screen -->
-        <property name="jnlp.IceBoar.splash" value="http://roche.github.io/IceBoar/ice-boar-demo-gh-pages/img/ice-boar-splash.png"/>
+        <property name="jnlp.IceBoar.splash" value="http://roche.github.io/IceBoar/img/ice-boar-splash.png"/>
 
         <!-- Hide a frame border / undecorate. -->
         <property name="jnlp.IceBoar.hide-frame-border" value="true"/>

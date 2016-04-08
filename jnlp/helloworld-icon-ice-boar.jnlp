@@ -46,10 +46,10 @@
 
         <!-- Icons used by IceBoar in taskbar, window and dock. You don't need to define all sizes of icons, one is
         sufficient. It will be scaled when needed. -->
-        <property name="jnlp.IceBoar.icon.1" value="http://roche.github.io/IceBoar/ice-boar-demo-gh-pages/img/IceBoar-icon-red-16x16.png"/>
-        <property name="jnlp.IceBoar.icon.2" value="http://roche.github.io/IceBoar/ice-boar-demo-gh-pages/img/IceBoar-icon-red-32x32.png"/>
-        <property name="jnlp.IceBoar.icon.3" value="http://roche.github.io/IceBoar/ice-boar-demo-gh-pages/img/IceBoar-icon-red-64x64.png"/>
-        <property name="jnlp.IceBoar.icon.4" value="http://roche.github.io/IceBoar/ice-boar-demo-gh-pages/img/IceBoar-icon-red-128x128.png"/>
+        <property name="jnlp.IceBoar.icon.1" value="http://roche.github.io/IceBoar/img/IceBoar-icon-red-16x16.png"/>
+        <property name="jnlp.IceBoar.icon.2" value="http://roche.github.io/IceBoar/img/IceBoar-icon-red-32x32.png"/>
+        <property name="jnlp.IceBoar.icon.3" value="http://roche.github.io/IceBoar/img/IceBoar-icon-red-64x64.png"/>
+        <property name="jnlp.IceBoar.icon.4" value="http://roche.github.io/IceBoar/img/IceBoar-icon-red-128x128.png"/>
     </resources>
 
     <resources os="Windows" arch="amd64">
