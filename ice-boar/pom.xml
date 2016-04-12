@@ -189,12 +189,16 @@
                     <show>public</show>
                     <doctitle>&lt;h1&gt;Welcome to Ice Boar&lt;/h1&gt;
                         &lt;p&gt;&lt;img src=&quot;resources/ice-boar-logo.png&quot;/&gt;
-                        &lt;p&gt;How it works?
-                        &lt;p&gt;&lt;img src=&quot;resources/ice-boar-sequence-diagram.png&quot;/&gt;
+                        &lt;p&gt;How it works?&lt;/p&gt;
+                        &lt;p&gt;&lt;img src=&quot;resources/ice-boar-sequence-diagram.png&quot;/&gt;&lt;/p&gt;
                         &lt;br&gt; &lt;br&gt; &lt;h2&gt;
-                        &lt;p&gt;If you need more technical details please read Readme.md&lt;/a&gt;.
+                        &lt;p&gt;If you need more technical details please read
+                        &lt;a href=&quot;https://github.com/Roche/IceBoar&quot; target=&quot;_blank&quot; &gt;Project
+                        page&lt;/a&gt;.&lt;/p&gt;
                         &lt;p&gt;Main entry point is &lt;a href=&quot;com/roche/iceboar/IceBoar.html&quot;&gt;IceBoar&lt;/a&gt;
-                        class.
+                        class.&lt;/p&gt;
+                        &lt;p&gt;Another interesting class is &lt;a
+                        href=&quot;com/roche/iceboar/settings/GlobalSettings.html&quot;&gt;GlobalSettings&lt;/a&gt;&lt;/p&gt;
                         &lt;/h2&gt;
                     </doctitle>
                     <docfilessubdirs>true</docfilessubdirs>

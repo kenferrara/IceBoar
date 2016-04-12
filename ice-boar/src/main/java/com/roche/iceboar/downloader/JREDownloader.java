@@ -31,7 +31,8 @@ import java.io.IOException;
 import java.net.URL;
 
 /**
- * This class download JRE from custom localization defined in {@value GlobalSettings#JNLP_TARGET_JAVA_URL}.
+ * This class download JRE from custom localization defined in {@value
+ * com.roche.iceboar.settings.GlobalSettings#JNLP_TARGET_JAVA_URL}.
  */
 public class JREDownloader implements ProgressEventObserver {
 

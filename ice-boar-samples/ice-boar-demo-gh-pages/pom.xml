@@ -77,23 +77,23 @@
         <dependency>
             <groupId>com.roche</groupId>
             <artifactId>ice-boar-hello-world-swing</artifactId>
-            <version>${version}</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.roche</groupId>
             <artifactId>ice-boar-hello-world-swing</artifactId>
-            <version>${version}</version>
+            <version>${project.version}</version>
             <classifier>jar-with-dependencies</classifier>
         </dependency>
         <dependency>
             <groupId>com.roche</groupId>
             <artifactId>ice-boar</artifactId>
-            <version>${version}</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.roche</groupId>
             <artifactId>ice-boar</artifactId>
-            <version>${version}</version>
+            <version>${project.version}</version>
             <classifier>jar-with-dependencies</classifier>
         </dependency>
 
@@ -155,12 +155,12 @@
                 </configuration>
             </plugin>
 
-            <!-- Copy dependencies -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <version>2.10</version>
                 <executions>
+                    <!-- Copy dependencies -->
                     <execution>
                         <id>copy-dependencies</id>
                         <phase>generate-resources</phase>
@@ -172,6 +172,36 @@
                             <overWriteReleases>false</overWriteReleases>
                             <overWriteSnapshots>false</overWriteSnapshots>
                             <overWriteIfNewer>true</overWriteIfNewer>
+                        </configuration>
+                    </execution>
+                    <!-- Unpack javadoc -->
+                    <execution>
+                        <id>unpack</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>com.roche</groupId>
+                                    <artifactId>ice-boar</artifactId>
+                                    <version>${project.version}</version>
+                                    <classifier>javadoc</classifier>
+                                    <type>jar</type>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>${project.build.directory}/${artifactId}/docs/current/</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>com.roche</groupId>
+                                    <artifactId>ice-boar</artifactId>
+                                    <version>${project.version}</version>
+                                    <classifier>javadoc</classifier>
+                                    <type>jar</type>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>${project.build.directory}/${artifactId}/docs/${project.version}/</outputDirectory>
+                                </artifactItem>
+                            </artifactItems>
                         </configuration>
                     </execution>
                 </executions>

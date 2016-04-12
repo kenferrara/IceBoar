@@ -33,10 +33,10 @@ import com.roche.iceboar.settings.GlobalSettingsFactory;
 import javax.swing.*;
 
 /**
- * This is the main class/entry point of the project. It is executed by Java Webstart.
+ * This is the main class/entry point of the project. It is executed by Java Web Start.
  * <p>
- * This class is an entry point for ice-boar library. It reads a configuration from JNLP file, downloads a custom
- * JRE (from a given location), downloads the target Java application with all dependencies and runs it.
+ * It reads a configuration from JNLP file, downloads a custom JRE (from a given location), downloads the target Java
+ * application with all dependencies and runs it.
  * <p>
  * <h3>How to debug this class / application?</h3>
  * <p>
