@@ -20,7 +20,7 @@
 
 <!-- This example show how to run hello-world-swing application using standard Java Web Start (without IceBoar) -->
 
-<jnlp spec="1.0+" codebase="#{codebase}">
+<jnlp spec="1.0+" codebase="${codebase}">
     <information>
         <title>Hello World Example JNLP</title>
         <vendor>Roche</vendor>
@@ -35,7 +35,7 @@
         <!-- Jar without depencencies. -->
         <jar href="${jre.and.jars.host}/${jars.path}/ice-boar-hello-world-swing-${version}.jar"/>
         <!-- Depended Jar -->
-        <jar href="${jre.and.jars.host}/${jars.path}/libs/guava-11.0.2.jar"/>
+        <jar href="${jre.and.jars.host}/${jars.path}/guava-11.0.2.jar"/>
     </resources>
     <application-desc main-class="com.roche.iceboar.helloworldswing.HelloWorld">
     </application-desc>
