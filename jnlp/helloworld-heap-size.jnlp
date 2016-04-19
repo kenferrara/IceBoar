@@ -33,7 +33,7 @@
     <resources>
         <!-- Initial & max heap size -->
         <j2se version="1.5+" href="http://java.sun.com/products/autodl/j2se" initial-heap-size="128m" max-heap-size="1024m" />
-        <jar href="http://roche.github.io/IceBoar/apps/ice-boar-hello-world-swing-0.7-SNAPSHOT-jar-with-dependencies.jar"/>
+        <jar href="http://roche.github.io/IceBoar/apps/ice-boar-hello-world-swing-0.7-jar-with-dependencies.jar"/>
     </resources>
     <application-desc main-class="com.roche.iceboar.helloworldswing.HelloWorld">
     </application-desc>

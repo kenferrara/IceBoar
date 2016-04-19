@@ -34,14 +34,14 @@
         <!-- This JRE version is used for starting Ice Boar. It needs to be >= 1.5 -->
         <j2se version="1.5+" href="http://java.sun.com/products/autodl/j2se"/>
         <!-- Here a path to Ice Boar Jar is necessary -->
-        <jar href="http://roche.github.io/IceBoar/apps/ice-boar-0.7-SNAPSHOT-jar-with-dependencies.jar"/>
+        <jar href="http://roche.github.io/IceBoar/apps/ice-boar-0.7-jar-with-dependencies.jar"/>
 
         <!-- A main target class. In pure Web Start here should be a class from application-desc main-class. -->
         <property name="jnlp.IceBoar.main-class" value="com.roche.iceboar.helloworldswing.HelloWorld"/>
 
         <!-- A path to target jar. -->
         <property name="jnlp.IceBoar.jar.0"
-                  value="http://roche.github.io/IceBoar/apps/ice-boar-hello-world-swing-0.7-SNAPSHOT-jar-with-dependencies.jar"/>
+                  value="http://roche.github.io/IceBoar/apps/ice-boar-hello-world-swing-0.7-jar-with-dependencies.jar"/>
     </resources>
 
     <!-- Path to zipped JRE depended on OS. A target app will be started ont his version of JRE. -->
