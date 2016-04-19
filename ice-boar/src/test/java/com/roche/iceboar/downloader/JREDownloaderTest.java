@@ -248,7 +248,14 @@ public class JREDownloaderTest {
 
         // then
         assertThat(((JREUnzippedDetailInfo) JRE_UNZIPPED_EVENT.getDetailInfo()).getPathToJreUnzipDir())
-                .isEqualTo(javaTempDir + "abc_1234");
+                .isEqualTo(dirWithFileSeparatorOnEnd(javaTempDir) + "abc_1234");
+    }
+
+    private String dirWithFileSeparatorOnEnd(String dir) {
+        if(dir.lastIndexOf(File.separator) == (dir.length()-1)) {
+            return dir;
+        }
+        return dir + File.separator;
     }
 
     private String tempDirPlusFilename(String filename) {
