@@ -14,6 +14,8 @@ Helper for running a Java standalone application using Java Web Start (JNLP) wit
 ![latest snapshots](https://img.shields.io/badge/latest-snapshot%20=%3E-yellow.svg) [ ![download bintray]
 (https://img.shields.io/badge/download-bintray-green.svg)](https://oss.jfrog.org/artifactory/webapp/#/artifacts/browse/tree/General/oss-snapshot-local/com/roche/ice-boar)
 
+## Live demo: [roche.github.io/IceBoar](http://roche.github.io/IceBoar/)
+
 Ice Boar is a small app started by Java Web Start (using JNLP file), with does the following:
 
 * checks installed Java Version,
@@ -68,6 +70,9 @@ JNLP file, using `jar` tag.
 * You need to create a JNLP file and make it also downloadable. 
 You can use [webstart-maven-plugin](http://www.mojohaus.org/webstart/webstart-maven-plugin/) for both or make it manually. 
 To learn how it can be done please check [ice-boar-samples/ice-boar-demo](ice-boar-samples/ice-boar-demo) module.   
+
+* Another code examples you can find on [live demo page](http://roche.github.io/IceBoar/). A source code of this page
+ is available in [ice-boar-samples/ice-boar-demo-gh-pages/](ice-boar-samples/ice-boar-demo-gh-pages/).
 
 ## A minimum example of JNLP file
 ```xml
@@ -154,12 +159,20 @@ To use Ice Boar in production you need/should sign Ice Boar with your certificat
 
 `jarsigner -keystore keyStore.jks -storepass <password> -tsa http://timestamp.digicert.com ice-boar-<version>-jar-with-dependencies.jar <alias>`
 
-I prefer to use JAR with all dependencies.
+I prefer to use JAR with all dependencies. If you use Maven you can sign using 
+[webstart-maven-plugin](http://www.mojohaus.org/webstart/webstart-maven-plugin/) or 
+[maven-jarsigner-plugin](https://maven.apache.org/plugins/maven-jarsigner-plugin/).
 
 # How to build a project?
-To build IceBoar project from sources please use maven and execute `mvn clean install` on this folder. This will 
-produce 2 JAR's (one regular and second with all dependencies). You can use them in your project. For examples for
-usage please see [ice-boar-samples](ice-boar-samples).
+To build IceBoar project from sources please use maven and execute `mvn clean install` on [ice-boar](ice-boar). This 
+will produce 2 JAR's (one regular and second with all dependencies). You can use them in your project. For examples for
+usage please see [ice-boar-samples/ice-boar-demo-gh-pages](ice-boar-samples/ice-boar-demo-gh-pages) or 
+[ice-boar-samples/ice-boar-demo](ice-boar-samples/ice-boar-demo).
+
+If you would to build all sub-projects please execute:
+* `mvn clean install` in [ice-boar](ice-boar) directory
+* `mvn clean install` in root (this)
+
 
 # How to contribute?
 
@@ -188,8 +201,13 @@ can probably avoid commons-lang3). The second reason to avoid logging frameworks
 For big projects it works maximum 10 Minutes and I don't need log rotation, patterns, and all this stuff from logging 
 frameworks.
 
+## Q: Why if I would to build a whole project I need to execute `mvn clean install` in two directories?
+
+The [ice-boar](ice-boar) module is not included in parent pom.xml. Therefore I don't need to release parent pom in to
+ Maven Central repository - It's not a trash.
+
 # Authors
-This project was initially developed by Marcin Stachniuk (Roche ADMD) to address the issues with WebStart reported by 
+This project was initially developed by Marcin Stachniuk (Roche ADMD) to address the issues with Web Start reported by 
 Michael Vogel from Genentech Bioinformatics & Computational Biology Department.
 
 # Acknowledgments
