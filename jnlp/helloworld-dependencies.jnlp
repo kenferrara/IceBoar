@@ -33,7 +33,7 @@
     <resources>
         <j2se version="1.5+" href="http://java.sun.com/products/autodl/j2se"/>
         <!-- Jar without depencencies. -->
-        <jar href="http://roche.github.io/IceBoar/apps/ice-boar-hello-world-swing-0.7.jar"/>
+        <jar href="http://roche.github.io/IceBoar/apps/ice-boar-hello-world-swing-0.8-SNAPSHOT.jar"/>
         <!-- Depended Jar -->
         <jar href="http://roche.github.io/IceBoar/apps/guava-11.0.2.jar"/>
     </resources>
