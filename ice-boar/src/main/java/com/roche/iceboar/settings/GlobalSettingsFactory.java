@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import static com.roche.iceboar.settings.GlobalSettings.JNLPX_JVM;
 import static com.roche.iceboar.settings.GlobalSettings.JNLP_ALWAYS_RUN_ON_PREPARED_JVM;
 import static com.roche.iceboar.settings.GlobalSettings.JNLP_CLOSE_ON_END;
 import static com.roche.iceboar.settings.GlobalSettings.JNLP_FRAME_TITLE;
@@ -100,6 +101,7 @@ public class GlobalSettingsFactory {
 		String splash = getSplashScreen(codeBase, properties);
 		boolean hideFrameBorder = getHideFrameBorder(properties);
 		boolean alwaysRunOnPreparedJVM = getAlwaysRunOnPreparedJVM(properties);
+		String jvmPath = getJvmPath(properties);
 
 		GlobalSettings settings = GlobalSettings.builder()
 				.applicationArguments(args)
@@ -125,6 +127,7 @@ public class GlobalSettingsFactory {
 				.customSplashImage(splash)
 				.hideFrameBorder(hideFrameBorder)
 				.alwaysRunOnPreparedJVM(alwaysRunOnPreparedJVM)
+				.jvmPath(jvmPath)
 				.build();
 		return settings;
 	}
@@ -241,8 +244,12 @@ public class GlobalSettingsFactory {
 	}
 
 	private static boolean getAlwaysRunOnPreparedJVM(Properties properties) {
-		String hideFrameBorder = properties.getProperty(JNLP_ALWAYS_RUN_ON_PREPARED_JVM);
-		return (isNotBlank(hideFrameBorder) && hideFrameBorder.equals("true"));
+		String alwaysRunOnPreparedJVM = properties.getProperty(JNLP_ALWAYS_RUN_ON_PREPARED_JVM);
+		return (isNotBlank(alwaysRunOnPreparedJVM) && alwaysRunOnPreparedJVM.equals("true"));
+	}
+
+	private static String getJvmPath(Properties properties) {
+		return properties.getProperty(JNLPX_JVM);
 	}
 
 }

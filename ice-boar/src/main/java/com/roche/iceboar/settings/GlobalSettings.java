@@ -187,9 +187,17 @@ public class GlobalSettings {
 	 * <tt>{@value #JNLP_ALWAYS_RUN_ON_PREPARED_JVM}</tt><br>
 	 * Enforce always download JVM even if current JVM match to required target version.
 	 *
-	 * @since 0.7
+	 * @since 0.8
 	 */
 	public static final String JNLP_ALWAYS_RUN_ON_PREPARED_JVM = "jnlp.IceBoar.alwaysRunOnPreparedJVM";
+
+	/**
+	 * <tt>{@value #JNLPX_JVM}</tt><br>
+	 * Location of java runtime that were used to run current JVM.
+	 *
+	 * @since 0.8
+	 */
+	public static final String JNLPX_JVM = "jnlpx.jvm";
 
 	private List<String> applicationArguments;
 	private long jvmStartTime;
@@ -214,6 +222,7 @@ public class GlobalSettings {
 	private String customSplashImage;
 	private boolean hideFrameBorder;
 	private boolean alwaysRunOnPreparedJVM;
+	private String jvmPath;
 
 
 	/**
@@ -402,6 +411,10 @@ public class GlobalSettings {
 		return alwaysRunOnPreparedJVM;
 	}
 
+	public String getJvmPath() {
+		return jvmPath;
+	}
+
 	public static class Builder {
 		private String[] applicationArguments = new String[]{};
 		private long jvmStartTime;
@@ -426,6 +439,7 @@ public class GlobalSettings {
 		private String splashScreen;
 		private boolean hideFrameBorder;
 		private boolean alwaysRunOnPreparedJVM;
+		private String jvmPath;
 
 		public Builder applicationArguments(String[] applicationArguments) {
 			if (applicationArguments != null) {
@@ -548,6 +562,11 @@ public class GlobalSettings {
 			return this;
 		}
 
+		public Builder jvmPath(String jvmPath) {
+			this.jvmPath = jvmPath;
+			return this;
+		}
+
 		public GlobalSettings build() {
 			GlobalSettings settings = new GlobalSettings(applicationArguments);
 			settings.jvmStartTime = jvmStartTime;
@@ -572,6 +591,7 @@ public class GlobalSettings {
 			settings.customSplashImage = splashScreen;
 			settings.hideFrameBorder = hideFrameBorder;
 			settings.alwaysRunOnPreparedJVM = alwaysRunOnPreparedJVM;
+			settings.jvmPath = jvmPath;
 			return settings;
 		}
 	}
