@@ -13,11 +13,10 @@ import java.util.regex.Pattern;
  * <p>
  * eg. 1.4.2_04 we decode as:
  * <p>
- * 1 - Master version
- * 4 - Major
- * 2 - micro
+ * 1 - Major version
+ * 4 - Minor
+ * 2 - Micro
  * 04 - release number
- * <p>
  * <p>
  * User: koziolek
  */
