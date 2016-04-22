@@ -29,10 +29,15 @@ import com.roche.iceboar.settings.GlobalSettings;
  */
 public class JVMRunnerFactory {
 
+    private JVMVersionMatcher versionMatcher = new JVMVersionMatcher();
+
     public JVMRunner create(GlobalSettings settings, ExecutableCommandFactory executableCommandFactory,
                             ProgressEventFactory progressEventFactory, ProgressEventQueue progressEventQueue) {
 
         // For now only TargetJVMRunner implementation works and is supported
+        // add ifology from issue #1
+
+
         JVMRunner jvmRunner = new TargetJVMRunner(settings, executableCommandFactory, progressEventFactory, progressEventQueue);
 
         return jvmRunner;
