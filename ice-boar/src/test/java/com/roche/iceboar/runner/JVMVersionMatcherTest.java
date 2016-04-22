@@ -24,12 +24,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class JVMVersionMatcherTest {
 
     public static final String JAVA_14 = "1.4";
-    public static final String JAVA_14_MIN = "1.4+";
+    public static final String JAVA_14_PLUS = "1.4+";
     public static final String JAVA_142 = "1.4.2";
     public static final String JAVA_142_04 = "1.4.2_04";
 
     public static final String JAVA_15 = "1.5";
-    public static final String JAVA_15_MIN = "1.5+";
+    public static final String JAVA_15_PLUS = "1.5+";
     public static final String JAVA_150 = "1.5.0";
     public static final String JAVA_150_17 = "1.5.0_17";
 
@@ -84,27 +84,27 @@ public class JVMVersionMatcherTest {
     @Test
     public void shouldMatchIfTargetMinimumIsEqualToCurrent() {
         // given
-        GlobalSettings settingsThatMatchMinor = getBuild(JAVA_14, JAVA_14_MIN);
-        GlobalSettings settingsThatMatchMicro = getBuild(JAVA_142, JAVA_14_MIN);
-        GlobalSettings settingsThatMatchRelease = getBuild(JAVA_142_04, JAVA_14_MIN);
+        GlobalSettings settingsThatMatchMinor = getBuild(JAVA_14, JAVA_14_PLUS);
+        GlobalSettings settingsThatMatchMicro = getBuild(JAVA_142, JAVA_14_PLUS);
+        GlobalSettings settingsThatMatchRelease = getBuild(JAVA_142_04, JAVA_14_PLUS);
 
         assertAllTrue(settingsThatMatchMinor, settingsThatMatchMicro, settingsThatMatchRelease);
     }
 
     @Test
     public void shouldMatchIfCurrentMinorBetterThanTargetMinimum() {
-        GlobalSettings settingsThatMatchMinor = getBuild(JAVA_15, JAVA_14_MIN);
-        GlobalSettings settingsThatMatchMicro = getBuild(JAVA_150, JAVA_14_MIN);
-        GlobalSettings settingsThatMatchRelease = getBuild(JAVA_150_17, JAVA_14_MIN);
+        GlobalSettings settingsThatMatchMinor = getBuild(JAVA_15, JAVA_14_PLUS);
+        GlobalSettings settingsThatMatchMicro = getBuild(JAVA_150, JAVA_14_PLUS);
+        GlobalSettings settingsThatMatchRelease = getBuild(JAVA_150_17, JAVA_14_PLUS);
 
         assertAllTrue(settingsThatMatchMinor, settingsThatMatchMicro, settingsThatMatchRelease);
     }
 
     @Test
     public void shouldNotMatchIfCurrentMinorLessThanTargetMinimum() {
-        GlobalSettings settingsThatMatchMinor = getBuild(JAVA_14, JAVA_15_MIN);
-        GlobalSettings settingsThatMatchMicro = getBuild(JAVA_142, JAVA_15_MIN);
-        GlobalSettings settingsThatMatchRelease = getBuild(JAVA_142_04, JAVA_15_MIN);
+        GlobalSettings settingsThatMatchMinor = getBuild(JAVA_14, JAVA_15_PLUS);
+        GlobalSettings settingsThatMatchMicro = getBuild(JAVA_142, JAVA_15_PLUS);
+        GlobalSettings settingsThatMatchRelease = getBuild(JAVA_142_04, JAVA_15_PLUS);
 
         assertAllFalse(settingsThatMatchMinor, settingsThatMatchMicro, settingsThatMatchRelease);
     }
