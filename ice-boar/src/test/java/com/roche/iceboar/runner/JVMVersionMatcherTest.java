@@ -1,5 +1,6 @@
 package com.roche.iceboar.runner;
 
+import com.roche.iceboar.IceBoarException;
 import com.roche.iceboar.settings.GlobalSettings;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -35,6 +36,8 @@ public class JVMVersionMatcherTest {
 
     public static final String JAVA_16 = "1.6";
 
+    private static final String JAVA_20 = "2.0";
+
     private JVMVersionMatcher sut;
 
     @BeforeMethod
@@ -45,10 +48,16 @@ public class JVMVersionMatcherTest {
     @Test
     public void shouldMatchSimpleFullVersion() {
         // given
-        GlobalSettings settingsThatMatch = getBuild(JAVA_142, JAVA_142);
-        GlobalSettings settingsThatNotMatch = getBuild(JAVA_150, JAVA_142);
+        GlobalSettings settingsThatMatch = getBuild(JAVA_142_04, JAVA_142_04);
         // then
         assertThat(sut.match(settingsThatMatch)).isTrue();
+    }
+
+    @Test
+    public void shouldNotMatchSimpleFullVersion() {
+        // given
+        GlobalSettings settingsThatNotMatch = getBuild(JAVA_150, JAVA_142);
+        // then
         assertThat(sut.match(settingsThatNotMatch)).isFalse();
     }
 
@@ -82,7 +91,7 @@ public class JVMVersionMatcherTest {
     }
 
     @Test
-    public void shouldMatchIfTargetMinimumIsEqualToCurrent() {
+    public void shouldMatchIfCurrentIsMoreStrictThanTargetMinimum() {
         // given
         GlobalSettings settingsThatMatchMinor = getBuild(JAVA_14, JAVA_14_PLUS);
         GlobalSettings settingsThatMatchMicro = getBuild(JAVA_142, JAVA_14_PLUS);
@@ -114,13 +123,62 @@ public class JVMVersionMatcherTest {
         // given
         GlobalSettings settingsThatMatchByComa = getBuild(JAVA_142, JAVA_150 + ", " + JAVA_142);
         GlobalSettings settingsThatMatchBySpace = getBuild(JAVA_142, JAVA_150 + " " + JAVA_142);
-        GlobalSettings settingsThatNotMatchByComa = getBuild(JAVA_142, JAVA_150 + ", " + JAVA_16);
-        GlobalSettings settingsThatNotMatchBySpace = getBuild(JAVA_142, JAVA_150 + " " + JAVA_16);
 
         assertThat(sut.match(settingsThatMatchByComa)).isTrue();
         assertThat(sut.match(settingsThatMatchBySpace)).isTrue();
+    }
+
+    @Test
+    public void shouldNotMatchIfCurrentMatchToAnyInTargets() {
+        // given
+        GlobalSettings settingsThatNotMatchByComa = getBuild(JAVA_142, JAVA_150 + ", " + JAVA_16);
+        GlobalSettings settingsThatNotMatchBySpace = getBuild(JAVA_142, JAVA_150 + " " + JAVA_16);
+
         assertThat(sut.match(settingsThatNotMatchByComa)).isFalse();
         assertThat(sut.match(settingsThatNotMatchBySpace)).isFalse();
+    }
+
+    @Test
+    public void shouldNotMatchForJava20() {
+        GlobalSettings settingsWithJava20 = getBuild(JAVA_20, JAVA_142);
+        assertThat(sut.match(settingsWithJava20)).isFalse();
+    }
+
+    @Test(expectedExceptions = IceBoarException.class)
+    public void shouldThrowWhenTargetIsNull() {
+        GlobalSettings settingsWithNullTarget = getBuild(JAVA_142, null);
+        sut.match(settingsWithNullTarget);
+    }
+
+    @Test(expectedExceptions = IceBoarException.class)
+    public void shouldThrowWhenTargetIsEmpty() {
+        GlobalSettings settingsWithEmptyTarget = getBuild(JAVA_142, "");
+        sut.match(settingsWithEmptyTarget);
+    }
+
+    @Test(expectedExceptions = IceBoarException.class)
+    public void shouldThrowWhenTargetIsBlank() {
+        GlobalSettings settingsWithBlankTarget = getBuild(JAVA_142, "    ");
+        sut.match(settingsWithBlankTarget);
+    }
+
+
+    @Test(expectedExceptions = IceBoarException.class)
+    public void shouldThrowWhenCurrentIsNull() {
+        GlobalSettings settingsWithNullCurrent = getBuild(null, JAVA_142);
+        sut.match(settingsWithNullCurrent);
+    }
+
+    @Test(expectedExceptions = IceBoarException.class)
+    public void shouldThrowWhenCurrentIsEmpty() {
+        GlobalSettings settingsWithEmptyCurrent = getBuild("", JAVA_142);
+        sut.match(settingsWithEmptyCurrent);
+    }
+
+    @Test(expectedExceptions = IceBoarException.class)
+    public void shouldThrowWhenCurrentIsBlank() {
+        GlobalSettings settingsWithBlankCurrent = getBuild("    ", JAVA_142);
+        sut.match(settingsWithBlankCurrent);
     }
 
     private void assertAllFalse(GlobalSettings settingsThatMatchMinor, GlobalSettings settingsThatMatchMicro, GlobalSettings settingsThatMatchRelease) {

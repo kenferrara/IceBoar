@@ -47,6 +47,13 @@ public class GlobalSettingsFactory {
      * Default Frame Title.
      */
     public static final String DEFAULT_FRAME_TITLE = "Ice Boar";
+    /**
+     * <tt>{@value #JNLPX_JVM}</tt><br>
+     * Location of java runtime that were used to run current Java WebStart instance.
+     *
+     * @since 0.8
+     */
+    public static final String JNLPX_JVM = "jnlpx.jvm";
 
     private static final String JAVA_VERSION = "java.version";
     private static final String OS_NAME = "os.name";

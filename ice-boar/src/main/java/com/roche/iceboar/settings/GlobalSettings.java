@@ -185,19 +185,11 @@ public class GlobalSettings {
 
     /**
      * <tt>{@value #JNLP_ALWAYS_RUN_ON_PREPARED_JVM}</tt><br>
-     * Enforce always download JVM even if current JVM match to required target version.
+     * Enforce always download JVM even if current JVM match to required target version. Default false.
      *
      * @since 0.8
      */
     public static final String JNLP_ALWAYS_RUN_ON_PREPARED_JVM = "jnlp.IceBoar.alwaysRunOnPreparedJVM";
-
-    /**
-     * <tt>{@value #JNLPX_JVM}</tt><br>
-     * Location of java runtime that were used to run current JVM.
-     *
-     * @since 0.8
-     */
-    public static final String JNLPX_JVM = "jnlpx.jvm";
 
     private List<String> applicationArguments;
     private long jvmStartTime;

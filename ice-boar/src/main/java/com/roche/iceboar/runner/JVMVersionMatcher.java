@@ -59,6 +59,9 @@ public class JVMVersionMatcher {
         boolean minimum;
 
         public Version(String version) {
+            if (version == null || version.trim().length() == 0) {
+                throw new IceBoarException("Version number cannot be null", null);
+            }
             Matcher matcher = VERSION_PATTERN.matcher(version);
             matcher.find();
             major = matcher.group(1);
