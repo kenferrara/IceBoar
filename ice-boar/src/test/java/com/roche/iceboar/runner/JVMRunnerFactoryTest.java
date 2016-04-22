@@ -33,10 +33,12 @@ public class JVMRunnerFactoryTest {
 	public void shouldThrowExceptionWhenTargetJVMIsNotDefined() {
 		// given
 		JVMRunnerFactory factory = new JVMRunnerFactory();
+		GlobalSettings build = GlobalSettings.builder()
+				.currentJavaVersion("1.6")
+				.build();
 
 		// should fail
-		factory.create(GlobalSettings.builder().currentJavaVersion("1.6")
-						.build(), mock(ExecutableCommandFactory.class),
+		factory.create(build, mock(ExecutableCommandFactory.class),
 				mock(ProgressEventFactory.class), mock(ProgressEventQueue.class));
 
 	}
