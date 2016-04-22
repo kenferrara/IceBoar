@@ -20,7 +20,6 @@ package com.roche.iceboar.runner;
 
 import com.roche.iceboar.progressevent.ProgressEventFactory;
 import com.roche.iceboar.progressevent.ProgressEventQueue;
-import com.roche.iceboar.progressview.ProgressUpdater;
 import com.roche.iceboar.settings.GlobalSettings;
 
 /**
@@ -29,17 +28,17 @@ import com.roche.iceboar.settings.GlobalSettings;
  */
 public class JVMRunnerFactory {
 
-    private JVMVersionMatcher versionMatcher = new JVMVersionMatcher();
+	private JVMVersionMatcher versionMatcher = new JVMVersionMatcher();
 
-    public JVMRunner create(GlobalSettings settings, ExecutableCommandFactory executableCommandFactory,
-                            ProgressEventFactory progressEventFactory, ProgressEventQueue progressEventQueue) {
+	public JVMRunner create(GlobalSettings settings, ExecutableCommandFactory executableCommandFactory,
+	                        ProgressEventFactory progressEventFactory, ProgressEventQueue progressEventQueue) {
 
-        // For now only TargetJVMRunner implementation works and is supported
-        // add ifology from issue #1
-
-
-        JVMRunner jvmRunner = new TargetJVMRunner(settings, executableCommandFactory, progressEventFactory, progressEventQueue);
-
-        return jvmRunner;
-    }
+		// For now only TargetJVMRunner implementation works and is supported
+		JVMRunner jvmRunner;
+		if (!versionMatcher.match(settings) || settings.isAlwaysRunOnPreparedJVM())
+			jvmRunner = new TargetJVMRunner(settings, executableCommandFactory, progressEventFactory, progressEventQueue);
+		else
+			jvmRunner = new CurrentJVMRunner(null);
+		return jvmRunner;
+	}
 }
