@@ -252,7 +252,7 @@ public class JREDownloaderTest {
     }
 
     private String dirWithFileSeparatorOnEnd(String dir) {
-        if(dir.lastIndexOf(File.separator) == (dir.length()-1)) {
+        if (dir.lastIndexOf(File.separator) == (dir.length() - 1)) {
             return dir;
         }
         return dir + File.separator;

@@ -18,33 +18,21 @@
 
 package com.roche.iceboar.runner;
 
-import com.roche.iceboar.IceBoarException;
 import com.roche.iceboar.downloader.FileUtilsFacade;
 import com.roche.iceboar.progressevent.*;
 import com.roche.iceboar.settings.GlobalSettings;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
 /**
  * Run a target application on downloaded Java Virtual Machine.
  */
-public class TargetJVMRunner implements JVMRunner, ProgressEventObserver {
+public class TargetJVMRunner extends AbstractJVMRunner implements ProgressEventObserver {
 
-    private final GlobalSettings settings;
-    private ExecutableCommandFactory executableCommandFactory;
-    private final ProgressEventFactory progressEventFactory;
-    private final ProgressEventQueue progressEventQueue;
     private JREUnzippedDetailInfo detailInfo;
 
-    public TargetJVMRunner(GlobalSettings settings, ExecutableCommandFactory executableCommandFactory,
-                           ProgressEventFactory progressEventFactory, ProgressEventQueue progressEventQueue) {
-        this.settings = settings;
-        this.executableCommandFactory = executableCommandFactory;
-        this.progressEventFactory = progressEventFactory;
-        this.progressEventQueue = progressEventQueue;
+    public TargetJVMRunner(GlobalSettings settings, ExecutableCommandFactory executableCommandFactory, ProgressEventFactory progressEventFactory, ProgressEventQueue progressEventQueue) {
+        super(settings, progressEventQueue, progressEventFactory, executableCommandFactory);
     }
+
 
     public void update(ProgressEvent event) {
         if (event.equals(progressEventFactory.getJREUnzippedEvent())) {
@@ -69,7 +57,8 @@ public class TargetJVMRunner implements JVMRunner, ProgressEventObserver {
         }
     }
 
-    private void runMainClass() {
+    @Override
+    protected void runMainClass() {
         ExecutableCommand command = executableCommandFactory.createRunTargetApplicationCommand(
                 settings, detailInfo.getPathToJreUnzipDir());
 
@@ -77,55 +66,6 @@ public class TargetJVMRunner implements JVMRunner, ProgressEventObserver {
 
         redirectProcessOutputsToDebugWindow(process);
         progressEventQueue.update(progressEventFactory.getAppStartedEvent());
-    }
-
-    private void redirectProcessOutputsToDebugWindow(final Process process) {
-        startOutputReaderThread(process);
-        startErrorReaderThread(process);
-    }
-
-    private void startOutputReaderThread(final Process process) {
-        Thread thread1 = new Thread(new Runnable() {
-            public void run() {
-                BufferedReader inputReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-                String line;
-                while (true) {
-                    try {
-                        if (inputReader.ready()) {
-                            line = inputReader.readLine();
-                            if (line != null) {
-                                System.out.println("Process input: " + line);
-                            }
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-        thread1.start();
-    }
-
-    private void startErrorReaderThread(final Process process) {
-        Thread thread2 = new Thread(new Runnable() {
-            public void run() {
-                BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-                String line;
-                while (true) {
-                    try {
-                        if (errorReader.ready()) {
-                            line = errorReader.readLine();
-                            if (line != null) {
-                                System.out.println("Process error: " + line);
-                            }
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-        thread2.start();
     }
 
 }

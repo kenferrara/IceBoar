@@ -23,101 +23,110 @@ import java.util.regex.Pattern;
  */
 public class JVMVersionMatcher {
 
-	public boolean match(GlobalSettings settings) {
-		Version currentJavaVersion = new Version(settings.getCurrentJavaVersion());
-		List<Version> targetJavaVersions = parseTarget(settings.getTargetJavaVersion());
+    public boolean match(GlobalSettings settings) {
+        Version currentJavaVersion = new Version(settings.getCurrentJavaVersion());
+        List<Version> targetJavaVersions = parseTarget(settings.getTargetJavaVersion());
 
-		for (Version target : targetJavaVersions) {
-			if (currentJavaVersion.equals(target))
-				return true;
-		}
+        for (Version target : targetJavaVersions) {
+            if (currentJavaVersion.equals(target)) {
+                return true;
+            }
+        }
 
-		return false;
-	}
+        return false;
+    }
 
-	private List<Version> parseTarget(String targetDesc) {
-		if (targetDesc == null || targetDesc.trim().length() == 0)
-			throw new IceBoarException("You should define target JVM version", null);
+    private List<Version> parseTarget(String targetDesc) {
+        if (targetDesc == null || targetDesc.trim().length() == 0) {
+            throw new IceBoarException("You should define target JVM version", null);
+        }
 
-		String[] byComa = targetDesc.split(",");
-		List<Version> versions = new ArrayList<Version>();
-		for (String elem : byComa) {
-			String[] bySpace = elem.trim().split(" ");
-			for (String ver : bySpace) {
-				versions.add(new Version(ver));
-			}
-		}
-		return versions;
-	}
+        String[] byComa = targetDesc.split(",");
+        List<Version> versions = new ArrayList<Version>();
+        for (String elem : byComa) {
+            String[] bySpace = elem.trim().split(" ");
+            for (String ver : bySpace) {
+                versions.add(new Version(ver));
+            }
+        }
+        return versions;
+    }
 
 
-	private static class Version {
-		private static final Pattern VERSION_PATTERN = Pattern.compile("(\\d)+\\.(\\d)+\\.?(\\d)?(_\\d)?|(\\d)+\\.(\\d)+\\+");
-		String major, minor, micro, release;
-		boolean minimum;
+    private static class Version {
+        private static final Pattern VERSION_PATTERN = Pattern
+                .compile("(\\d)+\\.(\\d)+\\.?(\\d)?(_\\d)?|(\\d)+\\.(\\d)+\\+");
+        String major, minor, micro, release;
+        boolean minimum;
 
-		public Version(String version) {
-			Matcher matcher = VERSION_PATTERN.matcher(version);
-			matcher.find();
-			major = matcher.group(1);
-			minor = matcher.group(2);
-			micro = matcher.group(3);
-			release = matcher.group(4);
-			minimum = version.contains("+");
-		}
+        public Version(String version) {
+            Matcher matcher = VERSION_PATTERN.matcher(version);
+            matcher.find();
+            major = matcher.group(1);
+            minor = matcher.group(2);
+            micro = matcher.group(3);
+            release = matcher.group(4);
+            minimum = version.contains("+");
+        }
 
-		@Override
-		public boolean equals(Object o) {
-			if (this == o) return true;
-			if (!(o instanceof Version)) return false;
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (!(o instanceof Version)) {
+                return false;
+            }
 
-			Version version = (Version) o;
+            Version version = (Version) o;
 
-			if (major != null ? !major.equals(version.major) : version.major != null) return false;
-			return isMinorEqualOrGreater(version) && isMicroEqual(version) && isReleaseEqual(version);
+            if (major != null ? !major.equals(version.major) : version.major != null) {
+                return false;
+            }
+            return isMinorEqualOrGreater(version) && isMicroEqual(version) && isReleaseEqual(version);
 
-		}
+        }
 
-		private boolean isMinorEqualOrGreater(Version that) {
-			if (minor != null && that.minor != null) {
-				return this.minor.compareTo(that.minor) >= 0;
-			} else if (minor != null) {
-				return true;
-			} else if (that.minor == null) {
-				return true;
-			}
-			return false;
-		}
+        private boolean isMinorEqualOrGreater(Version that) {
+            if (minor != null && that.minor != null) {
+                return this.minor.compareTo(that.minor) >= 0;
+            } else if (minor != null) {
+                return true;
+            } else if (that.minor == null) {
+                return true;
+            }
+            return false;
+        }
 
-		private boolean isMicroEqual(Version that) {
-			if (micro != null && that.micro != null) {
-				return this.micro.equals(that.micro);
-			} else if (micro != null) {
-				return true;
-			} else if (that.micro == null) {
-				return true;
-			}
-			return false || minimum;
-		}
+        private boolean isMicroEqual(Version that) {
+            if (micro != null && that.micro != null) {
+                return this.micro.equals(that.micro);
+            } else if (micro != null) {
+                return true;
+            } else if (that.micro == null) {
+                return true;
+            }
+            return false || minimum;
+        }
 
-		private boolean isReleaseEqual(Version that) {
-			if (release != null && that.release != null) {
-				return this.release.equals(that.release);
-			} else if (release != null) {
-				return true;
-			} else if (that.release == null) {
-				return true;
-			}
-			return false || minimum;
-		}
+        private boolean isReleaseEqual(Version that) {
+            if (release != null && that.release != null) {
+                return this.release.equals(that.release);
+            } else if (release != null) {
+                return true;
+            } else if (that.release == null) {
+                return true;
+            }
+            return false || minimum;
+        }
 
-		@Override
-		public int hashCode() {
-			int result = major != null ? major.hashCode() : 0;
-			result = 31 * result + (minor != null ? minor.hashCode() : 0);
-			result = 31 * result + (micro != null ? micro.hashCode() : 0);
-			result = 31 * result + (release != null ? release.hashCode() : 0);
-			return result;
-		}
-	}
+        @Override
+        public int hashCode() {
+            int result = major != null ? major.hashCode() : 0;
+            result = 31 * result + (minor != null ? minor.hashCode() : 0);
+            result = 31 * result + (micro != null ? micro.hashCode() : 0);
+            result = 31 * result + (release != null ? release.hashCode() : 0);
+            return result;
+        }
+    }
 }

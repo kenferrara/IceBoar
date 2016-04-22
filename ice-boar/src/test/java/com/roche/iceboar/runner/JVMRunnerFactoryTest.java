@@ -29,90 +29,90 @@ import static org.mockito.Mockito.mock;
 
 public class JVMRunnerFactoryTest {
 
-	@Test(expectedExceptions = IceBoarException.class)
-	public void shouldThrowExceptionWhenTargetJVMIsNotDefined() {
-		// given
-		JVMRunnerFactory factory = new JVMRunnerFactory();
-		GlobalSettings build = GlobalSettings.builder()
-				.currentJavaVersion("1.6")
-				.build();
+    @Test(expectedExceptions = IceBoarException.class)
+    public void shouldThrowExceptionWhenTargetJVMIsNotDefined() {
+        // given
+        JVMRunnerFactory factory = new JVMRunnerFactory();
+        GlobalSettings build = GlobalSettings.builder()
+                                             .currentJavaVersion("1.6")
+                                             .build();
 
-		// should fail
-		factory.create(build, mock(ExecutableCommandFactory.class),
-				mock(ProgressEventFactory.class), mock(ProgressEventQueue.class));
+        // should fail
+        factory.create(build, mock(ExecutableCommandFactory.class),
+                mock(ProgressEventFactory.class), mock(ProgressEventQueue.class));
 
-	}
+    }
 
-	@Test
-	public void shouldCreateTargetJVMRunnerWhenTargetVersionEqualsCurrentVersion() {
-		// given
-		JVMRunnerFactory factory = new JVMRunnerFactory();
-		GlobalSettings settings = GlobalSettings.builder()
-				.targetJavaVersion("1.6")
-				.currentJavaVersion("1.6")
-				.alwaysRunOnPreparedJVM(true)
-				.build();
-		// when
-		JVMRunner runner = factory
-				.create(settings, mock(ExecutableCommandFactory.class), mock(ProgressEventFactory.class),
-						mock(ProgressEventQueue.class));
+    @Test
+    public void shouldCreateTargetJVMRunnerWhenTargetVersionEqualsCurrentVersion() {
+        // given
+        JVMRunnerFactory factory = new JVMRunnerFactory();
+        GlobalSettings settings = GlobalSettings.builder()
+                                                .targetJavaVersion("1.6")
+                                                .currentJavaVersion("1.6")
+                                                .alwaysRunOnPreparedJVM(true)
+                                                .build();
+        // when
+        JVMRunner runner = factory
+                .create(settings, mock(ExecutableCommandFactory.class), mock(ProgressEventFactory.class),
+                        mock(ProgressEventQueue.class));
 
-		// then
-		assertThat(runner).isInstanceOf(TargetJVMRunner.class);
-	}
+        // then
+        assertThat(runner).isInstanceOf(TargetJVMRunner.class);
+    }
 
-	@Test
-	public void shouldCreateCurrentJVMRunnerWhenTargetVersionEqualsCurrentVersion() {
-		// given
-		JVMRunnerFactory factory = new JVMRunnerFactory();
-		GlobalSettings settings = GlobalSettings.builder()
-				.targetJavaVersion("1.6")
-				.currentJavaVersion("1.6")
-				.alwaysRunOnPreparedJVM(false)
-				.build();
-		// when
-		JVMRunner runner = factory
-				.create(settings, mock(ExecutableCommandFactory.class), mock(ProgressEventFactory.class),
-						mock(ProgressEventQueue.class));
+    @Test
+    public void shouldCreateCurrentJVMRunnerWhenTargetVersionEqualsCurrentVersion() {
+        // given
+        JVMRunnerFactory factory = new JVMRunnerFactory();
+        GlobalSettings settings = GlobalSettings.builder()
+                                                .targetJavaVersion("1.6")
+                                                .currentJavaVersion("1.6")
+                                                .alwaysRunOnPreparedJVM(false)
+                                                .build();
+        // when
+        JVMRunner runner = factory
+                .create(settings, mock(ExecutableCommandFactory.class), mock(ProgressEventFactory.class),
+                        mock(ProgressEventQueue.class));
 
-		// then
-		assertThat(runner).isInstanceOf(CurrentJVMRunner.class);
-	}
+        // then
+        assertThat(runner).isInstanceOf(CurrentJVMRunner.class);
+    }
 
-	@Test
-	public void shouldRunOnTargetJavaVersionWhenTargetVersionNotEqualsCurrentVersion() {
-		// given
-		JVMRunnerFactory factory = new JVMRunnerFactory();
-		GlobalSettings settings = GlobalSettings.builder()
-				.targetJavaVersion("1.6")
-				.currentJavaVersion("1.7")
-				.alwaysRunOnPreparedJVM(true)
-				.build();
-		// when
-		JVMRunner runner = factory
-				.create(settings, mock(ExecutableCommandFactory.class), mock(ProgressEventFactory.class),
-						mock(ProgressEventQueue.class));
+    @Test
+    public void shouldRunOnTargetJavaVersionWhenTargetVersionNotEqualsCurrentVersion() {
+        // given
+        JVMRunnerFactory factory = new JVMRunnerFactory();
+        GlobalSettings settings = GlobalSettings.builder()
+                                                .targetJavaVersion("1.6")
+                                                .currentJavaVersion("1.7")
+                                                .alwaysRunOnPreparedJVM(true)
+                                                .build();
+        // when
+        JVMRunner runner = factory
+                .create(settings, mock(ExecutableCommandFactory.class), mock(ProgressEventFactory.class),
+                        mock(ProgressEventQueue.class));
 
-		// then
-		assertThat(runner).isInstanceOf(TargetJVMRunner.class);
-	}
+        // then
+        assertThat(runner).isInstanceOf(TargetJVMRunner.class);
+    }
 
-	@Test
-	public void shouldRunOnTargetJavaVersionWhenTargetVersionNotEqualsCurrentVersionWhenDownloadFlagIsFalse() {
-		// given
-		JVMRunnerFactory factory = new JVMRunnerFactory();
-		GlobalSettings settings = GlobalSettings.builder()
-				.targetJavaVersion("1.7")
-				.currentJavaVersion("1.6")
-				.alwaysRunOnPreparedJVM(false)
-				.build();
-		// when
-		JVMRunner runner = factory
-				.create(settings, mock(ExecutableCommandFactory.class), mock(ProgressEventFactory.class),
-						mock(ProgressEventQueue.class));
+    @Test
+    public void shouldRunOnTargetJavaVersionWhenTargetVersionNotEqualsCurrentVersionWhenDownloadFlagIsFalse() {
+        // given
+        JVMRunnerFactory factory = new JVMRunnerFactory();
+        GlobalSettings settings = GlobalSettings.builder()
+                                                .targetJavaVersion("1.7")
+                                                .currentJavaVersion("1.6")
+                                                .alwaysRunOnPreparedJVM(false)
+                                                .build();
+        // when
+        JVMRunner runner = factory
+                .create(settings, mock(ExecutableCommandFactory.class), mock(ProgressEventFactory.class),
+                        mock(ProgressEventQueue.class));
 
-		// then
-		assertThat(runner).isInstanceOf(TargetJVMRunner.class);
-	}
+        // then
+        assertThat(runner).isInstanceOf(TargetJVMRunner.class);
+    }
 
 }

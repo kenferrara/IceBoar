@@ -27,7 +27,6 @@ import javax.jnlp.BasicService;
 import javax.jnlp.ServiceManager;
 import javax.jnlp.ServiceManagerStub;
 import javax.jnlp.UnavailableServiceException;
-
 import java.net.MalformedURLException;
 import java.net.URL;
 

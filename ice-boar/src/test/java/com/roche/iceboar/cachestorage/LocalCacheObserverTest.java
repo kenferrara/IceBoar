@@ -18,14 +18,14 @@
 
 package com.roche.iceboar.cachestorage;
 
-import com.roche.iceboar.progressevent.*;
+import com.roche.iceboar.progressevent.JREDownloadedDetailInfo;
+import com.roche.iceboar.progressevent.JREUnzippedDetailInfo;
+import com.roche.iceboar.progressevent.ProgressEvent;
+import com.roche.iceboar.progressevent.ProgressEventFactory;
 import com.roche.iceboar.settings.GlobalSettings;
 import org.testng.annotations.Test;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.testng.Assert.*;
+import static org.mockito.Mockito.*;
 
 public class LocalCacheObserverTest {
 

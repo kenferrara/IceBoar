@@ -18,7 +18,6 @@
 
 package com.roche.iceboar.runner;
 
-import com.roche.iceboar.progressevent.ProgressEvent;
 import com.roche.iceboar.progressevent.ProgressEventObserver;
 
 /**

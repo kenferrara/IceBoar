@@ -5,10 +5,11 @@ import com.roche.iceboar.progressevent.ProgressEvent;
 import com.roche.iceboar.progressevent.ProgressEventFactory;
 import com.roche.iceboar.progressevent.ProgressEventQueue;
 import com.roche.iceboar.settings.GlobalSettings;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.SystemUtils;
 import org.assertj.core.api.Assertions;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -80,9 +81,9 @@ public class TargetJVMRunnerTest {
     private Process createMockProcessWithEmptyStreams() {
         Process process = mock(Process.class);
         when(process.getInputStream())
-                .thenReturn(new ByteArrayInputStream(new byte [] {}));
+                .thenReturn(new ByteArrayInputStream(new byte[]{}));
         when(process.getErrorStream())
-                .thenReturn(new ByteArrayInputStream(new byte [] {}));
+                .thenReturn(new ByteArrayInputStream(new byte[]{}));
         return process;
     }
 
@@ -96,12 +97,12 @@ public class TargetJVMRunnerTest {
 
         ExecutableCommand command = mock(ExecutableCommand.class);
         Process process = mock(Process.class);
-        byte [] input = "some text\nsecond line".getBytes();
+        byte[] input = "some text\nsecond line".getBytes();
         InputStream inputStream = new ByteArrayInputStream(input);
         when(process.getInputStream())
                 .thenReturn(inputStream);
         when(process.getErrorStream())
-                .thenReturn(new ByteArrayInputStream(new byte [] {}));
+                .thenReturn(new ByteArrayInputStream(new byte[]{}));
         when(command.exec())
                 .thenReturn(process);
         when(executableCommandFactory.createRunTargetApplicationCommand(any(GlobalSettings.class), anyString()))
@@ -132,10 +133,10 @@ public class TargetJVMRunnerTest {
 
         ExecutableCommand command = mock(ExecutableCommand.class);
         Process process = mock(Process.class);
-        byte [] input = "some text\nsecond line".getBytes();
+        byte[] input = "some text\nsecond line".getBytes();
         InputStream inputStream = new ByteArrayInputStream(input);
         when(process.getInputStream())
-                .thenReturn(new ByteArrayInputStream(new byte [] {}));
+                .thenReturn(new ByteArrayInputStream(new byte[]{}));
         when(process.getErrorStream())
                 .thenReturn(inputStream);   // read from error stream
         when(command.exec())

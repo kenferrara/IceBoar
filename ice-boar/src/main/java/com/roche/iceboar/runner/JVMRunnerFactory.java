@@ -28,17 +28,18 @@ import com.roche.iceboar.settings.GlobalSettings;
  */
 public class JVMRunnerFactory {
 
-	private JVMVersionMatcher versionMatcher = new JVMVersionMatcher();
+    private JVMVersionMatcher versionMatcher = new JVMVersionMatcher();
 
-	public JVMRunner create(GlobalSettings settings, ExecutableCommandFactory executableCommandFactory,
-	                        ProgressEventFactory progressEventFactory, ProgressEventQueue progressEventQueue) {
+    public JVMRunner create(GlobalSettings settings, ExecutableCommandFactory executableCommandFactory,
+							ProgressEventFactory progressEventFactory, ProgressEventQueue progressEventQueue) {
 
-		// For now only TargetJVMRunner implementation works and is supported
-		JVMRunner jvmRunner;
-		if (!versionMatcher.match(settings) || settings.isAlwaysRunOnPreparedJVM())
+        // For now only TargetJVMRunner implementation works and is supported
+        JVMRunner jvmRunner;
+		if (!versionMatcher.match(settings) || settings.isAlwaysRunOnPreparedJVM()) {
 			jvmRunner = new TargetJVMRunner(settings, executableCommandFactory, progressEventFactory, progressEventQueue);
-		else
+		} else {
 			jvmRunner = new CurrentJVMRunner(settings, executableCommandFactory, progressEventFactory, progressEventQueue);
-		return jvmRunner;
-	}
+		}
+        return jvmRunner;
+    }
 }
