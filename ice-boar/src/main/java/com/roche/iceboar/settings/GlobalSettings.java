@@ -222,7 +222,7 @@ public class GlobalSettings {
 	private String customSplashImage;
 	private boolean hideFrameBorder;
 	private boolean alwaysRunOnPreparedJVM;
-	private String jvmPath;
+	private String currentJvmPath;
 
 
 	/**
@@ -411,8 +411,8 @@ public class GlobalSettings {
 		return alwaysRunOnPreparedJVM;
 	}
 
-	public String getJvmPath() {
-		return jvmPath;
+	public String getCurrentJvmPath() {
+		return currentJvmPath;
 	}
 
 	public static class Builder {
@@ -439,7 +439,7 @@ public class GlobalSettings {
 		private String splashScreen;
 		private boolean hideFrameBorder;
 		private boolean alwaysRunOnPreparedJVM;
-		private String jvmPath;
+		private String currentJvmPath;
 
 		public Builder applicationArguments(String[] applicationArguments) {
 			if (applicationArguments != null) {
@@ -562,8 +562,8 @@ public class GlobalSettings {
 			return this;
 		}
 
-		public Builder jvmPath(String jvmPath) {
-			this.jvmPath = jvmPath;
+		public Builder currentJvmPath(String currentJvmPath) {
+			this.currentJvmPath = currentJvmPath;
 			return this;
 		}
 
@@ -591,7 +591,7 @@ public class GlobalSettings {
 			settings.customSplashImage = splashScreen;
 			settings.hideFrameBorder = hideFrameBorder;
 			settings.alwaysRunOnPreparedJVM = alwaysRunOnPreparedJVM;
-			settings.jvmPath = jvmPath;
+			settings.currentJvmPath = currentJvmPath;
 			return settings;
 		}
 	}

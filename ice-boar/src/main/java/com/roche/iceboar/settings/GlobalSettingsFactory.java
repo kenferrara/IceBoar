@@ -101,7 +101,7 @@ public class GlobalSettingsFactory {
 		String splash = getSplashScreen(codeBase, properties);
 		boolean hideFrameBorder = getHideFrameBorder(properties);
 		boolean alwaysRunOnPreparedJVM = getAlwaysRunOnPreparedJVM(properties);
-		String jvmPath = getJvmPath(properties);
+		String jvmPath = getCurrentJvmPath(properties);
 
 		GlobalSettings settings = GlobalSettings.builder()
 				.applicationArguments(args)
@@ -127,7 +127,7 @@ public class GlobalSettingsFactory {
 				.customSplashImage(splash)
 				.hideFrameBorder(hideFrameBorder)
 				.alwaysRunOnPreparedJVM(alwaysRunOnPreparedJVM)
-				.jvmPath(jvmPath)
+				.currentJvmPath(jvmPath)
 				.build();
 		return settings;
 	}
@@ -248,7 +248,7 @@ public class GlobalSettingsFactory {
 		return (isNotBlank(alwaysRunOnPreparedJVM) && alwaysRunOnPreparedJVM.equals("true"));
 	}
 
-	private static String getJvmPath(Properties properties) {
+	private static String getCurrentJvmPath(Properties properties) {
 		return properties.getProperty(JNLPX_JVM);
 	}
 
