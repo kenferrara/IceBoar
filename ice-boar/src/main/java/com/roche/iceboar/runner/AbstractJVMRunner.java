@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * TODO write JAVADOC!!!
  * User: koziolek
  */
 public abstract class AbstractJVMRunner implements JVMRunner {
