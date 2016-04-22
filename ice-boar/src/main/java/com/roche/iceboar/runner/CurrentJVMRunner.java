@@ -29,8 +29,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * Runs a target user application on current installed Java version on user machine. For now this case isn't full
- * implemented.
+ * Runs a target user application on JVM same as JNLP were run.
  */
 public class CurrentJVMRunner implements JVMRunner {
 
@@ -40,7 +39,7 @@ public class CurrentJVMRunner implements JVMRunner {
 	private ExecutableCommandFactory executableCommandFactory;
 	private ProgressEventQueue progressEventQueue;
 
-	public CurrentJVMRunner(ProgressUpdater progress, GlobalSettings settings, ExecutableCommandFactory executableCommandFactory,
+	public CurrentJVMRunner(GlobalSettings settings, ExecutableCommandFactory executableCommandFactory,
 	                        ProgressEventFactory progressEventFactory, ProgressEventQueue progressEventQueue) {
 		this.progress = progress;
 		this.settings = settings;

@@ -38,7 +38,7 @@ public class JVMRunnerFactory {
 		if (!versionMatcher.match(settings) || settings.isAlwaysRunOnPreparedJVM())
 			jvmRunner = new TargetJVMRunner(settings, executableCommandFactory, progressEventFactory, progressEventQueue);
 		else
-			jvmRunner = new CurrentJVMRunner(null, settings, executableCommandFactory, progressEventFactory, progressEventQueue);
+			jvmRunner = new CurrentJVMRunner(settings, executableCommandFactory, progressEventFactory, progressEventQueue);
 		return jvmRunner;
 	}
 }

@@ -1,5 +1,6 @@
 package com.roche.iceboar.runner;
 
+import com.roche.iceboar.IceBoarException;
 import com.roche.iceboar.settings.GlobalSettings;
 
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ import java.util.regex.Pattern;
  * User: koziolek
  */
 public class JVMVersionMatcher {
+
 	public boolean match(GlobalSettings settings) {
 		Version currentJavaVersion = new Version(settings.getCurrentJavaVersion());
 		List<Version> targetJavaVersions = parseTarget(settings.getTargetJavaVersion());
@@ -34,6 +36,9 @@ public class JVMVersionMatcher {
 	}
 
 	private List<Version> parseTarget(String targetDesc) {
+		if (targetDesc == null || targetDesc.trim().length() == 0)
+			throw new IceBoarException("You should define target JVM version", null);
+
 		String[] byComa = targetDesc.split(",");
 		List<Version> versions = new ArrayList<Version>();
 		for (String elem : byComa) {
