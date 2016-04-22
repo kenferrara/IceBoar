@@ -20,6 +20,8 @@ package com.roche.iceboar.downloader;
 
 import com.roche.iceboar.IceBoarException;
 import com.roche.iceboar.cachestorage.CacheStatus;
+import com.roche.iceboar.cachestorage.StatusInfo;
+import com.roche.iceboar.progressevent.JREUnzippedDetailInfo;
 import com.roche.iceboar.progressevent.ProgressEvent;
 import com.roche.iceboar.progressevent.ProgressEventFactory;
 import com.roche.iceboar.progressevent.ProgressEventQueue;
@@ -157,6 +159,103 @@ public class JREDownloaderTest {
             assertThat(e.getMessage())
                     .isEqualTo("User temp directory is not defined!");
         }
+    }
+
+    @Test
+    public void shouldUseUnzippedJre() throws InterruptedException {
+        // given
+        String javaVersion = "1.7.0_02";
+        String jreCachePath = "jre/cache/path";
+        String javaTempDir = System.getProperty("java.io.tmpdir");
+        FileUtilsFacade fileUtils = mock(FileUtilsFacade.class);
+        CacheStatus cacheStatus = mock(CacheStatus.class);
+        StatusInfo statusInfo = mock(StatusInfo.class);
+        when(statusInfo.getPath())
+                .thenReturn(jreCachePath);
+        when(cacheStatus.getJreUnzippedStatusInfo(javaVersion))
+                .thenReturn(statusInfo);
+        GlobalSettings settings = GlobalSettings.builder()
+                                                .targetJavaURL("http://www.example.com/jre1.zip")
+                                                .tempDirectory(javaTempDir)
+                                                .cacheStatus(cacheStatus)
+                                                .targetJavaVersion(javaVersion)
+                                                .build();
+        ProgressEventFactory progressEventFactory = mock(ProgressEventFactory.class);
+        when(progressEventFactory.getJREUnzipEvent())
+                .thenReturn(JRE_UNZIP_EVENT);
+        when(progressEventFactory.getJREUnzippedEvent())
+                .thenReturn(JRE_UNZIPPED_EVENT);
+        ExecutableCommandFactory executableCommandFactory = mock(ExecutableCommandFactory.class);
+        ExecutableCommand executableCommand = mock(ExecutableCommand.class);
+        Process process = mock(Process.class);
+        when(process.waitFor())
+                .thenReturn(0);
+        when(executableCommand.exec())
+                .thenReturn(process);
+        when(executableCommandFactory.createJavaGetVersionNumberCommand(jreCachePath))
+                .thenReturn(executableCommand);
+        JREDownloader downloader = new JREDownloader(settings, fileUtils,
+                progressEventFactory, mock(ProgressEventQueue.class), executableCommandFactory);
+
+        // when
+        downloader.update(JRE_UNZIP_EVENT);
+
+        // then
+        assertThat(((JREUnzippedDetailInfo) JRE_UNZIPPED_EVENT.getDetailInfo()).getPathToJreUnzipDir())
+                .isEqualTo(jreCachePath);
+    }
+
+    @Test
+    public void shouldNotUseUnzippedJreWhenCommandThrowException() throws InterruptedException {
+        // given
+        String javaVersion = "1.7.0_02";
+        String jreCachePath = "jre/cache/path";
+        String javaTempDir = System.getProperty("java.io.tmpdir");
+        FileUtilsFacade fileUtils = mock(FileUtilsFacade.class);
+        CacheStatus cacheStatus = mock(CacheStatus.class);
+        StatusInfo statusInfo = mock(StatusInfo.class);
+        when(statusInfo.getPath())
+                .thenReturn(jreCachePath);
+        when(cacheStatus.getJreUnzippedStatusInfo(javaVersion))
+                .thenReturn(statusInfo);
+        GlobalSettings settings = GlobalSettings.builder()
+                                                .targetJavaURL("http://www.example.com/jre1.zip")
+                                                .tempDirectory(javaTempDir)
+                                                .cacheStatus(cacheStatus)
+                                                .targetJavaVersion(javaVersion)
+                                                .targetJavaURL("abc.zip")
+                                                .jvmStartTime(1234)
+                                                .build();
+        ProgressEventFactory progressEventFactory = mock(ProgressEventFactory.class);
+        when(progressEventFactory.getJREUnzipEvent())
+                .thenReturn(JRE_UNZIP_EVENT);
+        when(progressEventFactory.getJREUnzippedEvent())
+                .thenReturn(JRE_UNZIPPED_EVENT);
+        ExecutableCommandFactory executableCommandFactory = mock(ExecutableCommandFactory.class);
+        ExecutableCommand executableCommand = mock(ExecutableCommand.class);
+        Process process = mock(Process.class);
+        when(process.waitFor())
+                .thenThrow(new InterruptedException("Some exception"));
+        when(executableCommand.exec())
+                .thenReturn(process);
+        when(executableCommandFactory.createJavaGetVersionNumberCommand(jreCachePath))
+                .thenReturn(executableCommand);
+        JREDownloader downloader = new JREDownloader(settings, fileUtils,
+                progressEventFactory, mock(ProgressEventQueue.class), executableCommandFactory);
+
+        // when
+        downloader.update(JRE_UNZIP_EVENT);
+
+        // then
+        assertThat(((JREUnzippedDetailInfo) JRE_UNZIPPED_EVENT.getDetailInfo()).getPathToJreUnzipDir())
+                .isEqualTo(dirWithFileSeparatorOnEnd(javaTempDir) + "abc_1234");
+    }
+
+    private String dirWithFileSeparatorOnEnd(String dir) {
+        if(dir.lastIndexOf(File.separator) == (dir.length()-1)) {
+            return dir;
+        }
+        return dir + File.separator;
     }
 
     private String tempDirPlusFilename(String filename) {

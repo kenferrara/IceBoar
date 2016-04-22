@@ -6,7 +6,7 @@ KEY_STORE_PASSWORD=password
 KEY_STORE_ALIAS=myalias
 TOMCAT_WEBAPPS_DIR=/usr/local/Cellar/tomcat/8.0.27/libexec/webapps
 MAVEN_REPO=~/.m2/repository
-ICE_BOAR_VERSION=0.7-SNAPSHOT
+ICE_BOAR_VERSION=0.8-SNAPSHOT
 
 # Copy Ice Boar JARs to libs
 mkdir libs
@@ -48,8 +48,7 @@ jarsigner -keystore $KEY_STORE_JKS -storepass $KEY_STORE_PASSWORD -tsa http://ti
 jarsigner -keystore $KEY_STORE_JKS -storepass $KEY_STORE_PASSWORD -tsa http://timestamp.digicert.com libs/zip4j-1.3.2.jar $KEY_STORE_ALIAS
 
 # Copy dependencies to tomcat webapps dir
-mkdir $TOMCAT_WEBAPPS_DIR/apps/libs/
-cp libs/commons-io-2.2.jar $TOMCAT_WEBAPPS_DIR/apps/libs/
-cp libs/commons-lang3-3.1.jar $TOMCAT_WEBAPPS_DIR/apps/libs/
-cp libs/guava-11.0.2.jar $TOMCAT_WEBAPPS_DIR/apps/libs/
-cp libs/zip4j-1.3.2.jar $TOMCAT_WEBAPPS_DIR/apps/libs/
+cp libs/commons-io-2.2.jar $TOMCAT_WEBAPPS_DIR/apps/
+cp libs/commons-lang3-3.1.jar $TOMCAT_WEBAPPS_DIR/apps/
+cp libs/guava-11.0.2.jar $TOMCAT_WEBAPPS_DIR/apps/
+cp libs/zip4j-1.3.2.jar $TOMCAT_WEBAPPS_DIR/apps/

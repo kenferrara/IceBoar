@@ -21,7 +21,7 @@
 <!-- This example show how to run hello-world-swing application using IceBoar. In contrast to helloworld-simple-ice-boar.jnlp -->
 <!-- this file define also dependencies for target application (see jnlp.IceBoar.jar.1 property) -->
 
-<jnlp spec="1.0+" codebase="#{codebase}">
+<jnlp spec="1.0+" codebase="${codebase}">
     <information>
         <title>Hello World Example Ice Boar</title>
         <vendor>Roche</vendor>
@@ -40,7 +40,7 @@
                   value="${jre.and.jars.host}/${jars.path}/ice-boar-hello-world-swing-${version}.jar"/>
 
         <!-- Definition of depended Jar -->
-        <property name="jnlp.IceBoar.jar.1" value="${jre.and.jars.host}/${jars.path}/libs/guava-11.0.2.jar"/>
+        <property name="jnlp.IceBoar.jar.1" value="${jre.and.jars.host}/${jars.path}/guava-11.0.2.jar"/>
     </resources>
 
     <resources os="Windows" arch="amd64">

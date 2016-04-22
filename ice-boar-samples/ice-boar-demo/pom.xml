@@ -24,7 +24,7 @@
     <parent>
         <artifactId>ice-boar-samples</artifactId>
         <groupId>com.roche</groupId>
-        <version>0.7-SNAPSHOT</version>
+        <version>0.8-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -40,6 +40,8 @@
         <jre.path>jre</jre.path>
         <jars.path>apps</jars.path>
         <jre.and.jars.host>#{host}</jre.and.jars.host>
+        <codebase>#{codebase}</codebase>
+
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>

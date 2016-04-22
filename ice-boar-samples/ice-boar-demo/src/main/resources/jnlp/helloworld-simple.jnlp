@@ -20,7 +20,7 @@
 
 <!-- This example show how to run hello-world-swing application using standard Java Web Start (without IceBoar) -->
 
-<jnlp spec="1.0+" codebase="#{codebase}">
+<jnlp spec="1.0+" codebase="${codebase}">
     <information>
         <title>Hello World Example JNLP</title>
         <vendor>Roche</vendor>

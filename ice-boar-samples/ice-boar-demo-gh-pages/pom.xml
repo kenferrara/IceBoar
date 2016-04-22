@@ -24,7 +24,7 @@
     <parent>
         <artifactId>ice-boar-samples</artifactId>
         <groupId>com.roche</groupId>
-        <version>0.7-SNAPSHOT</version>
+        <version>0.8-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -190,7 +190,7 @@
                                     <classifier>javadoc</classifier>
                                     <type>jar</type>
                                     <overWrite>true</overWrite>
-                                    <outputDirectory>${project.build.directory}/${artifactId}/docs/current/</outputDirectory>
+                                    <outputDirectory>${project.build.directory}/${project.artifactId}/docs/current/</outputDirectory>
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId>com.roche</groupId>
@@ -199,7 +199,7 @@
                                     <classifier>javadoc</classifier>
                                     <type>jar</type>
                                     <overWrite>true</overWrite>
-                                    <outputDirectory>${project.build.directory}/${artifactId}/docs/${project.version}/</outputDirectory>
+                                    <outputDirectory>${project.build.directory}/${project.artifactId}/docs/${project.version}/</outputDirectory>
                                 </artifactItem>
                             </artifactItems>
                         </configuration>

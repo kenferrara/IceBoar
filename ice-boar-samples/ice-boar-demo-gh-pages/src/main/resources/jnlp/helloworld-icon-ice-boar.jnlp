@@ -27,9 +27,9 @@
         <description>Hello World Description</description>
         <offline-allowed/>
         <!-- Custom icon of Ice Boar but not always shown. -->
-        <icon href="${jre.and.jars.host}/${artifactId}/img/IceBoar-icon-128x128.png"/>
+        <icon href="${jre.and.jars.host}/img/IceBoar-icon-128x128.png"/>
         <!-- This probably doesn't work in newest JRE. -->
-        <icon kind="splash" href="${jre.and.jars.host}/${artifactId}/img/ice-boar-logo.png"/>
+        <icon kind="splash" href="${jre.and.jars.host}/img/ice-boar-logo.png"/>
     </information>
     <security>
         <all-permissions/>
