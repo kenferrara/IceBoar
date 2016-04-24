@@ -30,15 +30,15 @@ import static org.mockito.Mockito.mock;
 public class JVMRunnerFactoryTest {
 
     @Test(expectedExceptions = IceBoarException.class)
-    public void shouldThrowExceptionWhenTargetJVMIsNotDefined() {
+    public void shouldThrowExceptionWhenTargetJavaVersionIsNotDefined() {
         // given
         JVMRunnerFactory factory = new JVMRunnerFactory();
-        GlobalSettings build = GlobalSettings.builder()
+        GlobalSettings settings = GlobalSettings.builder()
                                              .currentJavaVersion("1.6")
                                              .build();
 
         // should fail
-        factory.create(build, mock(ExecutableCommandFactory.class),
+        factory.create(settings, mock(ExecutableCommandFactory.class),
                 mock(ProgressEventFactory.class), mock(ProgressEventQueue.class));
 
     }
@@ -50,7 +50,7 @@ public class JVMRunnerFactoryTest {
         GlobalSettings settings = GlobalSettings.builder()
                                                 .targetJavaVersion("1.6")
                                                 .currentJavaVersion("1.6")
-                                                .alwaysRunOnPreparedJVM(true)
+                                                .alwaysRunOnTargetJVM(true)
                                                 .build();
         // when
         JVMRunner runner = factory
@@ -68,7 +68,7 @@ public class JVMRunnerFactoryTest {
         GlobalSettings settings = GlobalSettings.builder()
                                                 .targetJavaVersion("1.6")
                                                 .currentJavaVersion("1.6")
-                                                .alwaysRunOnPreparedJVM(false)
+                                                .alwaysRunOnTargetJVM(false)
                                                 .build();
         // when
         JVMRunner runner = factory
@@ -86,7 +86,7 @@ public class JVMRunnerFactoryTest {
         GlobalSettings settings = GlobalSettings.builder()
                                                 .targetJavaVersion("1.6")
                                                 .currentJavaVersion("1.7")
-                                                .alwaysRunOnPreparedJVM(true)
+                                                .alwaysRunOnTargetJVM(true)
                                                 .build();
         // when
         JVMRunner runner = factory
@@ -104,7 +104,7 @@ public class JVMRunnerFactoryTest {
         GlobalSettings settings = GlobalSettings.builder()
                                                 .targetJavaVersion("1.7")
                                                 .currentJavaVersion("1.6")
-                                                .alwaysRunOnPreparedJVM(false)
+                                                .alwaysRunOnTargetJVM(false)
                                                 .build();
         // when
         JVMRunner runner = factory

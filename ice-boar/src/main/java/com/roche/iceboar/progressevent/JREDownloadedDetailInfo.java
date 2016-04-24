@@ -25,7 +25,10 @@ public class JREDownloadedDetailInfo implements ProgressEventDetailInfo {
 
     private String pathToJreZipFile;
 
-    public JREDownloadedDetailInfo(String pathToJreZipFile) {
+    public JREDownloadedDetailInfo() {
+    }
+
+    public void setPathToJreZipFile(String pathToJreZipFile) {
         this.pathToJreZipFile = pathToJreZipFile;
     }
 

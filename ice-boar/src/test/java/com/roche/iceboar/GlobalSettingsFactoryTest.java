@@ -57,21 +57,6 @@ public class GlobalSettingsFactoryTest {
     }
 
     @Test
-    public void shouldThrowExceptionWhenTargetJavaURLPropertyIsNotSet() {
-        // given
-
-        // when
-        try {
-            GlobalSettingsFactory.getGlobalSettings(null);
-            // then
-            fail("It should throw an BootstrapException");
-        } catch (IceBoarException e) {
-            assertThat(e.getMessage())
-                    .isEqualTo("A property jnlp.IceBoar.targetJavaURL is not defined. Please specify it in JNLP file!");
-        }
-    }
-
-    @Test
     public void shouldThrowExceptionWhenTargetJarIsNotDefined() {
         // given
         // it is minimum to set to verify that target JAR is not defined

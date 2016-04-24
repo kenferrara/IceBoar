@@ -22,6 +22,7 @@ import com.roche.iceboar.IceBoarException;
 import com.roche.iceboar.cachestorage.CacheStatus;
 import com.roche.iceboar.cachestorage.StatusInfo;
 import com.roche.iceboar.downloader.FileUtilsFacade;
+import com.roche.iceboar.runner.JVMVersionMatcher;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -184,12 +185,14 @@ public class GlobalSettings {
     public static final String JNLP_SPLASH_HIDE_FRAME_BORDER = "jnlp.IceBoar.hide-frame-border";
 
     /**
-     * <tt>{@value #JNLP_ALWAYS_RUN_ON_PREPARED_JVM}</tt><br>
+     * <tt>{@value #JNLP_ALWAYS_RUN_ON_TARGET_JVM}</tt><br>
      * Enforce always download JVM even if current JVM match to required target version. Default false.
      *
      * @since 0.8
      */
-    public static final String JNLP_ALWAYS_RUN_ON_PREPARED_JVM = "jnlp.IceBoar.alwaysRunOnPreparedJVM";
+    public static final String JNLP_ALWAYS_RUN_ON_TARGET_JVM = "jnlp.IceBoar.alwaysRunOnTargetJVM";
+
+    private JVMVersionMatcher versionMatcher = new JVMVersionMatcher();
 
     private List<String> applicationArguments;
     private long jvmStartTime;
@@ -213,8 +216,8 @@ public class GlobalSettings {
     private List<String> icons;
     private String customSplashImage;
     private boolean hideFrameBorder;
-    private boolean alwaysRunOnPreparedJVM;
-    private String currentJvmPath;
+    private boolean alwaysRunOnTargetJVM;
+    private String currentJavaCommand;
 
 
     /**
@@ -399,12 +402,27 @@ public class GlobalSettings {
         return hideFrameBorder;
     }
 
-    public boolean isAlwaysRunOnPreparedJVM() {
-        return alwaysRunOnPreparedJVM;
+    public boolean runOnTargetJVM() {
+        return !versionMatcher.match(this) || isAlwaysRunOnTargetJVM();
     }
 
-    public String getCurrentJvmPath() {
-        return currentJvmPath;
+    private boolean isAlwaysRunOnTargetJVM() {
+        return alwaysRunOnTargetJVM;
+    }
+
+    public String getCurrentJavaCommand() {
+        return removeQuotationMarksAtBeginAndEnd(currentJavaCommand);
+    }
+
+    private String removeQuotationMarksAtBeginAndEnd(String input) {
+        String text = input;
+        if(input.charAt(0) == '\"') {
+            text = text.substring(1, text.length());
+        }
+        if(input.charAt(input.length() - 1) == '\"') {
+            text = text.substring(0, text.length() - 1);
+        }
+        return text;
     }
 
     public static class Builder {
@@ -430,8 +448,8 @@ public class GlobalSettings {
         private List<String> icons;
         private String splashScreen;
         private boolean hideFrameBorder;
-        private boolean alwaysRunOnPreparedJVM;
-        private String currentJvmPath;
+        private boolean alwaysRunOnTargetJVM;
+        private String currentJavaCommand;
 
         public Builder applicationArguments(String[] applicationArguments) {
             if (applicationArguments != null) {
@@ -549,13 +567,13 @@ public class GlobalSettings {
             return this;
         }
 
-        public Builder alwaysRunOnPreparedJVM(boolean alwaysRunOnPreparedJVM) {
-            this.alwaysRunOnPreparedJVM = alwaysRunOnPreparedJVM;
+        public Builder alwaysRunOnTargetJVM(boolean alwaysRunOnTargetJVM) {
+            this.alwaysRunOnTargetJVM = alwaysRunOnTargetJVM;
             return this;
         }
 
-        public Builder currentJvmPath(String currentJvmPath) {
-            this.currentJvmPath = currentJvmPath;
+        public Builder currentJavaCommand(String currentJvmPath) {
+            this.currentJavaCommand = currentJvmPath;
             return this;
         }
 
@@ -582,8 +600,8 @@ public class GlobalSettings {
             settings.icons = icons;
             settings.customSplashImage = splashScreen;
             settings.hideFrameBorder = hideFrameBorder;
-            settings.alwaysRunOnPreparedJVM = alwaysRunOnPreparedJVM;
-            settings.currentJvmPath = currentJvmPath;
+            settings.alwaysRunOnTargetJVM = alwaysRunOnTargetJVM;
+            settings.currentJavaCommand = currentJavaCommand;
             return settings;
         }
     }

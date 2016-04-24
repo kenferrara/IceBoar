@@ -63,13 +63,15 @@ public class JREDownloader implements ProgressEventObserver {
 
     private void downloadJavaAndCreateEvent() {
         ProgressEvent jreDownloadedEvent = progressEventFactory.getJREDownloadedEvent();
-        JREDownloadedDetailInfo detailInfo;
-        if (!canUseDownloadedJreZipFile()) {
-            downloadJava();
-            detailInfo = new JREDownloadedDetailInfo(settings.getDestinationJREPath());
-        } else {
-            System.out.println("Download of JRE skipped");
-            detailInfo = new JREDownloadedDetailInfo(settings.getDestinationJreZipPathFromCache());
+        JREDownloadedDetailInfo detailInfo = new JREDownloadedDetailInfo();
+        if(settings.runOnTargetJVM()) {
+            if (!canUseDownloadedJreZipFile()) {
+                downloadJava();
+                detailInfo.setPathToJreZipFile(settings.getDestinationJREPath());
+            } else {
+                System.out.println("Download of JRE skipped");
+                detailInfo.setPathToJreZipFile(settings.getDestinationJreZipPathFromCache());
+            }
         }
         jreDownloadedEvent.addDetailInfo(detailInfo);
         progressEventQueue.update(jreDownloadedEvent);
@@ -97,13 +99,15 @@ public class JREDownloader implements ProgressEventObserver {
 
     private void unzipJavaAndCreateEvent() {
         ProgressEvent jreUnzippedEvent = progressEventFactory.getJREUnzippedEvent();
-        JREUnzippedDetailInfo detailInfo;
-        if (!canUseUnzippedJre()) {
-            extractJava();
-            detailInfo = new JREUnzippedDetailInfo(settings.getUnzipPath());
-        } else {
-            System.out.println("Unzipping of JRE skipped");
-            detailInfo = new JREUnzippedDetailInfo(settings.getUnzippedJrePathFromCache());
+        JREUnzippedDetailInfo detailInfo = new JREUnzippedDetailInfo();
+        if(settings.runOnTargetJVM()) {
+            if (!canUseUnzippedJre()) {
+                extractJava();
+                detailInfo.setPathToJreUnzipDir(settings.getUnzipPath());
+            } else {
+                System.out.println("Unzipping of JRE skipped");
+                detailInfo.setPathToJreUnzipDir(settings.getUnzippedJrePathFromCache());
+            }
         }
         jreUnzippedEvent.addDetailInfo(detailInfo);
         progressEventQueue.update(jreUnzippedEvent);

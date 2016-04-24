@@ -25,7 +25,10 @@ public class JREUnzippedDetailInfo implements ProgressEventDetailInfo {
 
     private String pathToJreUnzipDir;
 
-    public JREUnzippedDetailInfo(String pathToJreUnzipDir) {
+    public JREUnzippedDetailInfo() {
+    }
+
+    public void setPathToJreUnzipDir(String pathToJreUnzipDir) {
         this.pathToJreUnzipDir = pathToJreUnzipDir;
     }
 

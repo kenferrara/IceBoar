@@ -42,7 +42,8 @@ public class LocalCacheObserverTest {
                 .thenReturn(JRE_DOWNLOADED_EVENT);
         LocalCacheObserver observer = new LocalCacheObserver(settings, progressEventFactory,
                 localCacheStorage);
-        JREDownloadedDetailInfo detailInfo = new JREDownloadedDetailInfo("aa/b/c");
+        JREDownloadedDetailInfo detailInfo = new JREDownloadedDetailInfo();
+        detailInfo.setPathToJreZipFile("aa/b/c");
         JRE_DOWNLOADED_EVENT.addDetailInfo(detailInfo);
 
         // when
@@ -63,7 +64,8 @@ public class LocalCacheObserverTest {
         LocalCacheObserver observer = new LocalCacheObserver(settings, progressEventFactory,
                 localCacheStorage);
         ProgressEvent jreUnzippedEvent = new ProgressEvent("jre unzipped", "");
-        JREUnzippedDetailInfo detailInfo = new JREUnzippedDetailInfo("aa/b/c");
+        JREUnzippedDetailInfo detailInfo = new JREUnzippedDetailInfo();
+        detailInfo.setPathToJreUnzipDir("aa/b/c");
         jreUnzippedEvent.addDetailInfo(detailInfo);
 
         // when

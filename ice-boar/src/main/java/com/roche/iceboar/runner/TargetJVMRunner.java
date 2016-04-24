@@ -18,9 +18,11 @@
 
 package com.roche.iceboar.runner;
 
+import com.roche.iceboar.IceBoarException;
 import com.roche.iceboar.downloader.FileUtilsFacade;
 import com.roche.iceboar.progressevent.*;
 import com.roche.iceboar.settings.GlobalSettings;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Run a target application on downloaded Java Virtual Machine.
@@ -31,6 +33,13 @@ public class TargetJVMRunner extends AbstractJVMRunner implements ProgressEventO
 
     public TargetJVMRunner(GlobalSettings settings, ExecutableCommandFactory executableCommandFactory, ProgressEventFactory progressEventFactory, ProgressEventQueue progressEventQueue) {
         super(settings, progressEventQueue, progressEventFactory, executableCommandFactory);
+        validate(settings);
+    }
+
+    private void validate(GlobalSettings settings) {
+        if(StringUtils.isBlank(settings.getTargetJavaVersion())) {
+            throw new IceBoarException("You should define a target Java Version", null);
+        }
     }
 
 
@@ -59,8 +68,9 @@ public class TargetJVMRunner extends AbstractJVMRunner implements ProgressEventO
 
     @Override
     protected void runMainClass() {
+        String javaCommand = FileUtilsFacade.addJavaCommandPathToPath(detailInfo.getPathToJreUnzipDir());
         ExecutableCommand command = executableCommandFactory.createRunTargetApplicationCommand(
-                settings, detailInfo.getPathToJreUnzipDir());
+                settings, javaCommand);
 
         Process process = command.exec();
 

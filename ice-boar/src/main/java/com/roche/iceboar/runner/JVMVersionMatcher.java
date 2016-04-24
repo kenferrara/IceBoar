@@ -2,6 +2,7 @@ package com.roche.iceboar.runner;
 
 import com.roche.iceboar.IceBoarException;
 import com.roche.iceboar.settings.GlobalSettings;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,9 @@ import java.util.regex.Pattern;
 public class JVMVersionMatcher {
 
     public boolean match(GlobalSettings settings) {
+        if(StringUtils.isBlank(settings.getTargetJavaVersion())) {
+            return false;
+        }
         Version currentJavaVersion = new Version(settings.getCurrentJavaVersion());
         List<Version> targetJavaVersions = parseTarget(settings.getTargetJavaVersion());
 
@@ -60,7 +64,7 @@ public class JVMVersionMatcher {
 
         public Version(String version) {
             if (version == null || version.trim().length() == 0) {
-                throw new IceBoarException("Version number cannot be null", null);
+                throw new IceBoarException("Current Java Version number cannot be null", null);
             }
             Matcher matcher = VERSION_PATTERN.matcher(version);
             matcher.find();

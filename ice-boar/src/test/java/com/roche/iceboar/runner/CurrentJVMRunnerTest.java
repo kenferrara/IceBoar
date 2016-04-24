@@ -53,6 +53,7 @@ public class CurrentJVMRunnerTest {
         // given
         GlobalSettings settings = GlobalSettings.builder()
                                                 .operationSystemName("Win7")
+                                                .currentJavaCommand("/path/to/java")
                                                 .build();
         CurrentJVMRunner runner = new CurrentJVMRunner(settings, executableCommandFactory, progressEventFactory,
                 progressEventQueue);

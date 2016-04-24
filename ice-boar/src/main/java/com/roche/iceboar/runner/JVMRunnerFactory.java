@@ -23,19 +23,16 @@ import com.roche.iceboar.progressevent.ProgressEventQueue;
 import com.roche.iceboar.settings.GlobalSettings;
 
 /**
- * A Factory for proper JVMRunner. Now {@link TargetJVMRunner} is always returned by ths factory, but in feature it
- * can be {@link CurrentJVMRunner}.
+ * A Factory for proper JVMRunner. If target Java version match to current or alwaysRunOnTargetJVM is set then
+ * target JVM (downloaded or from cache) is used. Pre installed user JVM, is used otherwise.
  */
 public class JVMRunnerFactory {
-
-    private JVMVersionMatcher versionMatcher = new JVMVersionMatcher();
 
     public JVMRunner create(GlobalSettings settings, ExecutableCommandFactory executableCommandFactory,
 							ProgressEventFactory progressEventFactory, ProgressEventQueue progressEventQueue) {
 
-        // For now only TargetJVMRunner implementation works and is supported
         JVMRunner jvmRunner;
-		if (!versionMatcher.match(settings) || settings.isAlwaysRunOnPreparedJVM()) {
+		if (settings.runOnTargetJVM()) {
 			jvmRunner = new TargetJVMRunner(settings, executableCommandFactory, progressEventFactory, progressEventQueue);
 		} else {
 			jvmRunner = new CurrentJVMRunner(settings, executableCommandFactory, progressEventFactory, progressEventQueue);

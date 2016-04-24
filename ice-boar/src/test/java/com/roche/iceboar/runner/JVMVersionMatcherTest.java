@@ -144,22 +144,22 @@ public class JVMVersionMatcherTest {
         assertThat(sut.match(settingsWithJava20)).isFalse();
     }
 
-    @Test(expectedExceptions = IceBoarException.class)
-    public void shouldThrowWhenTargetIsNull() {
+    @Test
+    public void shouldNotMatchWhenTargetIsNull() {
         GlobalSettings settingsWithNullTarget = getBuild(JAVA_142, null);
-        sut.match(settingsWithNullTarget);
+        assertThat(sut.match(settingsWithNullTarget)).isFalse();
     }
 
-    @Test(expectedExceptions = IceBoarException.class)
-    public void shouldThrowWhenTargetIsEmpty() {
+    @Test
+    public void shouldNotMatchWhenTargetIsEmpty() {
         GlobalSettings settingsWithEmptyTarget = getBuild(JAVA_142, "");
-        sut.match(settingsWithEmptyTarget);
+        assertThat(sut.match(settingsWithEmptyTarget)).isFalse();
     }
 
-    @Test(expectedExceptions = IceBoarException.class)
-    public void shouldThrowWhenTargetIsBlank() {
+    @Test
+    public void shouldNotMatchWhenTargetIsBlank() {
         GlobalSettings settingsWithBlankTarget = getBuild(JAVA_142, "    ");
-        sut.match(settingsWithBlankTarget);
+        assertThat(sut.match(settingsWithBlankTarget)).isFalse();
     }
 
 

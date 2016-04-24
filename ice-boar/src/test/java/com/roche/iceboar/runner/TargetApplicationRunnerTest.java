@@ -52,6 +52,7 @@ public class TargetApplicationRunnerTest {
 
         when(settings.getTargetJavaVersion()).thenReturn("1.6.0");
         when(settings.getCurrentJavaVersion()).thenReturn("1.5.0");
+        when(settings.runOnTargetJVM()).thenReturn(true);
 
         // when
         runner.run(settings, executableCommandFactory, progressEventFactory, progressEventQueue);

@@ -47,19 +47,14 @@ public class GlobalSettingsFactory {
      * Default Frame Title.
      */
     public static final String DEFAULT_FRAME_TITLE = "Ice Boar";
-    /**
-     * <tt>{@value #JNLPX_JVM}</tt><br>
-     * Location of java runtime that were used to run current Java WebStart instance.
-     *
-     * @since 0.8
-     */
-    public static final String JNLPX_JVM = "jnlpx.jvm";
 
     private static final String JAVA_VERSION = "java.version";
+
     private static final String OS_NAME = "os.name";
     private static final String TEMP_DIRECTORY = "java.io.tmpdir";
     private static final String JNLP_ICE_BOAR_PREFIX = "jnlp.IceBoar.";
     private static final String PATH_SEPARATOR = "path.separator";
+    private static final String CURRENT_JAVA_EXECUTABLE_COMMAND = "jnlpx.jvm";
 
     /**
      * Reads system properties (incl. those specified in JNLP file).
@@ -93,8 +88,8 @@ public class GlobalSettingsFactory {
         List<String> icons = getIcons(codeBase, properties);
         String splash = getSplashScreen(codeBase, properties);
         boolean hideFrameBorder = getHideFrameBorder(properties);
-        boolean alwaysRunOnPreparedJVM = getAlwaysRunOnPreparedJVM(properties);
-        String jvmPath = getCurrentJvmPath(properties);
+        boolean alwaysRunOnTargetJVM = getAlwaysRunOnTargetJVM(properties);
+        String currentJavaCommand = getCurrentJavaCommand(properties);
 
         GlobalSettings settings = GlobalSettings.builder()
                                                 .applicationArguments(args)
@@ -119,8 +114,8 @@ public class GlobalSettingsFactory {
                                                 .icons(icons)
                                                 .customSplashImage(splash)
                                                 .hideFrameBorder(hideFrameBorder)
-                                                .alwaysRunOnPreparedJVM(alwaysRunOnPreparedJVM)
-                                                .currentJvmPath(jvmPath)
+                                                .alwaysRunOnTargetJVM(alwaysRunOnTargetJVM)
+                                                .currentJavaCommand(currentJavaCommand)
                                                 .build();
         return settings;
     }
@@ -160,10 +155,7 @@ public class GlobalSettingsFactory {
 
     private static String getTargetJavaUrl(String codeBase, Properties properties) {
         String targetJavaURL;
-        targetJavaURL = properties.getProperty(JNLP_TARGET_JAVA_URL);
-        if (targetJavaURL == null) {
-            throw new IceBoarException("A property " + JNLP_TARGET_JAVA_URL + " is not defined. Please specify it in JNLP file!", null);
-        }
+        targetJavaURL = properties.getProperty(JNLP_TARGET_JAVA_URL, "");
         if (!isAbsolutePath(targetJavaURL) && StringUtils.isNotBlank(codeBase)) {
             targetJavaURL = codeBase + targetJavaURL;
         }
@@ -236,13 +228,13 @@ public class GlobalSettingsFactory {
         return (isNotBlank(hideFrameBorder) && hideFrameBorder.equals("true"));
     }
 
-    private static boolean getAlwaysRunOnPreparedJVM(Properties properties) {
-        String alwaysRunOnPreparedJVM = properties.getProperty(JNLP_ALWAYS_RUN_ON_PREPARED_JVM);
-        return (isNotBlank(alwaysRunOnPreparedJVM) && alwaysRunOnPreparedJVM.equals("true"));
+    private static boolean getAlwaysRunOnTargetJVM(Properties properties) {
+        String alwaysRunOnTargetJVM = properties.getProperty(JNLP_ALWAYS_RUN_ON_TARGET_JVM);
+        return (isNotBlank(alwaysRunOnTargetJVM) && alwaysRunOnTargetJVM.equals("true"));
     }
 
-    private static String getCurrentJvmPath(Properties properties) {
-        return properties.getProperty(JNLPX_JVM);
+    private static String getCurrentJavaCommand(Properties properties) {
+        return properties.getProperty(CURRENT_JAVA_EXECUTABLE_COMMAND);
     }
 
 }

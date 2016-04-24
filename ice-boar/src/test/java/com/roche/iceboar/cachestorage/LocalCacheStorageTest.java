@@ -66,7 +66,8 @@ public class LocalCacheStorageTest {
                                                 .cachePath(cachePath)
                                                 .build();
 
-        JREDownloadedDetailInfo detailInfo = new JREDownloadedDetailInfo(jrePath);
+        JREDownloadedDetailInfo detailInfo = new JREDownloadedDetailInfo();
+        detailInfo.setPathToJreZipFile(jrePath);
 
 
         // when
@@ -80,6 +81,29 @@ public class LocalCacheStorageTest {
     }
 
     @Test
+    public void shouldNotStoreJreDownloadedStatusInCacheWhenPathIsEmpty() {
+        // given
+        String jreVersion = "1.2.3";
+        String jrePath = "";    // empty path
+        GlobalSettings settings = GlobalSettings.builder()
+                                                .targetJavaVersion(jreVersion)
+                                                .cachePath(cachePath)
+                                                .build();
+
+        JREDownloadedDetailInfo detailInfo = new JREDownloadedDetailInfo();
+        detailInfo.setPathToJreZipFile(jrePath);
+
+
+        // when
+        cache.addAndSaveDownloadedJreInCache(settings, detailInfo);
+
+        // then
+        CacheStatus cacheStatus = cache.loadCacheStatus(cachePath);
+        StatusInfo statusInfo = cacheStatus.getJreDownloadedStatusInfo(jreVersion);
+        assertThat(statusInfo).isNull();
+    }
+
+    @Test
     public void shouldStoreJreUnzippedStatusInCache() {
         // given
         String jreVersion = "1.2.3.4";
@@ -89,7 +113,8 @@ public class LocalCacheStorageTest {
                                                 .cachePath(cachePath)
                                                 .build();
 
-        JREUnzippedDetailInfo detailInfo = new JREUnzippedDetailInfo(jrePath);
+        JREUnzippedDetailInfo detailInfo = new JREUnzippedDetailInfo();
+        detailInfo.setPathToJreUnzipDir(jrePath);
 
 
         // when
@@ -100,5 +125,28 @@ public class LocalCacheStorageTest {
         StatusInfo statusInfo = cacheStatus.getJreUnzippedStatusInfo(jreVersion);
         assertThat(statusInfo.getPath())
                 .isEqualTo(jrePath);
+    }
+
+    @Test
+    public void shouldNotStoreJreUnzippedStatusInCacheWhenPathToJreUnzipDirIsEmpty() {
+        // given
+        String jreVersion = "1.2.3.4.5";
+        String jrePath = "";    // empty PathToJreUnzipDir
+        GlobalSettings settings = GlobalSettings.builder()
+                                                .targetJavaVersion(jreVersion)
+                                                .cachePath(cachePath)
+                                                .build();
+
+        JREUnzippedDetailInfo detailInfo = new JREUnzippedDetailInfo();
+
+        detailInfo.setPathToJreUnzipDir(jrePath);
+
+        // when
+        cache.addAndSaveUnzippedJreInCache(settings, detailInfo);
+
+        // then
+        CacheStatus cacheStatus = cache.loadCacheStatus(cachePath);
+        StatusInfo statusInfo = cacheStatus.getJreUnzippedStatusInfo(jreVersion);
+        assertThat(statusInfo).isNull();
     }
 }

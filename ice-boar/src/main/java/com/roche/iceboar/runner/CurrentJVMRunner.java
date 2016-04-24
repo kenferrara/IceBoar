@@ -40,7 +40,7 @@ public class CurrentJVMRunner extends AbstractJVMRunner {
     @Override
     protected void runMainClass() {
         ExecutableCommand command = executableCommandFactory.createRunTargetApplicationCommand(
-                settings, settings.getCurrentJvmPath());
+                settings, settings.getCurrentJavaCommand());
 
         Process process = command.exec();
 

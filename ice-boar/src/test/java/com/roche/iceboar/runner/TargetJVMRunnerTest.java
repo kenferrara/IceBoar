@@ -56,6 +56,7 @@ public class TargetJVMRunnerTest {
         // given
         GlobalSettings settings = GlobalSettings.builder()
                                                 .operationSystemName("Win7")
+                                                .targetJavaVersion("1.6.7")
                                                 .build();
         TargetJVMRunner runner = new TargetJVMRunner(settings, executableCommandFactory, progressEventFactory, progressEventQueue);
 
@@ -92,6 +93,7 @@ public class TargetJVMRunnerTest {
         // given
         GlobalSettings settings = GlobalSettings.builder()
                                                 .operationSystemName("Win7")
+                                                .targetJavaVersion("1.6.7")
                                                 .build();
         TargetJVMRunner runner = new TargetJVMRunner(settings, executableCommandFactory, progressEventFactory, progressEventQueue);
 
@@ -128,6 +130,7 @@ public class TargetJVMRunnerTest {
         // given
         GlobalSettings settings = GlobalSettings.builder()
                                                 .operationSystemName("Win7")
+                                                .targetJavaVersion("1.6.7")
                                                 .build();
         TargetJVMRunner runner = new TargetJVMRunner(settings, executableCommandFactory, progressEventFactory, progressEventQueue);
 
@@ -161,7 +164,8 @@ public class TargetJVMRunnerTest {
 
     private void updateJREUnzippedEventOnRunner(TargetJVMRunner runner) {
         ProgressEvent jreUnzippedEvent = progressEventFactory.getJREUnzippedEvent();
-        JREUnzippedDetailInfo info = new JREUnzippedDetailInfo("/tmp/jre_unzip_dir");
+        JREUnzippedDetailInfo info = new JREUnzippedDetailInfo();
+        info.setPathToJreUnzipDir("/tmp/jre_unzip_dir");
         jreUnzippedEvent.addDetailInfo(info);
         runner.update(jreUnzippedEvent);
     }
@@ -171,6 +175,7 @@ public class TargetJVMRunnerTest {
         // given
         GlobalSettings settings = GlobalSettings.builder()
                                                 .operationSystemName("Mac OS X")
+                                                .targetJavaVersion("1.6.7")
                                                 .build();
         TargetJVMRunner runner = new TargetJVMRunner(settings, executableCommandFactory, progressEventFactory, progressEventQueue);
 
