@@ -44,32 +44,6 @@
                   value="${jre.and.jars.host}/${jars.path}/ice-boar-hello-world-swing-${version}-jar-with-dependencies.jar"/>
     </resources>
 
-    <!-- Path to zipped JRE depended on OS. A target app will be started ont his version of JRE. -->
-    <resources os="Windows" arch="amd64">
-        <property name="jnlp.IceBoar.targetJavaURL"
-                  value="${jre.and.jars.host}/${jre.path}/jre-1.7.0_04-win-x64.zip"/>
-    </resources>
-
-    <resources os="Windows" arch="x86">
-        <property name="jnlp.IceBoar.targetJavaURL"
-                  value="${jre.and.jars.host}/${jre.path}/jre-1.7.0_04-win-x32.zip"/>
-    </resources>
-
-    <resources os="Windows" arch="x86_64">
-        <property name="jnlp.IceBoar.targetJavaURL"
-                  value="${jre.and.jars.host}/${jre.path}/jre-1.7.0_04-win-x64.zip"/>
-    </resources>
-
-    <resources os="Mac OS X" arch="i386">
-        <property name="jnlp.IceBoar.targetJavaURL"
-                  value="${jre.and.jars.host}/${jre.path}/jre-1.7.0_04-macosx-x64.zip"/>
-    </resources>
-
-    <resources os="Mac OS X" arch="x86_64">
-        <property name="jnlp.IceBoar.targetJavaURL"
-                  value="${jre.and.jars.host}/${jre.path}/jre-1.7.0_04-macosx-x64.zip"/>
-    </resources>
-
     <!-- Main class of Ice Boar. It shouldn't be changed. -->
     <application-desc main-class="com.roche.iceboar.IceBoar">
     </application-desc>

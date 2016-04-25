@@ -30,10 +30,9 @@ import java.util.List;
  */
 public class ExecutableCommandFactory {
 
-    public ExecutableCommand createRunTargetApplicationCommand(GlobalSettings settings, String pathToJreUnzipDir) {
-        String javaCmdPath = FileUtilsFacade.addJavaCommandPathToPath(pathToJreUnzipDir);
+    public ExecutableCommand createRunTargetApplicationCommand(GlobalSettings settings, String javaCommand) {
         List<String> cmdList = new ArrayList<String>();
-        cmdList.add(javaCmdPath);
+        cmdList.add(javaCommand);
         cmdList.addAll(settings.getAllPropertiesForTarget());
         cmdList.add(settings.getInitialHeapSize());
         cmdList.add(settings.getMaxHeapSize());

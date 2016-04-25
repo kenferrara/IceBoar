@@ -46,7 +46,7 @@ public class ProgressJFrame extends JFrame {
 
 
         Image splashScreenImage = imageLoader.loadSplashScreen(settings);
-        if(splashScreenImage != null){
+        if (splashScreenImage != null) {
             JLabel splashScreen = new JLabel(new ImageIcon(splashScreenImage));
             splashScreen.setAlignmentX(Component.CENTER_ALIGNMENT);
             mainPanel.add(splashScreen);
@@ -65,10 +65,10 @@ public class ProgressJFrame extends JFrame {
         mainPanel.add(informationLabel);
         mainPanel.add(Box.createVerticalGlue());
         setContentPane(mainPanel);
-        if(settings.isHideFrameBorder()) {
+        if (settings.isHideFrameBorder()) {
             setUndecorated(true);
         }
-        if(splashScreenImage != null) {
+        if (splashScreenImage != null) {
             // A JFrame will be resized, only when splash is defined. If not a default size will be used.
             pack();
         }

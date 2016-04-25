@@ -20,13 +20,11 @@ package com.roche.iceboar.downloader;
 
 import com.roche.iceboar.IceBoarException;
 import com.roche.iceboar.progressevent.*;
-import com.roche.iceboar.progressview.ProgressUpdater;
 import com.roche.iceboar.settings.GlobalSettings;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 
 /**
  * This class download all JAR files needed to start a target application.

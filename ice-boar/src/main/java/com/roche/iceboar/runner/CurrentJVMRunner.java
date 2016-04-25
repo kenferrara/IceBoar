@@ -19,25 +19,38 @@
 package com.roche.iceboar.runner;
 
 import com.roche.iceboar.progressevent.ProgressEvent;
-import com.roche.iceboar.progressview.ProgressUpdater;
+import com.roche.iceboar.progressevent.ProgressEventFactory;
+import com.roche.iceboar.progressevent.ProgressEventQueue;
+import com.roche.iceboar.settings.GlobalSettings;
 
 /**
- * Runs a target user application on current installed Java version on user machine. For now this case isn't full
- * implemented.
+ * Runs a target user application on JVM same as JNLP were run.
  */
-public class CurrentJVMRunner implements JVMRunner {
+public class CurrentJVMRunner extends AbstractJVMRunner {
 
-    public CurrentJVMRunner(ProgressUpdater progress) {
-
+    public CurrentJVMRunner(GlobalSettings settings, ExecutableCommandFactory executableCommandFactory,
+                            ProgressEventFactory progressEventFactory, ProgressEventQueue progressEventQueue) {
+        super(settings, progressEventQueue, progressEventFactory, executableCommandFactory);
     }
 
     public void runOnJVM() {
-        //TODO: Implement running target application on current JVM
-        System.out.println("Run Process on current JVM... in future");
-        throw new UnsupportedOperationException("Running on current JVM is not implemented yet.");
+        runMainClass();
+    }
+
+    @Override
+    protected void runMainClass() {
+        ExecutableCommand command = executableCommandFactory.createRunTargetApplicationCommand(
+                settings, settings.getCurrentJavaCommand());
+
+        Process process = command.exec();
+
+        redirectProcessOutputsToDebugWindow(process);
+        progressEventQueue.update(progressEventFactory.getAppStartedEvent());
     }
 
     public void update(ProgressEvent event) {
-
+        if (event.equals(progressEventFactory.getAppStartingEvent())) {
+            runOnJVM();
+        }
     }
 }

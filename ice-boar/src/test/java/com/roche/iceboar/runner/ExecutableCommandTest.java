@@ -24,7 +24,7 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.testng.Assert.*;
+import static org.testng.Assert.fail;
 
 public class ExecutableCommandTest {
 

@@ -21,6 +21,7 @@ package com.roche.iceboar.cachestorage;
 import com.roche.iceboar.progressevent.JREDownloadedDetailInfo;
 import com.roche.iceboar.progressevent.JREUnzippedDetailInfo;
 import com.roche.iceboar.settings.GlobalSettings;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.*;
 
@@ -72,19 +73,23 @@ public class LocalCacheStorage {
     }
 
     public void addAndSaveDownloadedJreInCache(GlobalSettings settings, JREDownloadedDetailInfo detailInfo) {
-        CacheStatus cacheStatus = loadCacheStatus(settings.getCachePath());
-        StatusInfo status = new StatusInfo(StatusInfo.Status.JRE_DOWNLOADED, settings.getTargetJavaVersion(),
-                detailInfo.getPathToJreZipFile());
-        cacheStatus.add(status);
-        store(cacheStatus, settings.getCachePath());
+        if(StringUtils.isNotBlank(detailInfo.getPathToJreZipFile())) {
+            CacheStatus cacheStatus = loadCacheStatus(settings.getCachePath());
+            StatusInfo status = new StatusInfo(StatusInfo.Status.JRE_DOWNLOADED, settings.getTargetJavaVersion(),
+                    detailInfo.getPathToJreZipFile());
+            cacheStatus.add(status);
+            store(cacheStatus, settings.getCachePath());
+        }
     }
 
     public void addAndSaveUnzippedJreInCache(GlobalSettings settings, JREUnzippedDetailInfo detailInfo) {
-        CacheStatus cacheStatus = loadCacheStatus(settings.getCachePath());
-        StatusInfo status = new StatusInfo(StatusInfo.Status.JRE_UNZIPPED, settings.getTargetJavaVersion(),
-                detailInfo.getPathToJreUnzipDir());
-        cacheStatus.add(status);
-        store(cacheStatus, settings.getCachePath());
+        if(StringUtils.isNotBlank(detailInfo.getPathToJreUnzipDir())) {
+            CacheStatus cacheStatus = loadCacheStatus(settings.getCachePath());
+            StatusInfo status = new StatusInfo(StatusInfo.Status.JRE_UNZIPPED, settings.getTargetJavaVersion(),
+                    detailInfo.getPathToJreUnzipDir());
+            cacheStatus.add(status);
+            store(cacheStatus, settings.getCachePath());
+        }
     }
 
     private void store(CacheStatus cacheStatus, String cachePath) {

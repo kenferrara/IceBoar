@@ -8,6 +8,7 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+      <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico'/>
   </head>
   <body>
     <section class="page-header">
@@ -45,6 +46,14 @@
                         <td><a href="jnlp/helloworld-1.7.0_04.jnlp">helloworld-1.7.0_04.jnlp</a></td>
                         <td><a href="jnlp/helloworld-1.7.0_04-ice-boar.jnlp">helloworld-1.7.0_04-ice-boar.jnlp</a></td>
                         <td>Run on exactly JRE 1.7.0_04 version. Pure Web Start will be probably started not on 1.7.0_04</td>
+                    </tr>
+                    <tr>
+                        <td><a href="jnlp/helloworld-run-on-user-jvm.jnlp">helloworld-run-on-user-jvm.jnlp</a></td>
+                        <td><a href="jnlp/helloworld-run-on-user-jvm-ice-boar.jnlp">helloworld-run-on-user-jvm-ice-boar.jnlp</a>
+                        </td>
+                        <td>Run on user current used JVM >=1.5 (pre-installed). A behaviour of pure Web Start is
+                            not determinate - it deepens on user installed JVM (Since 0.8)
+                        </td>
                     </tr>
                     <tr>
                         <td><a href="jnlp/helloworld-heap-size.jnlp">helloworld-heap-size.jnlp</a></td>
@@ -101,6 +110,11 @@
                     <tr>
                         <td><a href="jnlp/helloworld-undecorated-ice-boar.jnlp">helloworld-undecorated-ice-boar.jnlp</a></td>
                         <td>Using splash 2 and hide frame border (undecorated) (Since 0.7)</td>
+                    </tr>
+                    <tr>
+                        <td><a href="jnlp/helloworld-force-not-use-user-jvm-ice-boar.jnlp">helloworld-force-not-use-user-jvm-ice-boar.jnlp</a>
+                        </td>
+                        <td>Force to always use target (downloaded or from cache) JVM (Since 0.8)</td>
                     </tr>
                 </tbody>
             </table>

@@ -19,7 +19,6 @@
 package com.roche.iceboar.runner;
 
 import com.roche.iceboar.IceBoarException;
-import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 
@@ -48,10 +47,10 @@ public class ExecutableCommand {
     }
 
     public String getReadable() {
-		String msg = "";
-		for (String st : cmd) {
-			msg = msg + "\"" + st + "\", ";
-		}
-		return msg;
+        String msg = "";
+        for (String st : cmd) {
+            msg = msg + "\"" + st + "\", ";
+        }
+        return msg;
     }
 }

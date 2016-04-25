@@ -27,7 +27,6 @@ import javax.jnlp.BasicService;
 import javax.jnlp.ServiceManager;
 import javax.jnlp.ServiceManagerStub;
 import javax.jnlp.UnavailableServiceException;
-
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -55,21 +54,6 @@ public class GlobalSettingsFactoryTest {
         System.clearProperty("jnlp.setting1");
         System.clearProperty("jnlp.setting2");
         System.clearProperty("jnlp.setting3");
-    }
-
-    @Test
-    public void shouldThrowExceptionWhenTargetJavaURLPropertyIsNotSet() {
-        // given
-
-        // when
-        try {
-            GlobalSettingsFactory.getGlobalSettings(null);
-            // then
-            fail("It should throw an BootstrapException");
-        } catch (IceBoarException e) {
-            assertThat(e.getMessage())
-                    .isEqualTo("A property jnlp.IceBoar.targetJavaURL is not defined. Please specify it in JNLP file!");
-        }
     }
 
     @Test

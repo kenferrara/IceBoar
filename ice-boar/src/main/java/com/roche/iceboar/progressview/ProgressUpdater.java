@@ -21,7 +21,6 @@ package com.roche.iceboar.progressview;
 import com.roche.iceboar.progressevent.ProgressEvent;
 import com.roche.iceboar.progressevent.ProgressEventFactory;
 import com.roche.iceboar.progressevent.ProgressEventObserver;
-import com.roche.iceboar.settings.GlobalSettings;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;

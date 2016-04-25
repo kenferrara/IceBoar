@@ -29,6 +29,7 @@ import com.roche.iceboar.runner.ExecutableCommand;
 import com.roche.iceboar.runner.ExecutableCommandFactory;
 import com.roche.iceboar.settings.GlobalSettings;
 import net.lingala.zip4j.exception.ZipException;
+import org.mockito.ArgumentCaptor;
 import org.testng.annotations.Test;
 
 import java.io.File;
@@ -55,6 +56,8 @@ public class JREDownloaderTest {
         GlobalSettings settings = GlobalSettings.builder()
                                                 .targetJavaURL("http://www.example.com/jre1.zip")
                                                 .tempDirectory(javaTempDir)
+                                                .currentJavaVersion("1.3")
+                                                .targetJavaVersion("1.6")
                                                 .cacheStatus(mock(CacheStatus.class))
                                                 .build();
         ProgressEventFactory progressEventFactory = mock(ProgressEventFactory.class);
@@ -110,55 +113,30 @@ public class JREDownloaderTest {
     }
 
     @Test
-    public void shouldDoesntDownloadWhenTargetJavaUrlIsBlank() throws IOException {
+    public void shouldDoesntDownloadWhenTargetJavaUrlIsBlankAndVersionMatch() throws IOException {
         // given
         FileUtilsFacade fileUtils = mock(FileUtilsFacade.class);
         GlobalSettings settings = GlobalSettings.builder()
                                                 .targetJavaURL(" ")
                                                 .tempDirectory("/tmp")
                                                 .cacheStatus(mock(CacheStatus.class))
+                                                .currentJavaVersion("1.6")
+                                                .targetJavaVersion("1.5+")
                                                 .build();
         ProgressEventFactory progressEventFactory = mock(ProgressEventFactory.class);
         when(progressEventFactory.getJREDownloadEvent())
                 .thenReturn(JRE_DOWNLOAD_EVENT);
+        when(progressEventFactory.getJREDownloadedEvent())
+                .thenReturn(JRE_DOWNLOADED_EVENT);
+        ArgumentCaptor<ProgressEvent> captor = ArgumentCaptor.forClass(ProgressEvent.class);
+        ProgressEventQueue progressEventQueue = mock(ProgressEventQueue.class);
         JREDownloader downloader = new JREDownloader(settings, fileUtils,
-                progressEventFactory, mock(ProgressEventQueue.class), mock(ExecutableCommandFactory.class));
+                progressEventFactory, progressEventQueue, mock(ExecutableCommandFactory.class));
 
-        try {
-            // when
-            downloader.update(JRE_DOWNLOAD_EVENT);
-            fail("If should throw a RuntimeException");
-        } catch (RuntimeException e) {
-            // then
-            e.printStackTrace();
-            assertThat(e).isInstanceOf(RuntimeException.class)
-                         .hasMessage("Please define jnlp.IceBoar.targetJavaURL");
-        }
-    }
-
-    @Test
-    public void shouldThrowExceptionWhenUserTempDirIsNotDefined() {
-        // given
-        FileUtilsFacade fileUtils = mock(FileUtilsFacade.class);
-        GlobalSettings settings = GlobalSettings.builder()
-                                                .targetJavaURL("http://www.example.com/jre.zip")
-                                                .cacheStatus(mock(CacheStatus.class))
-                                                .build();
-        ProgressEventFactory progressEventFactory = mock(ProgressEventFactory.class);
-        when(progressEventFactory.getJREDownloadEvent())
-                .thenReturn(JRE_DOWNLOAD_EVENT);
-        JREDownloader downloader = new JREDownloader(settings, fileUtils,
-                progressEventFactory, mock(ProgressEventQueue.class), mock(ExecutableCommandFactory.class));
-
-        try {
-            // when
-            downloader.update(JRE_DOWNLOAD_EVENT);
-            fail("Should throw BootstrapException");
-        } catch (IceBoarException e) {
-            // then
-            assertThat(e.getMessage())
-                    .isEqualTo("User temp directory is not defined!");
-        }
+        downloader.update(JRE_DOWNLOAD_EVENT);
+        verify(progressEventQueue).update(captor.capture());
+        assertThat(captor.getValue())
+                .isEqualTo(JRE_DOWNLOADED_EVENT);
     }
 
     @Test
@@ -177,6 +155,7 @@ public class JREDownloaderTest {
         GlobalSettings settings = GlobalSettings.builder()
                                                 .targetJavaURL("http://www.example.com/jre1.zip")
                                                 .tempDirectory(javaTempDir)
+                                                .currentJavaVersion("1.1")
                                                 .cacheStatus(cacheStatus)
                                                 .targetJavaVersion(javaVersion)
                                                 .build();
@@ -223,6 +202,7 @@ public class JREDownloaderTest {
                                                 .tempDirectory(javaTempDir)
                                                 .cacheStatus(cacheStatus)
                                                 .targetJavaVersion(javaVersion)
+                                                .currentJavaVersion("1.1")
                                                 .targetJavaURL("abc.zip")
                                                 .jvmStartTime(1234)
                                                 .build();
@@ -252,7 +232,7 @@ public class JREDownloaderTest {
     }
 
     private String dirWithFileSeparatorOnEnd(String dir) {
-        if(dir.lastIndexOf(File.separator) == (dir.length()-1)) {
+        if (dir.lastIndexOf(File.separator) == (dir.length() - 1)) {
             return dir;
         }
         return dir + File.separator;

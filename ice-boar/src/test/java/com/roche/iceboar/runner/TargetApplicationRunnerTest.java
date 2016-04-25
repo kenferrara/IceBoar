@@ -50,6 +50,10 @@ public class TargetApplicationRunnerTest {
         when(progressEventFactory.getEventsToReply())
                 .thenReturn(new ArrayList<ProgressEvent>(asList(new ProgressEvent("a", ""))));
 
+        when(settings.getTargetJavaVersion()).thenReturn("1.6.0");
+        when(settings.getCurrentJavaVersion()).thenReturn("1.5.0");
+        when(settings.runOnTargetJVM()).thenReturn(true);
+
         // when
         runner.run(settings, executableCommandFactory, progressEventFactory, progressEventQueue);
 
@@ -76,6 +80,8 @@ public class TargetApplicationRunnerTest {
         jarURLs.add("jar1");
         jarURLs.add("jar2");
         GlobalSettings settings = GlobalSettings.builder()
+                                                .targetJavaVersion("1.5.0")
+                                                .currentJavaVersion("1.5.0")
                                                 .jarURLs(jarURLs)
                                                 .build();
         ProgressEventFactory progressEventFactory = new ProgressEventFactory();
@@ -99,6 +105,8 @@ public class TargetApplicationRunnerTest {
         jarURLs.add("jar1");
         jarURLs.add("jar2");
         GlobalSettings settings = GlobalSettings.builder()
+                                                .targetJavaVersion("1.5.0")
+                                                .currentJavaVersion("1.5.0")
                                                 .jarURLs(jarURLs)
                                                 .build();
         ProgressEventFactory progressEventFactory = new ProgressEventFactory();
@@ -124,6 +132,8 @@ public class TargetApplicationRunnerTest {
         jarURLs.add("jar1");
         jarURLs.add("jar2");
         GlobalSettings settings = GlobalSettings.builder()
+                                                .targetJavaVersion("1.5.0")
+                                                .currentJavaVersion("1.5.0")
                                                 .jarURLs(jarURLs)
                                                 .build();
         ProgressEventFactory progressEventFactory = new ProgressEventFactory();
