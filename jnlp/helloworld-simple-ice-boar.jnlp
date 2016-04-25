@@ -44,32 +44,6 @@
                   value="http://roche.github.io/IceBoar/apps/ice-boar-hello-world-swing-0.8-SNAPSHOT-jar-with-dependencies.jar"/>
     </resources>
 
-    <!-- Path to zipped JRE depended on OS. A target app will be started ont his version of JRE. -->
-    <resources os="Windows" arch="amd64">
-        <property name="jnlp.IceBoar.targetJavaURL"
-                  value="http://roche.github.io/IceBoar/jre/jre-1.7.0_04-win-x64.zip"/>
-    </resources>
-
-    <resources os="Windows" arch="x86">
-        <property name="jnlp.IceBoar.targetJavaURL"
-                  value="http://roche.github.io/IceBoar/jre/jre-1.7.0_04-win-x32.zip"/>
-    </resources>
-
-    <resources os="Windows" arch="x86_64">
-        <property name="jnlp.IceBoar.targetJavaURL"
-                  value="http://roche.github.io/IceBoar/jre/jre-1.7.0_04-win-x64.zip"/>
-    </resources>
-
-    <resources os="Mac OS X" arch="i386">
-        <property name="jnlp.IceBoar.targetJavaURL"
-                  value="http://roche.github.io/IceBoar/jre/jre-1.7.0_04-macosx-x64.zip"/>
-    </resources>
-
-    <resources os="Mac OS X" arch="x86_64">
-        <property name="jnlp.IceBoar.targetJavaURL"
-                  value="http://roche.github.io/IceBoar/jre/jre-1.7.0_04-macosx-x64.zip"/>
-    </resources>
-
     <!-- Main class of Ice Boar. It shouldn't be changed. -->
     <application-desc main-class="com.roche.iceboar.IceBoar">
     </application-desc>
