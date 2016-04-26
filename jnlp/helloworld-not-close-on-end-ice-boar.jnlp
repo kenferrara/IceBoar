@@ -32,7 +32,7 @@
     </security>
     <resources>
         <j2se version="1.5+" href="http://java.sun.com/products/autodl/j2se"/>
-        <jar href="http://roche.github.io/IceBoar/apps/ice-boar-0.8-SNAPSHOT-jar-with-dependencies.jar"/>
+        <jar href="http://roche.github.io/IceBoar/apps/ice-boar-1.0-jar-with-dependencies.jar"/>
 
         <property name="jnlp.IceBoar.showDebug" value="true"/>
 
@@ -40,7 +40,7 @@
         <property name="jnlp.IceBoar.close-on-end" value="false"/>
         <property name="jnlp.IceBoar.main-class" value="com.roche.iceboar.helloworldswing.HelloWorld"/>
         <property name="jnlp.IceBoar.jar.0"
-                  value="http://roche.github.io/IceBoar/apps/ice-boar-hello-world-swing-0.8-SNAPSHOT-jar-with-dependencies.jar"/>
+                  value="http://roche.github.io/IceBoar/apps/ice-boar-hello-world-swing-1.0-jar-with-dependencies.jar"/>
     </resources>
 
     <application-desc main-class="com.roche.iceboar.IceBoar">

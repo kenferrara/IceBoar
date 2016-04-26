@@ -33,7 +33,7 @@
     <resources>
         <!-- VM arguments -->
         <j2se version="1.5+" href="http://java.sun.com/products/autodl/j2se" java-vm-args="-Xdebug -XX:+UseParallelGC" />
-        <jar href="http://roche.github.io/IceBoar/apps/ice-boar-hello-world-swing-0.8-SNAPSHOT-jar-with-dependencies.jar"/>
+        <jar href="http://roche.github.io/IceBoar/apps/ice-boar-hello-world-swing-1.0-jar-with-dependencies.jar"/>
     </resources>
     <application-desc main-class="com.roche.iceboar.helloworldswing.HelloWorld">
     </application-desc>
