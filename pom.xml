@@ -24,7 +24,7 @@
 
     <groupId>com.roche</groupId>
     <artifactId>ice-boar-build</artifactId>
-    <version>0.8-SNAPSHOT</version>
+    <version>1.0</version>
 	<modules>
 		<module>ice-boar-samples</module>
 	</modules>

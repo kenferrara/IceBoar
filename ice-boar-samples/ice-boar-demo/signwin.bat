@@ -6,7 +6,7 @@ set KEY_STORE_PASSWORD=password
 set KEY_STORE_ALIAS=myalias
 set TOMCAT_WEBAPPS_DIR=c:\apache-tomcat-8.0.28\webapps
 set MAVEN_REPO=C:\Users\XXXXXXXX\.m2\repository
-set ICE_BOAR_VERSION=0.8-SNAPSHOT
+set ICE_BOAR_VERSION=1.0
 
 
 REM Copy Ice Boar JARs to libs

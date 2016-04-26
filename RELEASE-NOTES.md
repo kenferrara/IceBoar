@@ -1,4 +1,9 @@
-## **0.7** (18.04.2016)
+## **1.0** (26.04.2016)
+ * Run target application on pre-installed Java version if version match 
+ (PR [#5](https://github.com/Roche/IceBoar/pull/5)) Thanks to koziolek for commitment
+ * Add possibility to force use target JVM Version
+
+## **0.7** (19.04.2016)
  * Add splash screen during downloading JRE and JAR files (PR [#4](https://github.com/Roche/IceBoar/pull/4)) Thanks 
  to Patryk Zieliński and Rafał Piotrowski for commitment
  * Add possibility to hide frame border 
